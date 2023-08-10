@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { useLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
-import '@/app/globals.css';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
