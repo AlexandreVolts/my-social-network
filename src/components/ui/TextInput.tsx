@@ -17,8 +17,8 @@ export function TextInput(props: TextInputProps) {
     const [isActive, setIsActive] = useState(false);
     const id = useId();
 
-    const disabled = props.disabled?"border-gray-300 bg-gray-300":""
-
+    const disabled = props.disabled?"border-gray-300 bg-gray-300 text-gray-400":""
+    //added text-gray-400 to change icons colors when disabled
 
     return (
         <motion.div>

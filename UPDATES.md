@@ -1,10 +1,10 @@
 # My Social Network's Updates
 
-## 0.1 (13/08/2023)
+## 0.1 (16/08/2023)
+- Project setup (Storybook, I18n)
 - Composant Button
 - Composant TextInput
-
-### 0.1.1: Project setup (Storybook, I18n)
+- Composant PasswordInput
 
 ## 0.2 (14/08/2023)
 
