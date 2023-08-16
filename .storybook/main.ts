@@ -1,5 +1,5 @@
 import type { StorybookConfig } from '@storybook/nextjs';
-
+const path = require("path")
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
@@ -12,6 +12,13 @@ const config: StorybookConfig = {
       options: {},
     },
   ],
+  webpackFinal: async (config) => {
+    config!.resolve!.alias = {
+      ...config.resolve?.alias, 
+      "@/components": path.resolve(__dirname, "../src/components"),
+    } 
+    return config
+  },
   framework: {
     name: '@storybook/nextjs',
     options: {},

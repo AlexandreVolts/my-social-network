@@ -4,7 +4,7 @@
 - Composant TextInput
 - Composant PasswordInput
 - Composant DatePicker
-- Composant Button
++ Composant Button
 - Composant Card
 - Template page d'accueil: Formulaire d'inscription
 - - Prénom, nom, numéro de téléphone ou email, mot de passe, date de naissance
