@@ -2,6 +2,7 @@
 
 ## 0.1 (13/08/2023)
 - Composant Button
+- Composant TextInput
 
 ### 0.1.1: Project setup (Storybook, I18n)
 
