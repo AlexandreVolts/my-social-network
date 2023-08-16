@@ -5,6 +5,7 @@
 - Composant Button
 - Composant TextInput
 - Composant PasswordInput
+- Composant Card
 
 ## 0.2 (14/08/2023)
 

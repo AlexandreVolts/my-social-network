@@ -49,9 +49,9 @@ export function TextInput(props: TextInputProps) {
             {props.withRightIcon??<></>}
             </div>
             {props.error?
-            <text
+            <p
                 className="text-red-600"
-            >{props.error}</text>:<></>}
+            >{props.error}</p>:<></>}
         </motion.div>
     )
 }
