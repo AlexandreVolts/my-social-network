@@ -1,6 +1,7 @@
 # My Social Network's Updates
 
 ## 0.1 (13/08/2023)
+- Composant Button
 
 ### 0.1.1: Project setup (Storybook, I18n)
 

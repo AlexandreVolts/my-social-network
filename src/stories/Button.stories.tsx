@@ -1,6 +1,6 @@
+import { Button } from '@/components/ui/Button';
 import type { Meta, StoryObj } from '@storybook/react';
-
-import { Button } from './Button';
+import { IconHome } from '@tabler/icons-react';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
@@ -14,7 +14,6 @@ const meta = {
   tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    backgroundColor: { control: 'color' },
   },
 } satisfies Meta<typeof Button>;
 
@@ -24,27 +23,37 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Primary: Story = {
   args: {
-    primary: true,
-    label: 'Button',
+    label: 'Primary Button',
   },
 };
 
 export const Secondary: Story = {
   args: {
-    label: 'Button',
+    label: 'Secondary Button',
+    secondary: true,
   },
 };
-
-export const Large: Story = {
-  args: {
-    size: 'large',
-    label: 'Button',
-  },
-};
-
 export const Small: Story = {
   args: {
-    size: 'small',
-    label: 'Button',
+    label: 'Small Button',
+    size: "sm",
   },
 };
+export const Large: Story = {
+  args: {
+    label: 'Large Button',
+    size: "lg",
+  },
+};
+export const Disabled: Story = {
+  args: {
+    label: 'Disabled Button',
+    disabled: true,
+  }
+}
+export const WithIcon: Story = {
+  args: {
+    label: 'Button with Icon',
+    icon: <IconHome />,
+  }
+}
