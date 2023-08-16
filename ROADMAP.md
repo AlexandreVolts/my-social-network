@@ -1,7 +1,6 @@
 # My Social Network's roadmap
 
-- Composant BaseInput
-- Composant TextInput
++ Composant TextInput
 - Composant PasswordInput
 - Composant DatePicker
 + Composant Button
