@@ -13,7 +13,6 @@ interface DatePickerProps {
 export function DatePicker(props: DatePickerProps) {
     const currentDate = new Date();
     const selectedDate = { day: props.date.getDate(), month: props.date.getMonth(), year: props.date.getFullYear() }
-    const error = props.error ? "border-2 border-red-600 p-2" : "";
 
     const getDayNb = () => {
         return new Date(selectedDate.year, selectedDate.month + 1, 0).getDate();
