@@ -9,7 +9,8 @@ interface TextInputProps {
     disabled?: boolean;
     withRightIcon?: ReactNode;
     withIcon?: ReactNode;
-    type?: "text"|"password"|"search";
+    readOnly?: boolean;
+    type?: "text"|"password"|"search"|"button";
     onChange: (value: string) => void;
 }
 
@@ -17,12 +18,13 @@ export function TextInput(props: TextInputProps) {
     const [isActive, setIsActive] = useState(false);
     const id = useId();
 
-    const disabled = props.disabled?"border-gray-300 bg-gray-300 text-gray-400":""
+    const disabled = props.disabled?"border-gray-300 bg-gray-300 text-gray-400":"bg-white"
+    const cursor = props.type==="button"&&!props.disabled?"cursor-pointer":"";
     //added text-gray-400 to change icons colors when disabled
 
     return (
         <motion.div>
-            <label htmlFor={`${id}`}>{props.label}</label>
+            <label htmlFor={id}>{props.label}</label>
             <div className={`
                     ${props.error?"border-red-600":isActive?"border-blue-800":"border-gray-300"}
                     ${disabled}
@@ -37,13 +39,14 @@ export function TextInput(props: TextInputProps) {
             <input
                 value={props.value}
                 onChange={(e) => props.onChange(e.target.value)}
-                type={props.type??"text"}
+                type={props.type==="button"?"text":(props.type??"text")}
                 placeholder={props.placeholder}
-                name={`${id}`}
+                id={id}
                 disabled={props.disabled}
                 onFocus={()=>setIsActive(true)}
                 onBlur={()=>setIsActive(false)}
-                className={`${disabled} focus:outline-none`}
+                readOnly={props.readOnly}
+                className={`${disabled} ${cursor} focus:outline-none`}
                 
             />
             {props.withRightIcon??<></>}
