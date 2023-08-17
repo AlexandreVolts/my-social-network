@@ -2,7 +2,7 @@
 
 + Composant TextInput
 + Composant PasswordInput
-- Composant DatePicker
++ Composant DatePicker
 + Composant Select
 + Composant Button
 + Composant Card
