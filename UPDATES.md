@@ -7,7 +7,8 @@
 - Composant PasswordInput
 - Composant Card
 
-## 0.2 (14/08/2023)
+## 0.2 (17/08/2023)
+- Composant Select
 
 ## 0.3 (15/08/2023)
 
