@@ -13,7 +13,8 @@
 - Fix: focus disabled when clicking icons in TextInput
 - Template page d'accueil: Formulaire d'inscription
 
-## 0.3 (15/08/2023)
+## 0.3 (18/08/2023)
+- Template page d'accueil: Formulaire de connexion
 
 ## 0.4 (16/08/2023)
 
