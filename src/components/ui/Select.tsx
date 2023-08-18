@@ -81,7 +81,7 @@ function Select(props: SelectProps) {
         onUpdate,
       }}
     >
-      <motion.div ref={rootRef} onClick={onParentClick} className={`${position} ${cursor}`}>
+      <motion.div ref={rootRef} onClick={onParentClick} className={`${position} ${cursor} flex grow`}>
         <TextInput
           value={selected?.label ?? ""}
           label={props.label}

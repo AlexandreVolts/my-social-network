@@ -29,12 +29,13 @@ export function TextInput(props: TextInputProps) {
             onClick={()=>inputRef.current?.focus()}
             onMouseEnter={()=>setIsMouseIn(true)}
             onMouseLeave={()=>setIsMouseIn(false)}
+            className="grow"
         >
             <label htmlFor={id}>{props.label}</label>
             <div 
                 className={`
                     ${props.error ? "border-red-600" : isActive ? "border-blue-800" : "border-gray-300"} 
-                    ${disabled} rounded-sm transition border-2 p-2 flex space-x-2`}
+                    ${disabled} rounded-sm transition border-2 p-2 flex space-x-2 min-w-0`}
             >
                 {props.withIcon ?? <></>}
                 <input
@@ -44,11 +45,12 @@ export function TextInput(props: TextInputProps) {
                     type={props.type === "button" ? "text" : (props.type ?? "text")}
                     placeholder={props.placeholder}
                     id={id}
+                    size={1}
                     disabled={props.disabled}
                     onFocus={() => setIsActive(true)}
                     onBlur={()=>setIsActive(isMouseIn)}
                     readOnly={props.readOnly}
-                    className={`${disabled} ${cursor} focus:outline-none grow`}
+                    className={`${disabled} ${cursor} focus:outline-none grow `}
 
                 />
                 {props.withRightIcon ?? <></>}

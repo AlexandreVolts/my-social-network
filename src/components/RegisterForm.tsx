@@ -81,24 +81,20 @@ export function RegisterForm(props: RegisterFormProps) {
                     </div>
                     <div className="space-y-2">
                         <div className="space-x-2 flex">
-                            <div className="grow">
-                                <TextInput
-                                    value={name}
-                                    onChange={(str) => onChange(str, setName, setErrorName)}
-                                    label={t("name")}
-                                    placeholder={t("name-holder")}
-                                    error={errorName}
-                                />
-                            </div>
-                            <div className="grow">
-                                <TextInput
-                                    value={surname}
-                                    onChange={(str) => onChange(str, setSurname, setErrorSurname)}
-                                    label={t("surname")}
-                                    placeholder={t("surname-holder")}
-                                    error={errorSurname}
-                                />
-                            </div>
+                            <TextInput
+                                value={name}
+                                onChange={(str) => onChange(str, setName, setErrorName)}
+                                label={t("name")}
+                                placeholder={t("name-holder")}
+                                error={errorName}
+                            />
+                            <TextInput
+                                value={surname}
+                                onChange={(str) => onChange(str, setSurname, setErrorSurname)}
+                                label={t("surname")}
+                                placeholder={t("surname-holder")}
+                                error={errorSurname}
+                            />
                         </div>
                         <TextInput
                             value={email}
@@ -126,7 +122,7 @@ export function RegisterForm(props: RegisterFormProps) {
                         />
                     </div>
                     <div className="flex justify-end">
-                        <Button label={t("register")} type="submit"/>
+                        <Button label={t("register")} type="submit" />
                     </div>
                 </div>
             </Card>
