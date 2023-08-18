@@ -10,6 +10,8 @@
 ## 0.2 (17/08/2023)
 - Composant Select
 - Composant DatePicker
+- Fix: focus disabled when clicking icons in TextInput
+- Template page d'accueil: Formulaire d'inscription
 
 ## 0.3 (15/08/2023)
 
