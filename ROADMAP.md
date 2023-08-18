@@ -55,3 +55,5 @@
 - - Sur les notifications ajouter un Pin avec le nombre de notifications non lues
 
 - Création d'une page /messages
+
+- Fix comportement du composant DatePicker : passage du 31 Aug -> 3 Mar quand on selectionne Feb 
