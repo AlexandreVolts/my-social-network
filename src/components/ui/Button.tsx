@@ -7,6 +7,7 @@ interface ButtonProps {
     disabled?: boolean;
     secondary?: boolean;
     size?: "sm"|"md"|"lg";
+    type?: "reset"|"button"|"submit";
     onClick?: ()=>void;
 }
 
@@ -25,6 +26,7 @@ export function Button(props: ButtonProps) {
         <motion.button
             animate={{scale: [0,2, 1]}}
             transition={{scale:{type: "spring"}}}
+            type={props.type??"button"}
             className={`
                 ${primary} 
                 ${size[props.size??"md"]} 

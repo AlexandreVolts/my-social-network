@@ -1,5 +1,6 @@
 "use client";
 
+import { LoginForm } from '@/components/LoginForm';
 import { RegisterForm } from '@/components/RegisterForm';
 import { useTranslations } from 'next-intl';
 
