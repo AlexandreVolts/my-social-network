@@ -8,9 +8,9 @@
 + Composant Card
 + Fix: focus disabled when clicking icons in TextInput
 + Template page d'accueil: Formulaire d'inscription
-- - Prénom, nom, numéro de téléphone ou email, mot de passe, date de naissance
-- Template page d'accueil: Formulaire de connexion
-- - Numéro de téléphone ou email, mot de passe
++ - Prénom, nom, numéro de téléphone ou email, mot de passe, date de naissance
++ Template page d'accueil: Formulaire de connexion
++ - Numéro de téléphone ou email, mot de passe
 
 - Composant Overlay
 - - Relier le DatePicker à l'Overlay
