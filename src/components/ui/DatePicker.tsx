@@ -19,7 +19,7 @@ export function DatePicker(props: DatePickerProps) {
     }
 
     const getMonthFromNb = (month: number) => {
-        return new Date(selectedDate.year, month).toLocaleString('en-US', { month: "short" })
+        return new Date(selectedDate.year, month, 15).toLocaleString('en-US', { month: "short" })
     }
 
     return (
@@ -31,7 +31,7 @@ export function DatePicker(props: DatePickerProps) {
                     label=""
                     disabled={props.disabled}
                     error={props.error ? " " : ""}
-                    onChange={(newDay) => props.onChange(new Date(`${selectedDate.month}/${newDay}/${selectedDate.year}`))}
+                    onChange={(newDay) => props.onChange(new Date(selectedDate.year, selectedDate.month ,parseInt(newDay)))}
                 >
                     {Array.from({ length: getDayNb() }).map((_, index) => {
                         return (
@@ -48,13 +48,13 @@ export function DatePicker(props: DatePickerProps) {
                     label=""
                     disabled={props.disabled}
                     error={props.error ? " " : ""}
-                    onChange={(newMonth) => props.onChange(new Date(`${newMonth}/${selectedDate.day}/${selectedDate.year}`))}
+                    onChange={(newMonth) => props.onChange(new Date(selectedDate.year, parseInt(newMonth) ,selectedDate.day))}
                 >
                     {Array.from({ length: 12 }).map((_, index) => {
                         return (
                             <Select.Option
                                 key={index}
-                                value={index + ""}
+                                value={index +""}
                                 label={getMonthFromNb(index)}
                             />
                         )
@@ -65,7 +65,7 @@ export function DatePicker(props: DatePickerProps) {
                     label=""
                     disabled={props.disabled}
                     error={props.error ? " " : ""}
-                    onChange={(newYear) => props.onChange(new Date(`${selectedDate.month}/${selectedDate.day}/${newYear}`))}
+                    onChange={(newYear) => props.onChange(new Date(parseInt(newYear), selectedDate.month ,selectedDate.day))}
                 >
                     {Array.from({ length: props.nbYears ?? 100 }).map((_, index) => {
                         const year = currentDate.getFullYear() - index + "";
