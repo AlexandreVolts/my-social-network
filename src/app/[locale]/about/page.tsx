@@ -1,5 +1,6 @@
 "use client";
 
+import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 
 export default function About() {
@@ -8,6 +9,7 @@ export default function About() {
       <Header />
       <main className="flex flex-col items-center justify-between p-24">
       </main>
+      <Footer />
     </>
   )
 }

@@ -5,6 +5,8 @@
   "Form": {
     "register": "Registriĝi",
     "login": "Ensaluto",
+    "switch-to-login": "Already have an account ? Login",
+    "switch-to-register": "No account ? Register",
     "name": "Nomo",
     "surname": "Familinomo",
     "name-holder": "Ex: John",
@@ -25,5 +27,15 @@
       "birthday-required": "Birthday is a required field.",
       "birthday-min-age": "Must be at least 13 years old."
     }
+  },
+  "Languages": {
+    "language": "Lingva Selekto",
+    "en": "Angla",
+    "fr": "Franca",
+    "eo": "Esperanto",
+    "es": "Hispana"
+  },
+  "About": {
+    "about": "Pri"
   }
 }

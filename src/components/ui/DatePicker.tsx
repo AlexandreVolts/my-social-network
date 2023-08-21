@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Select } from "./Select";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 
 interface DatePickerProps {
     date: Date;
@@ -40,8 +40,9 @@ export function DatePicker(props: DatePickerProps) {
                             <Select.Option
                                 key={index}
                                 value={index + 1 + ""}
-                                label={(index + 1 + "").padStart(2, "0")}
-                            />
+                            >
+                                {(index + 1 + "").padStart(2, "0")}
+                            </Select.Option>
                         )
                     })}
                 </Select>
@@ -57,8 +58,9 @@ export function DatePicker(props: DatePickerProps) {
                             <Select.Option
                                 key={index}
                                 value={index +""}
-                                label={getMonthFromNb(index)}
-                            />
+                            >
+                                {getMonthFromNb(index)}
+                            </Select.Option>
                         )
                     })}
                 </Select>
@@ -75,8 +77,9 @@ export function DatePicker(props: DatePickerProps) {
                             <Select.Option
                                 key={index}
                                 value={year}
-                                label={year}
-                            />
+                            >
+                                {year}
+                            </Select.Option>
                         )
                     })}
                 </Select>

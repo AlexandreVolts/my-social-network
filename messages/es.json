@@ -5,6 +5,8 @@
   "Form": {
     "register": "Registrarse",
     "login": "Conectarse ",
+    "switch-to-login": "Already have an account ? Login",
+    "switch-to-register": "No account ? Register",
     "name": "Nombre",
     "surname": "Apellido",
     "name-holder": "Ex: John",
@@ -25,5 +27,15 @@
       "birthday-required": "Birthday is a required field.",
       "birthday-min-age": "Must be at least 13 years old."
     }
+  },
+  "Languages": {
+    "language": "Selección del idioma",
+    "en": "Inglés",
+    "fr": "Francés",
+    "eo": "Esperanto",
+    "es": "Español"
+  },
+  "About": {
+    "about": "A proposito"
   }
 }

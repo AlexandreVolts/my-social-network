@@ -27,5 +27,15 @@
       "birthday-required": "Birthday is a required field.",
       "birthday-min-age": "Must be at least 13 years old."
     }
+  },
+  "Languages": {
+    "language": "Language selection",
+    "en": "English",
+    "fr": "French",
+    "eo": "Esperanto",
+    "es": "Spanish"
+  },
+  "About": {
+    "about": "About"
   }
 }
