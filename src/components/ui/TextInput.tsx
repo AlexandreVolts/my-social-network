@@ -63,7 +63,7 @@ export function TextInput(props: TextInputProps) {
           onFocus={() => setIsActive(true)}
           onBlur={() => setIsActive(isMouseIn)}
           readOnly={props.readOnly}
-          className={`${disabled} ${cursor} focus:outline-none grow `}
+          className={`${disabled} ${cursor} focus:outline-none grow ring-white`}
         />
         {props.withRightIcon ?? <></>}
       </div>

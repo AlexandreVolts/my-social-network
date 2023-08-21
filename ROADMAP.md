@@ -23,6 +23,8 @@
 + - Implémenter le composant Header
 + Composant Footer: Selection de langue, liens vers page de connexion, inscription et about
 
+- Fix: Overlay s'adapte au conteneur parent
+- Fix: Select se place sur l'input
 - Composant Modal
 - Composant TextArea
 - Création d'une page /home
