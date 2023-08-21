@@ -18,6 +18,10 @@
 
 ## 0.4 (21/08/2023)
 - Composant Overlay
+<<<<<<< HEAD
 - Composant Header: titre, bouton d'inscription et de connexion
 - Création d'une page /about
+=======
+- Animations whileTaping sur le bouton et l'input
+>>>>>>> 1dea03a (feat(ui): Added whileTap animation)
 

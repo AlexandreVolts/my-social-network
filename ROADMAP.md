@@ -13,9 +13,15 @@
 + - Numéro de téléphone ou email, mot de passe
 
 - Composant Toaster
+<<<<<<< HEAD
 - Animations whileTaping sur le bouton et l'input
 + Composant Overlay
 + - Relier le Select à l'Overlay
+=======
++ Animations whileTaping sur le bouton et l'input
+- Composant Overlay
+- - Relier le Select à l'Overlay
+>>>>>>> 1dea03a (feat(ui): Added whileTap animation)
 - Création d'une page /login (ne contient que le formulaire de connexion)
 - Création d'une page /register (ne contient que le formulaire d'inscription)
 + Composant Header: titre, bouton d'inscription et de connexion
