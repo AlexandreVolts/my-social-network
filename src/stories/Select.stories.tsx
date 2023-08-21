@@ -26,9 +26,9 @@ export const Default: Story = {
         onChange: ()=>{},
         children: (
             <>
-                <Select.Option value="dog" label="Dog" />
-                <Select.Option value="cat" label="Cat"/>
-                <Select.Option value="duck" label="Duck"/>
+                <Select.Option value="dog">Dog</Select.Option>
+                <Select.Option value="cat">Cat</Select.Option>
+                <Select.Option value="duck">Duck</Select.Option>
             </>
         )
     }
@@ -43,7 +43,7 @@ export const YearSelect: Story = {
       <>
         {Array.from({length: 100}).map((_,index)=>{
           return(
-            <Select.Option key={index} value={(2023-index).toString()} label={(2023-index).toString()}/>
+            <Select.Option key={index} value={(2023-index).toString()}>{(2023-index).toString()}</Select.Option>
           )
         })}
       </>

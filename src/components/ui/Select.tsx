@@ -43,7 +43,8 @@ interface SelectProps {
 
 interface SelectOptionProps {
   value: string;
-  label: string;
+  label?: string;
+  children: ReactNode;
 }
 
 function Select(props: SelectProps) {
@@ -83,7 +84,7 @@ function Select(props: SelectProps) {
     >
       <motion.div ref={rootRef} onClick={onParentClick} className={`${position} ${cursor} flex grow`}>
         <TextInput
-          value={selected?.label ?? ""}
+          value={""}
           label={props.label}
           placeholder={props.placeholder ?? ""}
           error={props.error}
@@ -91,6 +92,7 @@ function Select(props: SelectProps) {
           onChange={() => {}}
           readOnly
           type="button"
+          withIcon={selected?.children}
           withRightIcon={!isOpened ? <IconChevronDown /> : <IconChevronUp />}
         />
         <motion.div
@@ -109,7 +111,7 @@ function Select(props: SelectProps) {
           {options.map((option) => {
             return (
               <option key={option.id} value={option.value}>
-                {option.label}
+                {option.value}
               </option>
             );
           })}
@@ -129,12 +131,12 @@ function SelectOption(props: SelectOptionProps) {
   }, [props, id]);
 
   return (
-    <p
+    <div
       onClick={() => context.onChange(props.value)}
       className="p-2 bg-white cursor-pointer hover:bg-gray-200"
     >
-      {props.label}
-    </p>
+      {props.children}
+    </div>
   );
 }
 

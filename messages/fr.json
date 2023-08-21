@@ -27,5 +27,15 @@
       "birthday-required": "Vous devez rentrer une date de naissance.",
       "birthday-min-age": "Vous devez avoir au moins 13 ans pour vous inscrire."
     }
+  },
+  "Languages": {
+    "language": "Selection de la langue",
+    "en": "Anglais",
+    "fr": "Français",
+    "eo": "Esperanto",
+    "es": "Espagnol"
+  },
+  "About": {
+    "about": "A propos"
   }
 }

@@ -27,7 +27,7 @@
 + Composant Header: titre, bouton d'inscription et de connexion
 + Création d'une page /about
 + - Implémenter le composant Header
-- Composant Footer: Selection de langue, liens vers page de connexion, inscription et about
++ Composant Footer: Selection de langue, liens vers page de connexion, inscription et about
 
 - Composant Modal
 - Composant TextArea
