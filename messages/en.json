@@ -5,6 +5,8 @@
   "Form": {
     "register": "Register",
     "login": "Login",
+    "switch-to-login": "Already have an account ? Login",
+    "switch-to-register": "No account ? Register",
     "name": "Name",
     "surname": "Surname",
     "name-holder": "Ex: John",

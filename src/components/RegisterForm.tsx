@@ -11,6 +11,7 @@ import { useTranslations } from "next-intl";
 
 interface RegisterFormProps {
     onSubmit: (data: RegisterFormData) => void;
+    onSwitch: () => void;
 }
 
 export function RegisterForm(props: RegisterFormProps) {
@@ -121,7 +122,10 @@ export function RegisterForm(props: RegisterFormProps) {
                             error={errorBirthday}
                         />
                     </div>
-                    <div className="flex justify-end">
+                    <div className="flex space-x-2">
+                        <div className="grow">
+                            <Button onClick={props.onSwitch} label={t("switch-to-login")} type="button" secondary />
+                        </div>
                         <Button label={t("register")} type="submit" />
                     </div>
                 </div>

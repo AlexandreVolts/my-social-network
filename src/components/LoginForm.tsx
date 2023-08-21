@@ -5,19 +5,43 @@ import { TextInput } from "./ui/TextInput";
 import { FormEvent, useState } from "react";
 import { Card } from "./ui/Card";
 import { useTranslations } from "next-intl";
+import * as yup from "yup";
 
 interface LoginFormProps {
     onSubmit: (data: LoginFormData) => void;
+    onSwitch: () => void;
 }
+
+
 
 export function LoginForm(props: LoginFormProps) {
     const t = useTranslations("Form")
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("")
+    const [password, setPassword] = useState("");
+    //errors
+    const [errorEmail, setErrorEmail] = useState("");
+    const [errorPassword, setErrorPassword] = useState("");
+
+    const schema = yup.object({
+        email: yup.string().required(t("error.email-required")),
+        password: yup.string().required(t("error.password-required")),
+    })
 
     const onSubmit = (e: FormEvent) => {
         e.preventDefault();
-        props.onSubmit({email, password})
+        schema.validate({email, password}, {abortEarly: false})
+        .then(props.onSubmit)
+        .catch((err: yup.ValidationError)=>{
+            err.inner.forEach((error)=>{
+                switch (error.path) {
+                    case "email": setErrorEmail(error.message);
+                    break;
+                    case "password": setErrorPassword(error.message);
+                    break;
+                }
+
+            })
+        })
     }
 
     return (
@@ -31,16 +55,21 @@ export function LoginForm(props: LoginFormProps) {
                             onChange={setEmail}
                             label={t("email")}
                             placeholder={t("email-holder")}
+                            error={errorEmail}
                         />
                         <TextInput
                             value={password}
                             onChange={setPassword}
                             label={t("password")}
                             placeholder=""
+                            error={errorPassword}
                         />
                     </div>
-                    <div className="flex justify-end">
-                        <Button label={t("login")} />
+                    <div className="flex space-x-2">
+                        <div className="grow">
+                            <Button onClick={props.onSwitch} label={t("switch-to-register")} secondary />
+                        </div>
+                        <Button label={t("login")} type="submit"/>
                     </div>
                 </div>
             </Card>
