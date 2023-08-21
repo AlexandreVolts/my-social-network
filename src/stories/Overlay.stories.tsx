@@ -1,3 +1,4 @@
+import { Card } from '@/components/ui/Card';
 import { Overlay } from '@/components/ui/Overlay';
 import type { Meta, StoryObj } from '@storybook/react';
 
@@ -23,6 +24,15 @@ type Story = StoryObj<typeof meta>;
 export const WithOpacity: Story = {
   args: {
     children: <></>,
+    onClick: () => {},
+    opened: true,
+    opacity: true,
+  },
+};
+
+export const WithChildren: Story = {
+  args: {
+    children: <Card><h2>Hello world!</h2></Card>,
     onClick: () => {},
     opened: true,
     opacity: true,
