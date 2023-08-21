@@ -1,13 +1,34 @@
 "use client";
 
-import { LoginForm } from '@/components/LoginForm';
-import { RegisterForm } from '@/components/RegisterForm';
-import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { LoginForm } from "@/components/LoginForm";
+import { RegisterForm } from "@/components/RegisterForm";
+import { useState } from "react";
+import { RegisterFormData } from "../types/RegisterFormData";
+import { useLogin } from "@/hooks/useLogin";
+import { LoginFormData } from "../types/LoginFormData";
 
 export default function Home() {
-  const t = useTranslations('Index');
   const [onLoginPage, setOnLoginPage] = useState(false);
+  const handlers = useLogin();
+
+  const onSubmitRegister = (data: RegisterFormData) => {
+    handlers
+      .register(data)
+      .then(() => {
+        // TODO: Say to the user to check his emails
+        console.log('Register successful');
+      })
+      .catch((e) => {
+        // TODO: Catch errors here
+        console.error(e);
+      });
+  };
+  const onSubmitLogin = (data: LoginFormData) => {
+    handlers
+      .signIn(data)
+      .then(() => console.log('Login successful'))
+      .catch((e) => console.error(e));
+  };
 
   return (
     <main className="flex min-h-screen justify-between p-24">
@@ -15,10 +36,18 @@ export default function Home() {
         <h2 className="text-4xl">My social network</h2>
       </div>
       <div className="basis-0 grow">
-        {onLoginPage?
-        <LoginForm onSubmit={() => { }} onSwitch={()=>setOnLoginPage(false)}/>:
-        <RegisterForm onSubmit={() => { }} onSwitch={()=>setOnLoginPage(true)}/>}
+        {onLoginPage ? (
+          <LoginForm
+            onSubmit={onSubmitLogin}
+            onSwitch={() => setOnLoginPage(false)}
+          />
+        ) : (
+          <RegisterForm
+            onSubmit={onSubmitRegister}
+            onSwitch={() => setOnLoginPage(true)}
+          />
+        )}
       </div>
     </main>
-  )
+  );
 }
