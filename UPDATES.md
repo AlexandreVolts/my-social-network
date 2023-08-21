@@ -24,3 +24,4 @@
 - Composant Footer: Selection de langue, liens vers page de connexion, inscription et about
 - Création d'une page /login (ne contient que le formulaire de connexion)
 - Création d'une page /register (ne contient que le formulaire d'inscription)
+- Composant Modal

@@ -21,7 +21,7 @@ export function LoginForm(props: LoginFormProps) {
   const [errorPassword, setErrorPassword] = useState("");
 
   const schema = yup.object({
-    email: yup.string().required(t("error.email-required")),
+    email: yup.string().required(t("error.email-required")).email(t("error.email-email")),
     password: yup.string().required(t("error.password-required")),
   });
 
@@ -44,6 +44,11 @@ export function LoginForm(props: LoginFormProps) {
       });
   };
 
+  const onChange = <T,>(val: T, setter: (val: T)=>void, errorSetter: (val: string)=>void )=> {
+    setter(val);
+    errorSetter("");
+  }
+
   return (
     <motion.form onSubmit={onSubmit}>
       <Card>
@@ -52,14 +57,14 @@ export function LoginForm(props: LoginFormProps) {
           <div className=" grow space-y-2">
             <TextInput
               value={email}
-              onChange={setEmail}
+              onChange={(val)=>onChange(val, setEmail, setErrorEmail)}
               label={t("email")}
               placeholder={t("email-holder")}
               error={errorEmail}
             />
             <PasswordInput
               value={password}
-              onChange={setPassword}
+              onChange={(val)=>onChange(val, setPassword, setErrorPassword)}
               label={t("password")}
               placeholder=""
               error={errorPassword}
