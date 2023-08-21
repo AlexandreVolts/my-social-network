@@ -18,4 +18,5 @@
 
 ## 0.4 (21/08/2023)
 - Composant Overlay
+- Composant Header: titre, bouton d'inscription et de connexion
 

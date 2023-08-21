@@ -15,11 +15,11 @@
 - Composant Toaster
 - Animations whileTaping sur le bouton et l'input
 + Composant Overlay
-- - Relier le Select à l'Overlay
++ - Relier le Select à l'Overlay
 - Création d'une page /login (ne contient que le formulaire de connexion)
 - Création d'une page /register (ne contient que le formulaire d'inscription)
-- Composant Header: titre, bouton d'inscription et de connexion
-- Céation d'une page /about
++ Composant Header: titre, bouton d'inscription et de connexion
+- Création d'une page /about
 - - Implémenter le composant Header
 - Composant Footer: Selection de langue, liens vers page de connexion, inscription et about
 
