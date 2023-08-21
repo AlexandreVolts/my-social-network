@@ -2,7 +2,7 @@
 import { RegisterFormData } from "@/app/types/RegisterFormData";
 import { Footer } from "@/components/Footer";
 import { RegisterForm } from "@/components/RegisterForm";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next-intl/client";
 import { useState } from "react";
 
 export default function Register() {

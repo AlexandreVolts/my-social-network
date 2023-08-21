@@ -1,11 +1,12 @@
 "use client";
+import { LoginFormData } from "@/app/types/LoginFormData";
 import { Footer } from "@/components/Footer";
 import { LoginForm } from "@/components/LoginForm";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next-intl/client";
 import { useState } from "react";
 
 export default function Login() {
-  const [logData, setLogData] = useState<{ email: string; password: string }>();
+  const [logData, setLogData] = useState<LoginFormData>();
   const router = useRouter();
   return (
     <>
