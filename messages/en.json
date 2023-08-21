@@ -1,5 +1,31 @@
 {
   "Index": {
     "hello": "Hello"
+  },
+  "Form": {
+    "register": "Register",
+    "login": "Login",
+    "switch-to-login": "Already have an account ? Login",
+    "switch-to-register": "No account ? Register",
+    "name": "Name",
+    "surname": "Surname",
+    "name-holder": "Ex: John",
+    "surname-holder": "Ex: Doe",
+    "email": "Email",
+    "email-holder": "yourmail@mailbox.com",
+    "password": "Password",
+    "confirm-password": "Confirm password",
+    "birthday": "Your birthday",
+    "error": {
+      "name-required": "Name is a required field.",
+      "surname-required": "Surname is a required field.",
+      "email-required": "Email is a required field.",
+      "email-email": "Must be a valide email adress.",
+      "password-required": "Password is a required field.",
+      "password-same-pw": "This field and the one under must be the same.",
+      "password-too-short": "Password must be at least 8 characters.",
+      "birthday-required": "Birthday is a required field.",
+      "birthday-min-age": "Must be at least 13 years old."
+    }
   }
 }

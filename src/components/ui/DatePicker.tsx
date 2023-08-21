@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Select } from "./Select";
+import { useLocale, useTranslations } from "next-intl";
 
 interface DatePickerProps {
     date: Date;
@@ -11,6 +12,7 @@ interface DatePickerProps {
 }
 
 export function DatePicker(props: DatePickerProps) {
+    const locale = useLocale()
     const currentDate = new Date();
     const selectedDate = { day: props.date.getDate(), month: props.date.getMonth(), year: props.date.getFullYear() }
 
@@ -19,7 +21,7 @@ export function DatePicker(props: DatePickerProps) {
     }
 
     const getMonthFromNb = (month: number) => {
-        return new Date(selectedDate.year, month, 15).toLocaleString('en-US', { month: "short" })
+        return new Date(selectedDate.year, month, 15).toLocaleString(locale==="eo"?"en":locale, { month: "short" })
     }
 
     return (

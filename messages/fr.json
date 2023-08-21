@@ -1,5 +1,31 @@
 {
   "Index": {
     "hello": "Bonjour"
+  },
+  "Form": {
+    "register": "S'inscrire",
+    "login": "Se connecter",
+    "switch-to-login": "Déjà inscrit ? Se connecter",
+    "switch-to-register": "Pas de compte ? Inscrivez-vous",
+    "name": "Prénom",
+    "surname": "Nom",
+    "name-holder": "Ex: Jean",
+    "surname-holder": "Ex: Dupont",
+    "email": "Adresse mail",
+    "email-holder": "votre-adresse@boîte-mail.com",
+    "password": "Mot de passe",
+    "confirm-password": "Confirmation du mot de passe",
+    "birthday": "Votre date de naissance",
+    "error": {
+      "name-required": "Vous devez rentrer un prénom.",
+      "surname-required": "Vous devez rentrer un nom.",
+      "email-required": "Vous devez rentrer une adresse mail ",
+      "email-email": "L'adresse mail doit être valide.",
+      "password-required": "Vous devez rentrer un mot de passe.",
+      "password-same-pw": "Ce champ et celui en dessous doivent être identiques.",
+      "password-too-short": "Votre mot de passe doit faire au moins 8 caractères.",
+      "birthday-required": "Vous devez rentrer une date de naissance.",
+      "birthday-min-age": "Vous devez avoir au moins 13 ans pour vous inscrire."
+    }
   }
 }
