@@ -14,7 +14,7 @@
 
 - Composant Toaster
 - Animations whileTaping sur le bouton et l'input
-- Composant Overlay
++ Composant Overlay
 - - Relier le Select à l'Overlay
 - Création d'une page /login (ne contient que le formulaire de connexion)
 - Création d'une page /register (ne contient que le formulaire d'inscription)

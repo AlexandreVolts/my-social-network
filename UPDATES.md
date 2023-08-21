@@ -16,6 +16,6 @@
 ## 0.3 (18/08/2023)
 - Template page d'accueil: Formulaire de connexion
 
-## 0.4 (16/08/2023)
+## 0.4 (21/08/2023)
+- Composant Overlay
 
-## 0.5 (17/08/2023)
