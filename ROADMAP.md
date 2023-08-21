@@ -19,8 +19,8 @@
 - Création d'une page /login (ne contient que le formulaire de connexion)
 - Création d'une page /register (ne contient que le formulaire d'inscription)
 + Composant Header: titre, bouton d'inscription et de connexion
-- Création d'une page /about
-- - Implémenter le composant Header
++ Création d'une page /about
++ - Implémenter le composant Header
 - Composant Footer: Selection de langue, liens vers page de connexion, inscription et about
 
 - Composant Modal
