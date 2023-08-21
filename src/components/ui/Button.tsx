@@ -26,7 +26,7 @@ export function Button(props: ButtonProps) {
 
   return (
     <motion.button
-      whileTap={{ scale: 0.97 }}
+      whileTap={{ scale: props.disabled ? 1 : 0.97 }}
       type={props.type??"button"}
       disabled={props.disabled}
       onClick={props.onClick}
