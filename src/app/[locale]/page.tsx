@@ -14,13 +14,11 @@ export default function Home() {
       <div className="basis-0 grow">
         <h2 className="text-4xl">My social network</h2>
       </div>
-      {onLoginPage?
       <div className="basis-0 grow">
-        <LoginForm onSubmit={() => { }} onSwitch={()=>setOnLoginPage(false)}/>
-      </div>:
-      <div className="basis-0 grow">
-        <RegisterForm onSubmit={() => { }} onSwitch={()=>setOnLoginPage(true)}/>
-      </div>}
+        {onLoginPage?
+        <LoginForm onSubmit={() => { }} onSwitch={()=>setOnLoginPage(false)}/>:
+        <RegisterForm onSubmit={() => { }} onSwitch={()=>setOnLoginPage(true)}/>}
+      </div>
     </main>
   )
 }
