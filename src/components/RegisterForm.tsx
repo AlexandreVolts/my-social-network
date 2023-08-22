@@ -9,6 +9,7 @@ import * as yup from "yup";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { FormEvent, useEffect, useState } from "react";
+import { Loader } from "./ui/Loader";
 
 interface RegisterFormProps {
   onSubmit: (data: RegisterFormData) => void;
@@ -108,6 +109,7 @@ export function RegisterForm(props: RegisterFormProps) {
                 label={t("name")}
                 placeholder={t("name-holder")}
                 error={errorName}
+                disabled={props.isLoading}
               />
               <TextInput
                 value={surname}
@@ -115,6 +117,7 @@ export function RegisterForm(props: RegisterFormProps) {
                 label={t("surname")}
                 placeholder={t("surname-holder")}
                 error={errorSurname}
+                disabled={props.isLoading}
               />
             </div>
             <TextInput
@@ -123,23 +126,27 @@ export function RegisterForm(props: RegisterFormProps) {
               label={t("email")}
               placeholder={t("email-holder")}
               error={errorEmail}
+              disabled={props.isLoading}
             />
             <PasswordInput
               value={password}
               onChange={(str) => onChange(str, setPassword, setErrorPassword)}
               label={t("password")}
               error={errorPassword}
+              disabled={props.isLoading}
             />
             <PasswordInput
               value={confirmPw}
               onChange={setConfirmPw}
               label={t("confirm-password")}
+              disabled={props.isLoading}
             />
             <DatePicker
               date={birthday}
               onChange={(date) => onChange(date, setBirthday, setErrorBirthday)}
               label={t("birthday")}
               error={errorBirthday}
+              disabled={props.isLoading}
             />
           </div>
           <div className="flex space-x-2">
@@ -156,7 +163,11 @@ export function RegisterForm(props: RegisterFormProps) {
               type="submit"
               label={t("register")}
               disabled={props.isLoading}
-              icon={props.isLoading ? <IconLoader2 className="animate-spin" /> : <IconUserPlus />}
+              icon={
+                <Loader isLoading={props.isLoading}>
+                  <IconUserPlus />
+                </Loader>
+              }
             />
           </div>
         </div>

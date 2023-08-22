@@ -9,25 +9,27 @@ import { useLogin } from "@/hooks/useLogin";
 
 export default function Home() {
   const [onLoginPage, setOnLoginPage] = useState(false);
-  const handlers = useLogin();
+  const { values, handlers } = useLogin();
 
   const onSubmitRegister = (data: RegisterFormData) => {
-    handlers
-      .register(data)
-      .then(() => {
+    handlers.register(
+      data,
+      () => {
         // TODO: Say to the user to check his emails
-        console.log('Register successful');
-      })
-      .catch((e) => {
+        console.log("Register successful");
+      },
+      (e) => {
         // TODO: Catch errors here
         console.error(e);
-      });
+      }
+    );
   };
   const onSubmitLogin = (data: LoginFormData) => {
-    handlers
-      .signIn(data)
-      .then(() => console.log('Login successful'))
-      .catch((e) => console.error(e));
+    handlers.signIn(
+      data,
+      () => console.log("Login successful"),
+      (e) => console.error(e)
+    );
   };
 
   return (
@@ -40,11 +42,13 @@ export default function Home() {
           <LoginForm
             onSubmit={onSubmitLogin}
             onSwitch={() => setOnLoginPage(false)}
+            isLoading={values.isLoading}
           />
         ) : (
           <RegisterForm
             onSubmit={onSubmitRegister}
             onSwitch={() => setOnLoginPage(true)}
+            isLoading={values.isLoading}
           />
         )}
       </div>

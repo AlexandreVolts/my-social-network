@@ -25,3 +25,6 @@
 - Création d'une page /login (ne contient que le formulaire de connexion)
 - Création d'une page /register (ne contient que le formulaire d'inscription)
 - Composant Modal
+
+# 0.5 (22/08/2023)
+- Ajouter des icônes sur les boutons

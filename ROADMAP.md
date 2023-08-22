@@ -12,6 +12,7 @@
 + Template page d'accueil: Formulaire de connexion
 + - Numéro de téléphone ou email, mot de passe
 
++ Ajouter des icônes sur les boutons
 - Composant Toaster
 + Animations whileTaping sur le bouton et l'input
 + Composant Overlay

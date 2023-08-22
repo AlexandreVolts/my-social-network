@@ -71,6 +71,7 @@ export function LoginForm(props: LoginFormProps) {
               label={t("email")}
               placeholder={t("email-holder")}
               error={errorEmail}
+              disabled={props.isLoading}
             />
             <PasswordInput
               value={password}
@@ -78,6 +79,7 @@ export function LoginForm(props: LoginFormProps) {
               label={t("password")}
               placeholder=""
               error={errorPassword}
+              disabled={props.isLoading}
             />
           </div>
           <div className="flex space-x-2">
