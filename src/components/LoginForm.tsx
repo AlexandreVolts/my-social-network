@@ -3,25 +3,31 @@ import { TextInput } from "./ui/TextInput";
 import { PasswordInput } from "./ui/PasswordInput";
 import { Card } from "./ui/Card";
 import { LoginFormData } from "@/types/LoginFormData";
+import { IconLogin } from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { FormEvent, useState } from "react";
 import * as yup from "yup";
+import { Loader } from "./ui/Loader";
 
 interface LoginFormProps {
   onSubmit: (data: LoginFormData) => void;
   onSwitch: () => void;
+  isLoading?: boolean;
 }
 export function LoginForm(props: LoginFormProps) {
   const t = useTranslations("Form");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //errors
+
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
 
   const schema = yup.object({
-    email: yup.string().required(t("error.email-required")).email(t("error.email-email")),
+    email: yup
+      .string()
+      .required(t("error.email-required"))
+      .email(t("error.email-email")),
     password: yup.string().required(t("error.password-required")),
   });
 
@@ -44,10 +50,14 @@ export function LoginForm(props: LoginFormProps) {
       });
   };
 
-  const onChange = <T,>(val: T, setter: (val: T)=>void, errorSetter: (val: string)=>void )=> {
+  const onChange = <T,>(
+    val: T,
+    setter: (val: T) => void,
+    errorSetter: (val: string) => void
+  ) => {
     setter(val);
     errorSetter("");
-  }
+  };
 
   return (
     <motion.form onSubmit={onSubmit}>
@@ -57,14 +67,14 @@ export function LoginForm(props: LoginFormProps) {
           <div className=" grow space-y-2">
             <TextInput
               value={email}
-              onChange={(val)=>onChange(val, setEmail, setErrorEmail)}
+              onChange={(val) => onChange(val, setEmail, setErrorEmail)}
               label={t("email")}
               placeholder={t("email-holder")}
               error={errorEmail}
             />
             <PasswordInput
               value={password}
-              onChange={(val)=>onChange(val, setPassword, setErrorPassword)}
+              onChange={(val) => onChange(val, setPassword, setErrorPassword)}
               label={t("password")}
               placeholder=""
               error={errorPassword}
@@ -76,9 +86,19 @@ export function LoginForm(props: LoginFormProps) {
                 onClick={props.onSwitch}
                 label={t("switch-to-register")}
                 secondary
+                disabled={props.isLoading}
               />
             </div>
-            <Button label={t("login")} type="submit" />
+            <Button
+              type="submit"
+              label={t("login")}
+              disabled={props.isLoading}
+              icon={
+                <Loader isLoading={props.isLoading}>
+                  <IconLogin />
+                </Loader>
+              }
+            />
           </div>
         </div>
       </Card>
