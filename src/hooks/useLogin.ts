@@ -1,5 +1,5 @@
-import { LoginFormData } from "@/app/types/LoginFormData";
-import { RegisterFormData } from "@/app/types/RegisterFormData";
+import { LoginFormData } from "@/types/LoginFormData";
+import { RegisterFormData } from "@/types/RegisterFormData";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export function useLogin() {

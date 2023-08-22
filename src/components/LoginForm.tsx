@@ -1,8 +1,8 @@
-import { LoginFormData } from "@/app/types/LoginFormData";
 import { Button } from "./ui/Button";
 import { TextInput } from "./ui/TextInput";
 import { PasswordInput } from "./ui/PasswordInput";
 import { Card } from "./ui/Card";
+import { LoginFormData } from "@/types/LoginFormData";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { FormEvent, useState } from "react";

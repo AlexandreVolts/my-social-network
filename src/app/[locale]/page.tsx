@@ -3,9 +3,9 @@
 import { LoginForm } from "@/components/LoginForm";
 import { RegisterForm } from "@/components/RegisterForm";
 import { useState } from "react";
-import { RegisterFormData } from "../types/RegisterFormData";
+import { RegisterFormData } from "@/types/RegisterFormData";
+import { LoginFormData } from "@/types/LoginFormData";
 import { useLogin } from "@/hooks/useLogin";
-import { LoginFormData } from "../types/LoginFormData";
 
 export default function Home() {
   const [onLoginPage, setOnLoginPage] = useState(false);
