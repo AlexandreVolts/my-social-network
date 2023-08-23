@@ -15,7 +15,8 @@
 - Fix: Overlay s'adapte au conteneur parent
 - Fix: Select se place sur l'input
 + Composant Modal
-- Composant TextArea
++ Composant TextArea
+- Composant Avatar
 - Création d'une page /home
 - - Card "What's on your mind" clicable
 - - Composant PublishModal: formulaire avec TextArea + Bouton Publier
