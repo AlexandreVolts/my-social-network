@@ -6,7 +6,7 @@ interface CardProps {
 
 export function Card(props: CardProps) {
     return (
-        <div className="p-6 bg-white drop-shadow-md rounded-sm">
+        <div className="p-6 bg-white drop-shadow-md rounded-md">
             {props.children}
         </div>
     )

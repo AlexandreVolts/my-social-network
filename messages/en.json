@@ -1,6 +1,8 @@
 {
-  "Index": {
-    "hello": "Hello"
+  "Home": {
+    "publish-modal-title": "What's on your mind ?",
+    "publish-placeholder": "Your text here...",
+    "publish": "Publish"
   },
   "Form": {
     "register": "Register",

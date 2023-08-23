@@ -27,7 +27,7 @@ export function TextArea(props: TextAreaProps) {
         onChange={(e) => props.onChange(e.target.value)}
         placeholder={props.placeholder}
         disabled={props.disabled}
-        className={`p-2 border-2 ${border} ${disabled} rounded-sm resize-none overflow-hidden focus:border-blue-800 focus:outline-none`}
+        className={`p-2 border-2 ${border} ${disabled} rounded-md resize-none overflow-hidden focus:border-blue-800 focus:outline-none`}
       ></textarea>
       {props.error ? <p className="text-red-600">{props.error}</p> : <></>}
     </motion.div>

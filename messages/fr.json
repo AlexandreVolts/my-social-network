@@ -1,6 +1,8 @@
 {
-  "Index": {
-    "hello": "Bonjour"
+  "Home": {
+    "publish-modal-title": "A quoi pensez-vous ?",
+    "publish-placeholder": "Votre texte ici...",
+    "publish": "Publier"
   },
   "Form": {
     "register": "S'inscrire",

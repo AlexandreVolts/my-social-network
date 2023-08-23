@@ -1,6 +1,8 @@
 {
-  "Index": {
-    "hello": "Saluton"
+  "Home": {
+    "publish-modal-title": "Pri kio vi pensas ?",
+    "publish-placeholder": "Via teksto ĉi tie...",
+    "publish": "Publikigi"
   },
   "Form": {
     "register": "Registriĝi",
