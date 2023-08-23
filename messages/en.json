@@ -37,5 +37,12 @@
   },
   "About": {
     "about": "About"
+  },
+  "PublishedTime": {
+    "in-seconds": "a few moments ago",
+    "in-minutes": "{minutes}m ago",
+    "in-hours": "{hours}h ago",
+    "in-days": "{days}d ago",
+    "long-ago": "{date}"
   }
 }

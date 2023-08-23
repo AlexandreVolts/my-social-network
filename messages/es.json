@@ -37,5 +37,12 @@
   },
   "About": {
     "about": "A proposito"
+  },
+  "PublishedTime": {
+    "in-seconds": "hace unos momentos",
+    "in-minutes": "hace {minutes}m",
+    "in-hours": "hace {hours}h",
+    "in-days": "hace {days}d",
+    "long-ago": "el {date}"
   }
 }

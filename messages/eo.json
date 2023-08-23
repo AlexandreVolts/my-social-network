@@ -37,5 +37,12 @@
   },
   "About": {
     "about": "Pri"
+  },
+  "PublishedTime": {
+    "in-seconds": "antaŭ kelkaj momentoj",
+    "in-minutes": "antaŭ {minutes}m",
+    "in-hours": "antaŭ {hours}h",
+    "in-days": "antaŭ {days}t",
+    "long-ago": "la {date}"
   }
 }

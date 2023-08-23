@@ -21,8 +21,9 @@
 - - Card "What's on your mind" clicable
 - - Composant PublishModal: formulaire avec TextArea + Bouton Publier
 - - Lors du clic, ouverture d'une PublishModal
-- Composant Post:
-- - Affiche l'auteur, la date, le contenu du post, Buttons liker et commenter
++ Composant Post:
++ - Affiche l'auteur, la date, le contenu du post, Buttons liker et commenter
++ - Composant ActionIcon
 - - Lors du clic sur un post, affichage du post dans une Modal
 - - Si il s'agit d'un clic de l'auteur, ajouter des boutons de suppression ou d'édition
 - - Lors du clic sur le bouton commenter, ouverture d'une PublishModal
