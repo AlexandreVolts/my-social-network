@@ -28,3 +28,4 @@
 
 # 0.5 (22/08/2023)
 - Ajouter des icônes sur les boutons
+- Composant TextArea
