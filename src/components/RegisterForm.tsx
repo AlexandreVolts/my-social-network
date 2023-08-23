@@ -99,7 +99,7 @@ export function RegisterForm(props: RegisterFormProps) {
       <Card>
         <div className="space-y-8">
           <div>
-            <h2 className="text-3xl">{t("register")}</h2>
+            <h2 className="text-3xl font-bold">{t("register")}</h2>
           </div>
           <div className="space-y-2">
             <div className="space-x-2 flex">

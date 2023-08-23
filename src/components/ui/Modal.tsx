@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { Overlay } from "./Overlay";
 import { Card } from "./Card";
 import { IconX } from "@tabler/icons-react";
+import { motion } from "framer-motion";
 
 interface ModalProps {
   opened: boolean;
@@ -18,15 +19,17 @@ export function Modal(props: ModalProps) {
       onClick={props.closeOnClickOutside ? props.onClose : () => {}}
       opacity={true}
     >
-      <Card>
-        <div className="space-y-2 w-96">
-          <div className="flex items-center justify-between space-x-2">
-            <h3 className="text-xl">{props.title}</h3>
-            <IconX onClick={props.onClose} className="cursor-pointer" />
+      <motion.div animate={{scale: props.opened ? 1 : 0}} className="flex w-96">
+        <Card>
+          <div className="space-y-8">
+            <div className="flex items-center justify-between space-x-2">
+              <h3 className="text-xl font-bold">{props.title}</h3>
+              <IconX onClick={props.onClose} className="cursor-pointer" />
+            </div>
+            <div>{props.children}</div>
           </div>
-          <div>{props.children}</div>
-        </div>
-      </Card>
+        </Card>
+      </motion.div>
     </Overlay>
   );
 }

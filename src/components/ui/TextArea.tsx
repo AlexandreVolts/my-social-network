@@ -14,8 +14,9 @@ export function TextArea(props: TextAreaProps) {
 
   useEffect(() => {
     if (ref.current) {
-      ref.current.style.height = "0px";
-      ref.current.style.height = (ref.current?.scrollHeight + 4) + "px";
+      ref.current.style.height = "44px";
+      if (ref.current.scrollHeight >= 40)
+        ref.current.style.height = (ref.current.scrollHeight + 4) + "px";
     }
   }, [ref, props.value]);
   return (

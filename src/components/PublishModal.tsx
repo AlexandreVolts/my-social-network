@@ -40,6 +40,7 @@ export function PublishModal(props: PublishModalProps) {
           type="submit"
           label={t("publish")}
           size="lg"
+          disabled={props.isLoading}
           icon={
             <Loader isLoading={props.isLoading}>
               <IconSend />
