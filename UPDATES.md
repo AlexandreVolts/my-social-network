@@ -9,6 +9,7 @@
 # 0.5 (22/08/2023)
 - Ajouter des icônes sur les boutons
 - Composant TextArea
+- Composant Avatar
 
 ## 0.4 (21/08/2023)
 - Composant Overlay
