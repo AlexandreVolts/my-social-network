@@ -1,17 +1,5 @@
 # My Social Network's roadmap
 
-+ Composant TextInput
-+ Composant PasswordInput
-+ Composant DatePicker
-+ Composant Select
-+ Composant Button
-+ Composant Card
-+ Fix: focus disabled when clicking icons in TextInput
-+ Template page d'accueil: Formulaire d'inscription
-+ - Prénom, nom, numéro de téléphone ou email, mot de passe, date de naissance
-+ Template page d'accueil: Formulaire de connexion
-+ - Numéro de téléphone ou email, mot de passe
-
 + Ajouter des icônes sur les boutons
 - Composant Toaster
 + Animations whileTaping sur le bouton et l'input

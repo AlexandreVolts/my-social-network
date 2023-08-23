@@ -2,33 +2,30 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First, install dependencies: `yarn install`
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+Run the development server: `yarn dev`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Pages auto-updates as you edit files.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Storybook
 
-## Learn More
+First, run the Storybook server: `yarn storybook`
 
-To learn more about Next.js, take a look at the following resources:
+This should automatically open a new page in your browser with the Storybook.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+If nothing happens, you can manually go to [http://localhost:6006](http://localhost:6006)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Pages auto-updates as you edit files.
 
-## Deploy on Vercel
+## How to dev ?
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+If you have any ideas to improve the project, you can create a branch, edit the ROADMAP.md by adding any feature you think would be interesting.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+When you want to dev a feature, create a new branch, `git checkout -b feature/<feature-title>`.
+
+On this branch, the first thing you must do is to update the ROADMAP.md file by replacing the minus by a plus.
+
+Then, you must update the UPDATES.md file. This file helps tracking what has been done on each version.
