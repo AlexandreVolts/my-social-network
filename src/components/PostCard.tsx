@@ -14,22 +14,18 @@ import { ReadMoreText } from "./ui/ReadMoreText";
 import { useElapsedDelayFormat } from "@/hooks/useElapsedDelayFormat";
 import { BasePublishedContentProps } from "@/types/BasePublishedContentProps";
 import { Children, ReactNode, useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface PostCardProps extends BasePublishedContentProps {
   isAuthor?: boolean;
   isOpened?: boolean;
   children: ReactNode;
-  onSetting: () => void;
-  onLike: () => void;
-  onComment: () => void;
-  onShare: () => void;
-  onEdit: () => void;
-  onDelete: () => void;
 }
 
 export function PostCard(props: PostCardProps) {
-  const [isAuthorMenuOpened, setIsAuthorMenuOpened] = useState(false);
+  const t = useTranslations('Utils');
   const formater = useElapsedDelayFormat();
+  const [isAuthorMenuOpened, setIsAuthorMenuOpened] = useState(false);
 
   const justifyHeader = props.isAuthor ? "justify-between" : "";
   const comments = props.isOpened ? "" : "hidden";
@@ -61,18 +57,18 @@ export function PostCard(props: PostCardProps) {
               onOpen={() => setIsAuthorMenuOpened(true)}
               onClose={() => setIsAuthorMenuOpened(false)}
               target={
-                <ActionIcon onClick={props.onSetting}>
+                <ActionIcon>
                   <IconDots />
                 </ActionIcon>
               }
             >
               <Dropdown.Item onClick={props.onEdit}>
                 <IconPencil className="text-blue-600" />
-                <span>Editer</span>
+                <span>{t('edit')}</span>
               </Dropdown.Item>
               <Dropdown.Item onClick={props.onDelete}>
                 <IconTrash className="text-red-600" />
-                <span>Supprimer</span>
+                <span>{t('delete')}</span>
               </Dropdown.Item>
             </Dropdown>
           ) : (

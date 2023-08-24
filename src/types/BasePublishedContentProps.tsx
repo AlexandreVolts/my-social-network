@@ -7,4 +7,9 @@ export interface BasePublishedContentProps {
   likeCount: number;
   text: string;
   charLimit?: number;
+  onEdit: () => void;
+  onDelete: () => void;
+  onLike: () => void;
+  onComment: () => void;
+  onShare: () => void;
 }

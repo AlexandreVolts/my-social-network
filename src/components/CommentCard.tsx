@@ -1,28 +1,31 @@
-import { BasePublishedContentProps } from "@/types/BasePublishedContentProps";
-import { motion } from "framer-motion";
 import { Card } from "./ui/Card";
 import { Avatar } from "./ui/Avatar";
 import { ActionIcon } from "./ui/ActionIcon";
+import { ReadMoreText } from "./ui/ReadMoreText";
+import { Dropdown } from "./ui/Dropdown";
+import { useElapsedDelayFormat } from "@/hooks/useElapsedDelayFormat";
+import { BasePublishedContentProps } from "@/types/BasePublishedContentProps";
 import {
   IconDots,
   IconHeart,
   IconMessage,
+  IconPencil,
   IconShare,
+  IconTrash,
 } from "@tabler/icons-react";
-import { ReadMoreText } from "./ui/ReadMoreText";
-import { useElapsedDelayFormat } from "@/hooks/useElapsedDelayFormat";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface CommentCardProps extends BasePublishedContentProps {
   isAdmin?: boolean;
   isAuthor?: boolean;
-  onSettingClick: () => void;
-  onLikeClick: () => void;
-  onCommentClick: () => void;
-  onShareClick: () => void;
 }
 
 export function CommentCard(props: CommentCardProps) {
-  const getPublishedTime = useElapsedDelayFormat();
+  const formater = useElapsedDelayFormat();
+  const t = useTranslations('Utils');
+  const [isAuthorMenuOpened, setIsAuthorMenuOpened] = useState(false);
 
   return (
     <motion.div className="flex space-x-2">
@@ -35,7 +38,7 @@ export function CommentCard(props: CommentCardProps) {
           size="sm"
         />
         <div className="flex flex-col items-center">
-          <ActionIcon onClick={props.onLikeClick}>
+          <ActionIcon onClick={props.onLike}>
             <IconHeart />
           </ActionIcon>
           <span>{props.likeCount}</span>
@@ -50,23 +53,37 @@ export function CommentCard(props: CommentCardProps) {
         </Card>
         <div className="flex items-center justify-between">
           <div className="flex space-x-2 items-center">
-            <ActionIcon onClick={props.onCommentClick}>
+            <ActionIcon onClick={props.onComment}>
               <IconMessage />
             </ActionIcon>
             <span>{0}</span>
           </div>
-          <ActionIcon onClick={props.onShareClick}>
+          <ActionIcon onClick={props.onShare}>
             <IconShare />
           </ActionIcon>
-          <span>{getPublishedTime(props.createdAt)}</span>
+          <span>{formater(props.createdAt)}</span>
         </div>
       </div>
-      <div className="w-8 flex-col justify-start">
-        {props.isAuthor||props.isAdmin?
-        <ActionIcon onClick={props.onSettingClick}>
-          <IconDots />
-        </ActionIcon>:
-        <></>}
+      <div>
+        <Dropdown
+          opened={isAuthorMenuOpened}
+          onOpen={() => setIsAuthorMenuOpened(true)}
+          onClose={() => setIsAuthorMenuOpened(false)}
+          target={
+            <ActionIcon>
+              <IconDots />
+            </ActionIcon>
+          }
+        >
+          <Dropdown.Item onClick={props.onEdit}>
+            <IconPencil className="text-blue-600" />
+            <span>{t('edit')}</span>
+          </Dropdown.Item>
+          <Dropdown.Item onClick={props.onDelete}>
+            <IconTrash className="text-red-600" />
+            <span>{t('delete')}</span>
+          </Dropdown.Item>
+        </Dropdown>
       </div>
     </motion.div>
   );

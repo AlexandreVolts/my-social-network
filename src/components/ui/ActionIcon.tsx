@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 interface ActionIconProps {
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   disabled?: boolean;
 }
 
