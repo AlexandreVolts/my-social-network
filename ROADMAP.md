@@ -39,8 +39,8 @@
 - - Lors du clic sur un post, affichage du post dans une Modal
 - - Si il s'agit d'un clic de l'auteur, ajouter des boutons de suppression ou d'édition
 - - Lors du clic sur le bouton commenter, ouverture d'une PublishModal
-- Composant Comment:
-- - Affiche l'auteur, la date, le contenu du commentaire, Buttons liker et répondre
++ Composant Comment:
++ - Affiche l'auteur, la date, le contenu du commentaire, Buttons liker et répondre
 - - Afficher les commentaires lors d'un clic sur le post
 - Création d'une page /post qui affiche un post spécifique (pour pouvoir le partager)
 

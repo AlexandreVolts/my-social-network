@@ -9,6 +9,7 @@ export function useElapsedDelayFormat() {
     const refDay = refDate.getDate();
     const refHour = refDate.getHours();
     const refMinutes = refDate.getMinutes();
+
     //if we're at most 3 days after the post
     if (
       refDate.getFullYear() === 1970 &&
@@ -27,7 +28,7 @@ export function useElapsedDelayFormat() {
         }
         return t("in-hours", {hours: (refHour !== 0 ? refHour - 1 : 23)});
       }
-      return t("in-days", {days: (refDay - (refHour < 1 ? 1 : 0))});
+      return t("in-days", {days: (refDay-1 + (refHour < 1 ? 1 : 0))});
     }
     return t("long-ago", {date: postDate.toLocaleDateString()});
   };
