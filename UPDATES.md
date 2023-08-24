@@ -1,5 +1,8 @@
 # My Social Network's Updates
 
+# 0.7 (24/08/2023)
+- Composant Comment : Affiche l'auteur, la date, le contenu du commentaire, Buttons liker et répondre
+
 # 0.6 (23/08/2023)
 - Création d'une page /home
 - Composant PublishModal
