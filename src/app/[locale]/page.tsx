@@ -33,7 +33,7 @@ export default function Home() {
   const onSubmitLogin = (data: LoginFormData) => {
     handlers.signIn(
       data,
-      () => console.log("Login successful"),
+      () => router.push('/home'),
       (e) => console.error(e)
     );
   };

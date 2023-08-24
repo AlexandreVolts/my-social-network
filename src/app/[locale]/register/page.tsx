@@ -17,7 +17,7 @@ export default function Register() {
   const onSubmit = (data: RegisterFormData) => {
     handlers.register(
       data,
-      () => {},
+      () => router.push('/login'),
       () => {}
     );
   };
