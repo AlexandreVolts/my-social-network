@@ -7,7 +7,6 @@ import {
   IconDots,
   IconHeart,
   IconMessage,
-  IconShadow,
   IconShare,
 } from "@tabler/icons-react";
 import { ReadMoreText } from "./ui/ReadMoreText";
