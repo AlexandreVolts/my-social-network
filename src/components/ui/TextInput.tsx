@@ -34,7 +34,7 @@ export function TextInput(props: TextInputProps) {
     >
       <label htmlFor={id}>{props.label}</label>
       <div
-        className={`${border} ${disabled} rounded-sm transition border-2 p-2 flex space-x-2`}
+        className={`${border} ${disabled} rounded-md transition border-2 p-2 flex space-x-2`}
       >
         {props.withIcon ?? <></>}
         <input

@@ -63,7 +63,7 @@ export function LoginForm(props: LoginFormProps) {
     <motion.form onSubmit={onSubmit}>
       <Card>
         <div className="space-y-8">
-          <h1 className="text-3xl">{t("login")}</h1>
+          <h2 className="text-3xl font-bold">{t("login")}</h2>
           <div className=" grow space-y-2">
             <TextInput
               value={email}

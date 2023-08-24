@@ -34,7 +34,7 @@ export function Button(props: ButtonProps) {
                 ${primary} 
                 ${size[props.size ?? "md"]} 
                 ${style[props.secondary ? "secondary" : "primary"]} 
-                rounded-sm
+                rounded-md
                 transition`}
     >
       <span className="flex space-x-2">
