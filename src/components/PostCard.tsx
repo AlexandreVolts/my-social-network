@@ -5,22 +5,13 @@ import {
   IconShare,
 } from "@tabler/icons-react";
 import { Card } from "./ui/Card";
-import { useState } from "react";
 import { Avatar } from "./ui/Avatar";
 import { ActionIcon } from "./ui/ActionIcon";
 import { useElapsedDelayFormat } from "@/hooks/useElapsedDelayFormat";
-import { useTranslations } from "next-intl";
+import { ReadMoreText } from "./ui/ReadMoreText";
+import { BasePublishedContentProps } from "@/types/BasePublishedContentProps";
 
-interface PostCardProps {
-  name: string;
-  surname: string;
-  avatarSrc?: string;
-  avatarColor?: string;
-  createdAt: Date;
-  likeCount: number;
-  commentCount: number;
-  text: string;
-  charLimit?: number;
+interface PostCardProps extends BasePublishedContentProps{
   isAuthor?: boolean;
   onSettingClick: () => void;
   onLikeClick: () => void;
@@ -29,10 +20,7 @@ interface PostCardProps {
 }
 
 export function PostCard(props: PostCardProps) {
-  const t = useTranslations("Post");
   const formater = useElapsedDelayFormat();
-  const [isFullyDisplayed, setIsFullyDisplayed] = useState(false);
-  const isTextOverflow = props.text.length >= (props.charLimit ?? 250);
 
   const justifyHeader = props.isAuthor ? "justify-between" : "";
 
@@ -62,33 +50,7 @@ export function PostCard(props: PostCardProps) {
             <></>
           )}
         </div>
-        <p>
-          <span className={`break-all`}>
-            {isFullyDisplayed
-              ? props.text
-              : props.text.slice(0, props.charLimit ?? 250) +
-                (isTextOverflow ? "... " : " ")}
-          </span>
-          {isTextOverflow ? (
-            !isFullyDisplayed ? (
-              <span
-                onClick={() => setIsFullyDisplayed(true)}
-                className="cursor-pointer font-bold"
-              >
-                {t("see-more")}
-              </span>
-            ) : (
-              <span
-                onClick={() => setIsFullyDisplayed(false)}
-                className="cursor-pointer font-bold"
-              >
-                {t("see-less")}
-              </span>
-            )
-          ) : (
-            <></>
-          )}
-        </p>
+        <ReadMoreText text={props.text} charLimit={props.charLimit}/>
         <div className="grid grid-cols-3">
           <div className="flex items-center space-x-2">
             <ActionIcon onClick={props.onLikeClick}>

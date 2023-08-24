@@ -27,7 +27,7 @@ export function useElapsedDelayFormat() {
         }
         return t("in-hours", {hours: (refHour !== 0 ? refHour - 1 : 23)});
       }
-      return t("in-days", {days: (refDay - (refHour < 1 ? 1 : 0))});
+      return t("in-days", {days: (refDay-1 + (refHour < 1 ? 1 : 0))});
     }
     return t("long-ago", {date: postDate.toLocaleDateString()});
   };
