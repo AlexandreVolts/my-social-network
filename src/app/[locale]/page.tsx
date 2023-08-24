@@ -2,14 +2,20 @@
 
 import { LoginForm } from "@/components/LoginForm";
 import { RegisterForm } from "@/components/RegisterForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RegisterFormData } from "@/types/RegisterFormData";
 import { LoginFormData } from "@/types/LoginFormData";
 import { useLogin } from "@/hooks/useLogin";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useUser } from "@/hooks/useUser";
+import { useRouter } from "next-intl/client";
 
 export default function Home() {
+  const supabase = createClientComponentClient();
+  const { values, handlers } = useLogin(supabase);
+  const { user, isComplete } = useUser(supabase);
+  const router = useRouter();
   const [onLoginPage, setOnLoginPage] = useState(false);
-  const { values, handlers } = useLogin();
 
   const onSubmitRegister = (data: RegisterFormData) => {
     handlers.register(
@@ -31,6 +37,12 @@ export default function Home() {
       (e) => console.error(e)
     );
   };
+
+  useEffect(() => {
+    if (isComplete && user) {
+      router.push("/home");
+    }
+  });
 
   return (
     <main className="flex min-h-screen justify-between p-24">
