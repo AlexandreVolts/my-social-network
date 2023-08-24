@@ -2,15 +2,26 @@
 
 import { PublishModal } from "@/components/PublishModal";
 import { Card } from "@/components/ui/Card";
+import { useUser } from "@/hooks/useUser";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 export default function Home() {
+  const supabase = createClientComponentClient();
+  const user = useUser(supabase);
   const t = useTranslations("Home");
   const [opened, setOpened] = useState(false);
   const [postContent, setPostContent] = useState("");
 
-  const onPublish = () => {};
+  const onPublish = async () => {
+    const data = await supabase.from('posts').insert({
+      author: user?.id,
+      content: postContent,
+    });
+
+    // TODO: Manage response
+  };
 
   return (
     <>
