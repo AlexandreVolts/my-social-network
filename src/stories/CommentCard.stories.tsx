@@ -32,7 +32,7 @@ export const LongComment: Story = {
     likeCount: 10,
     commentCount: 2,
     //@ts-ignore
-    createdAt: new Date()-1000*60*60*24*3,
+    createdAt: new Date(new Date()-1000*60*60*24*4),
   }
 }
 

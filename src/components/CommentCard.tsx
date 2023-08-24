@@ -3,7 +3,13 @@ import { motion } from "framer-motion";
 import { Card } from "./ui/Card";
 import { Avatar } from "./ui/Avatar";
 import { ActionIcon } from "./ui/ActionIcon";
-import { IconDots, IconHeart, IconMessage, IconShadow, IconShare } from "@tabler/icons-react";
+import {
+  IconDots,
+  IconHeart,
+  IconMessage,
+  IconShadow,
+  IconShare,
+} from "@tabler/icons-react";
 import { ReadMoreText } from "./ui/ReadMoreText";
 import { useElapsedDelayFormat } from "@/hooks/useElapsedDelayFormat";
 
@@ -36,29 +42,24 @@ export function CommentCard(props: CommentCardProps) {
           <span>{props.likeCount}</span>
         </div>
       </div>
-      <div className="w-80">
+      <div className="w-96">
         <Card>
           <b>
             {props.name} {props.surname}
           </b>
           <ReadMoreText text={props.text} charLimit={props.charLimit} />
         </Card>
-        <div className="flex justify-between">
-          <span
-            onClick={props.onCommentClick}
-            className="flex hover:text-gray-300 cursor-pointer"
-          >
-            <IconMessage />
-            Comment
-          </span>
-          <span
-            onClick={props.onShareClick}
-            className="flex hover:text-gray-300 cursor-pointer"
-          >
+        <div className="flex items-center justify-between">
+          <div className="flex space-x-2 items-center">
+            <ActionIcon onClick={props.onCommentClick}>
+              <IconMessage />
+            </ActionIcon>
+            <span>{props.commentCount}</span>
+          </div>
+          <ActionIcon onClick={props.onShareClick}>
             <IconShare />
-            Share
-          </span>
-          <span className="">{getPublishedTime(props.createdAt)}</span>
+          </ActionIcon>
+          <span>{getPublishedTime(props.createdAt)}</span>
         </div>
       </div>
       <div className="flex-col justify-start">

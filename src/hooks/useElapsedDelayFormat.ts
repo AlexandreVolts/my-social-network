@@ -9,6 +9,7 @@ export function useElapsedDelayFormat() {
     const refDay = refDate.getDate();
     const refHour = refDate.getHours();
     const refMinutes = refDate.getMinutes();
+
     //if we're at most 3 days after the post
     if (
       refDate.getFullYear() === 1970 &&

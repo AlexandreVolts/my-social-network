@@ -12,8 +12,8 @@ export function ReadMoreText(props: ReadMoreTextProps) {
   const isTextOverflow = props.text.length >= (props.charLimit ?? 250);
 
   return (
-    <p>
-      <span className={`break-all text-justify`}>
+    <p className={`break-words block text-justify`}>
+      <span>
         {isFullyDisplayed
           ? props.text
           : props.text.slice(0, props.charLimit ?? 250) +
@@ -32,7 +32,7 @@ export function ReadMoreText(props: ReadMoreTextProps) {
             onClick={() => setIsFullyDisplayed(false)}
             className="cursor-pointer font-bold"
           >
-            {t("see-less")}
+            {" " + t("see-less")}
           </span>
         )
       ) : (
