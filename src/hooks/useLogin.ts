@@ -1,11 +1,10 @@
 import { LoginFormData } from "@/types/LoginFormData";
 import { RegisterFormData } from "@/types/RegisterFormData";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { SupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useState } from "react";
 
-export function useLogin() {
+export function useLogin(client: SupabaseClient) {
   const [isLoading, setIsLoading] = useState(false);
-  const supabase = createClientComponentClient();
 
   const load = async <T>(
     promise: Promise<T>,
@@ -30,7 +29,7 @@ export function useLogin() {
     onRejected: (e: any) => void
   ) => {
     return load(
-      supabase.auth.signUp({
+      client.auth.signUp({
         email: data.email,
         password: data.password,
         options: {
@@ -53,7 +52,7 @@ export function useLogin() {
     onRejected: (e: any) => void
   ) => {
     return load(
-      supabase.auth.signInWithPassword(data),
+      client.auth.signInWithPassword(data),
       onFulfilled,
       onRejected
     );
@@ -64,7 +63,7 @@ export function useLogin() {
     onRejected: (e: any) => void
   ) => {
     return load(
-      supabase.auth.signOut().then(() => {}),
+      client.auth.signOut().then(() => {}),
       onFulfilled,
       onRejected
     );

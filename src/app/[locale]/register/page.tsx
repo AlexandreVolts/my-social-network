@@ -2,20 +2,31 @@
 import { Footer } from "@/components/Footer";
 import { RegisterForm } from "@/components/RegisterForm";
 import { useLogin } from "@/hooks/useLogin";
+import { useUser } from "@/hooks/useUser";
 import { RegisterFormData } from "@/types/RegisterFormData";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next-intl/client";
+import { useEffect } from "react";
 
 export default function Register() {
-  const { values, handlers } = useLogin();
+  const supabase = createClientComponentClient();
+  const { values, handlers } = useLogin(supabase);
+  const { user, isComplete } = useUser(supabase);
   const router = useRouter();
 
   const onSubmit = (data: RegisterFormData) => {
     handlers.register(
       data,
-      () => {},
+      () => router.push('/login'),
       () => {}
     );
   };
+
+  useEffect(() => {
+    if (isComplete && user) {
+      router.push("/home");
+    }
+  });
 
   return (
     <>
