@@ -3,6 +3,7 @@ import { Overlay } from "./Overlay";
 import { Card } from "./Card";
 import { IconX } from "@tabler/icons-react";
 import { motion } from "framer-motion";
+import { ActionIcon } from "./ActionIcon";
 
 interface ModalProps {
   opened: boolean;
@@ -11,7 +12,6 @@ interface ModalProps {
   closeOnClickOutside?: boolean;
   onClose: () => void;
 }
-
 export function Modal(props: ModalProps) {
   return (
     <Overlay
@@ -19,12 +19,17 @@ export function Modal(props: ModalProps) {
       onClick={props.closeOnClickOutside ? props.onClose : () => {}}
       opacity={true}
     >
-      <motion.div animate={{scale: props.opened ? 1 : 0}} className="flex w-96">
+      <motion.div
+        animate={{ scale: props.opened ? 1 : 0 }}
+        className="flex w-96"
+      >
         <Card>
           <div className="space-y-4">
             <div className="flex items-center justify-between space-x-2">
               <h3 className="text-xl font-bold">{props.title}</h3>
-              <IconX onClick={props.onClose} className="cursor-pointer" />
+              <ActionIcon onClick={props.onClose}>
+                <IconX />
+              </ActionIcon>
             </div>
             <div>{props.children}</div>
           </div>
