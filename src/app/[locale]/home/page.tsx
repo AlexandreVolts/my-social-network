@@ -18,13 +18,11 @@ export default function Home() {
   const [postContent, setPostContent] = useState("");
 
   const onPublish = async () => {
-    const data = await supabase.from("posts").insert({
-      author: user?.id,
-      content: postContent,
-    });
+    const data = await supabase.from("posts").insert({ content: postContent });
 
     // TODO: Manage response
     setOpened(false);
+    setPostContent('');
   };
 
   useEffect(() => {

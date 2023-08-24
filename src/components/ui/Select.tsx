@@ -55,7 +55,7 @@ function Select(props: SelectProps) {
 
   const selected = options.find((option) => option.value === props.value);
   const cursor = props.disabled ? "cursor-default" : "cursor-pointer";
-  const position = isOpened ? "relative z-10" : "";
+  const position = isOpened ? "relative z-20" : "";
 
   const onUpdate = (option: SelectOption) => {
     setOptions((options) =>
