@@ -11,7 +11,6 @@ import { useElapsedDelayFormat } from "@/hooks/useElapsedDelayFormat";
 import { ReadMoreText } from "./ui/ReadMoreText";
 import { BasePublishedContentProps } from "@/types/BasePublishedContentProps";
 import React, { ReactNode } from "react";
-import { CommentCard } from "./CommentCard";
 
 interface PostCardProps extends BasePublishedContentProps {
   isAuthor?: boolean;
@@ -28,11 +27,12 @@ export function PostCard(props: PostCardProps) {
 
   const justifyHeader = props.isAuthor ? "justify-between" : "";
   const comments = props.isOpened ? "" : "hidden";
+  const postWidth = props.isOpened ? "w-full":"w-96";
 
   return (
     <div className="w-full space-y-4">
       <Card>
-        <div className="w-96 space-y-2">
+        <div className={`${postWidth} space-y-2`}>
           <div
             className={`flex items-center ${justifyHeader} space-x-2 w-full`}
           >
@@ -58,6 +58,7 @@ export function PostCard(props: PostCardProps) {
               <></>
             )}
           </div>
+          <ReadMoreText text={props.text} charLimit={props.charLimit} />
           <div className="grid grid-cols-3">
             <div className="flex items-center space-x-2">
               <ActionIcon onClick={props.onLikeClick}>
@@ -76,33 +77,6 @@ export function PostCard(props: PostCardProps) {
                 <IconShare />
               </ActionIcon>
             </div>
-          </div>
-          {props.isAuthor ? (
-            <ActionIcon onClick={props.onSettingClick}>
-              <IconDots />
-            </ActionIcon>
-          ) : (
-            <></>
-          )}
-        </div>
-        <ReadMoreText text={props.text} charLimit={props.charLimit} />
-        <div className="grid grid-cols-3">
-          <div className="flex items-center space-x-2">
-            <ActionIcon onClick={props.onLikeClick}>
-              <IconHeart />
-            </ActionIcon>
-            <p>{props.likeCount}</p>
-          </div>
-          <div className="flex justify-center items-center space-x-2">
-            <ActionIcon onClick={props.onCommentClick}>
-              <IconMessage />
-            </ActionIcon>
-            <p>{props.commentCount}</p>
-          </div>
-          <div className="flex justify-end">
-            <ActionIcon onClick={props.onShareClick}>
-              <IconShare />
-            </ActionIcon>
           </div>
         </div>
       </Card>

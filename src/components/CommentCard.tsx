@@ -53,7 +53,7 @@ export function CommentCard(props: CommentCardProps) {
             <ActionIcon onClick={props.onCommentClick}>
               <IconMessage />
             </ActionIcon>
-            <span>{props.commentCount}</span>
+            <span>{0}</span>
           </div>
           <ActionIcon onClick={props.onShareClick}>
             <IconShare />
@@ -61,10 +61,12 @@ export function CommentCard(props: CommentCardProps) {
           <span>{getPublishedTime(props.createdAt)}</span>
         </div>
       </div>
-      <div className="flex-col justify-start">
+      <div className="w-8 flex-col justify-start">
+        {props.isAuthor||props.isAdmin?
         <ActionIcon onClick={props.onSettingClick}>
           <IconDots />
-        </ActionIcon>
+        </ActionIcon>:
+        <></>}
       </div>
     </motion.div>
   );

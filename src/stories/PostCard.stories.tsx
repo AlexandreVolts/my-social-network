@@ -79,7 +79,6 @@ export const WithComments: Story = {
     createdAt: new Date() - 1000*60*60*23,
     likeCount: 50,
     text: "I'm the CEO now.",
-    isAuthor: true,
     isOpened: true,
     children: (
       <CommentCard
@@ -88,7 +87,33 @@ export const WithComments: Story = {
         createdAt={new Date()}
         likeCount={500}
         text="You're banned now"
-        commentCount={10}
+        onCommentClick={()=>{}}
+        onLikeClick={()=>{}}
+        onSettingClick={()=>{}}
+        onShareClick={()=>{}}
+      />
+    ),
+  }
+}
+
+export const WithCommentsNoSettings: Story = {
+  args: {
+    name: "Poster",
+    surname: "1",
+    //@ts-ignore
+    createdAt: new Date() - 1000*60*60*23,
+    likeCount: 50,
+    text: "*tells a spannish joke*",
+    isOpened: true,
+    isAuthor: true,
+    children: (
+      <CommentCard
+        name="Commenter"
+        surname="1"
+        createdAt={new Date()}
+        likeCount={1}
+        text={Array.from({length: 250}).map(()=>"JA").join("")}
+        isAuthor={true}
         onCommentClick={()=>{}}
         onLikeClick={()=>{}}
         onSettingClick={()=>{}}
