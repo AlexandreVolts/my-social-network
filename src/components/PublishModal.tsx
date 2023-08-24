@@ -26,6 +26,7 @@ export function PublishModal(props: PublishModalProps) {
       title={t("publish-modal-title")}
       opened={props.opened}
       onClose={props.onClose}
+      closeOnClickOutside
     >
       <form className="flex flex-col space-y-2" onSubmit={onPublish}>
         <TextArea

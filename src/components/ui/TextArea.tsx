@@ -20,7 +20,7 @@ export function TextArea(props: TextAreaProps) {
     }
   }, [ref, props.value]);
   return (
-    <motion.div className="flex flex-col grow" whileTap={{ scale: 0.97 }}>
+    <motion.div className="flex flex-col grow" whileTap={{ scale: props.disabled ? 1 : 0.97 }}>
       <label htmlFor={id}>{props.label}</label>
       <textarea
         ref={ref}

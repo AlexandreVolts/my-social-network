@@ -3,6 +3,8 @@
 # 0.6 (23/08/2023)
 - Création d'une page /home
 - Composant PublishModal
+- Composant Post: Affiche l'auteur, la date, le contenu du post, Buttons liker et commenter
+- Composant ActionIcon
 
 # 0.5 (22/08/2023)
 - Ajouter des icônes sur les boutons
