@@ -5,7 +5,6 @@ export interface BasePublishedContentProps {
   avatarColor?: string;
   createdAt: Date;
   likeCount: number;
-  commentCount: number;
   text: string;
   charLimit?: number;
 }
