@@ -28,11 +28,11 @@
 - Fix: Select se place sur l'input
 + Composant Modal
 + Composant TextArea
-- Composant Avatar
-- Création d'une page /home
-- - Card "What's on your mind" clicable
-- - Composant PublishModal: formulaire avec TextArea + Bouton Publier
-- - Lors du clic, ouverture d'une PublishModal
++ Composant Avatar
++ Création d'une page /home
++ - Card "What's on your mind" clicable
++ - Composant PublishModal: formulaire avec TextArea + Bouton Publier
++ - Lors du clic, ouverture d'une PublishModal
 + Composant Post:
 + - Affiche l'auteur, la date, le contenu du post, Buttons liker et commenter
 + - Composant ActionIcon
