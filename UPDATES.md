@@ -5,6 +5,7 @@
 
 ## 0.7 (24/08/2023)
 - Composant Comment : Affiche l'auteur, la date, le contenu du commentaire, Buttons liker et répondre
+- Composant Comment: Si il s'agit d'un clic de l'auteur, ajouter des boutons de suppression ou d'édition
 - Composant Dropdown
 
 ## 0.6 (23/08/2023)
