@@ -36,6 +36,7 @@
 + Composant Post:
 + - Affiche l'auteur, la date, le contenu du post, Buttons liker et commenter
 + - Composant ActionIcon
++ - Composant Dropdown
 - - Lors du clic sur un post, affichage du post dans une Modal
 - - Si il s'agit d'un clic de l'auteur, ajouter des boutons de suppression ou d'édition
 - - Lors du clic sur le bouton commenter, ouverture d'une PublishModal
