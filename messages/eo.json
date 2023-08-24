@@ -44,5 +44,9 @@
     "in-hours": "antaŭ {hours}h",
     "in-days": "antaŭ {days}t",
     "long-ago": "la {date}"
+  },
+  "Post": {
+    "see-more": "See more",
+    "see-less": "See less"
   }
 }

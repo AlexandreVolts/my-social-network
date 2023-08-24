@@ -9,6 +9,7 @@ import { useState } from "react";
 import { Avatar } from "./ui/Avatar";
 import { ActionIcon } from "./ui/ActionIcon";
 import { useElapsedDelayFormat } from "@/hooks/useElapsedDelayFormat";
+import { useTranslations } from "next-intl";
 
 interface PostCardProps {
   name: string;
@@ -28,6 +29,7 @@ interface PostCardProps {
 }
 
 export function PostCard(props: PostCardProps) {
+  const t = useTranslations("Post");
   const formater = useElapsedDelayFormat();
   const [isFullyDisplayed, setIsFullyDisplayed] = useState(false);
   const isTextOverflow = props.text.length >= (props.charLimit ?? 250);
@@ -73,14 +75,14 @@ export function PostCard(props: PostCardProps) {
                 onClick={() => setIsFullyDisplayed(true)}
                 className="cursor-pointer font-bold"
               >
-                En voir plus
+                {t("see-more")}
               </span>
             ) : (
               <span
                 onClick={() => setIsFullyDisplayed(false)}
                 className="cursor-pointer font-bold"
               >
-                En voir moins
+                {t("see-less")}
               </span>
             )
           ) : (

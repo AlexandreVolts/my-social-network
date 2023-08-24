@@ -44,5 +44,9 @@
     "in-hours": "il y a {hours}h",
     "in-days": "il y a {days}j",
     "long-ago": "le {date}"
+  },
+  "Post": {
+    "see-more": "Voir plus",
+    "see-less": "Voir moins"
   }
 }
