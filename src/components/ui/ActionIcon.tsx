@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { MouseEvent, ReactNode } from "react";
 
 interface ActionIconProps {
   children: ReactNode;
-  onClick?: () => void;
+  onClick?: (e: MouseEvent) => void;
   disabled?: boolean;
 }
 

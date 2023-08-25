@@ -1,16 +1,13 @@
 "use client";
 
+import { CommentCard } from "@/components/CommentCard";
 import { Header } from "@/components/Header";
 import { PostCard } from "@/components/PostCard";
 import { PublishModal } from "@/components/PublishModal";
 import { Card } from "@/components/ui/Card";
 import { useUser } from "@/hooks/useUser";
-import { PostProps } from "@/types/PostProps";
 import { getPosts } from "@/utils/getPosts";
-import {
-  SupabaseClient,
-  createClientComponentClient,
-} from "@supabase/auth-helpers-nextjs";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next-intl/client";
 import { use, useEffect, useState } from "react";
@@ -60,6 +57,7 @@ export default function Home() {
             </Card>
           </div>
           {posts?.map((postInfo, index) => {
+            const [isOpened, setIsOpened] = useState(false);
             return (
               <PostCard
                 key={index}
@@ -68,13 +66,33 @@ export default function Home() {
                 createdAt={new Date(postInfo.created_at)}
                 text={postInfo.content}
                 likeCount={0}
-                children={<></>}
-                isOpened={true}
-                onCommentClick={() => {}}
-                onLikeClick={() => {}}
-                onSettingClick={() => {}}
-                onShareClick={() => {}}
-              />
+                isOpened={isOpened}
+                isAuthor={user?.id === postInfo.users.id}
+                onClick={() => setIsOpened(!isOpened)}
+                onEdit={() => {}}
+                onComment={() => {}}
+                onShare={() => {}}
+                onLike={() => {}}
+                onDelete={() => {}}
+              >
+                {Array.from({ length: 10 }).map((_, index) => {
+                  return (
+                    <CommentCard
+                      key={index}
+                      name={"test"}
+                      surname={`${index}`}
+                      likeCount={0}
+                      text={"Test comment"}
+                      createdAt={new Date()}
+                      onComment={() => {}}
+                      onDelete={() => {}}
+                      onEdit={() => {}}
+                      onLike={() => {}}
+                      onShare={() => {}}
+                    />
+                  );
+                })}
+              </PostCard>
             );
           }) ?? <></>}
         </div>

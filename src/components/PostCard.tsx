@@ -13,27 +13,34 @@ import { Dropdown } from "./ui/Dropdown";
 import { ReadMoreText } from "./ui/ReadMoreText";
 import { useElapsedDelayFormat } from "@/hooks/useElapsedDelayFormat";
 import { BasePublishedContentProps } from "@/types/BasePublishedContentProps";
-import { Children, ReactNode, useState } from "react";
+import { Children, MouseEvent, ReactNode, useId, useState } from "react";
 import { useTranslations } from "next-intl";
 
 interface PostCardProps extends BasePublishedContentProps {
   isAuthor?: boolean;
   isOpened?: boolean;
   children: ReactNode;
+  onClick: ()=>void;
 }
 
 export function PostCard(props: PostCardProps) {
   const t = useTranslations('Utils');
   const formater = useElapsedDelayFormat();
+  const id = useId();
   const [isAuthorMenuOpened, setIsAuthorMenuOpened] = useState(false);
 
   const justifyHeader = props.isAuthor ? "justify-between" : "";
   const comments = props.isOpened ? "" : "hidden";
 
+  const cancelEvent = (e: MouseEvent, callback: ()=>void) => {
+    e.stopPropagation();
+    return callback;
+  }
+
   return (
-    <div className="w-full space-y-4">
+    <div onClick={props.onClick} className={`${id} w-full space-y-4`}>
       <Card>
-        <div className={` space-y-2`}>
+        <div className={`${id} space-y-2`}>
           <div
             className={`flex items-center ${justifyHeader} space-x-2 w-full`}
           >
@@ -52,6 +59,7 @@ export function PostCard(props: PostCardProps) {
               </div>
             </div>
             {props.isAuthor ? (
+              
             <Dropdown
               opened={isAuthorMenuOpened}
               onOpen={() => setIsAuthorMenuOpened(true)}
@@ -62,11 +70,11 @@ export function PostCard(props: PostCardProps) {
                 </ActionIcon>
               }
             >
-              <Dropdown.Item onClick={props.onEdit}>
+              <Dropdown.Item onClick={(e)=>cancelEvent(e, props.onEdit)}>
                 <IconPencil className="text-blue-600" />
                 <span>{t('edit')}</span>
               </Dropdown.Item>
-              <Dropdown.Item onClick={props.onDelete}>
+              <Dropdown.Item onClick={(e)=>cancelEvent(e, props.onDelete)}>
                 <IconTrash className="text-red-600" />
                 <span>{t('delete')}</span>
               </Dropdown.Item>
@@ -78,19 +86,19 @@ export function PostCard(props: PostCardProps) {
           <ReadMoreText text={props.text} charLimit={props.charLimit} />
           <div className="grid grid-cols-3">
             <div className="flex items-center space-x-2">
-              <ActionIcon onClick={props.onLike}>
+              <ActionIcon onClick={(e)=>cancelEvent(e, props.onLike)}>
                 <IconHeart />
               </ActionIcon>
               <p>{props.likeCount}</p>
             </div>
             <div className="flex justify-center items-center space-x-2">
-              <ActionIcon onClick={props.onComment}>
+              <ActionIcon onClick={(e)=>cancelEvent(e, props.onComment)}>
                 <IconMessage />
               </ActionIcon>
               <p>{Children.count(props.children)}</p>
             </div>
             <div className="flex justify-end">
-              <ActionIcon onClick={props.onShare}>
+              <ActionIcon onClick={(e)=>cancelEvent(e, props.onShare)}>
                 <IconShare />
               </ActionIcon>
             </div>

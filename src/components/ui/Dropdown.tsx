@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { Overlay } from "./Overlay";
 import { motion } from "framer-motion";
+import {MouseEvent} from "react"
 
 interface DropdownProps {
   opened: boolean;
@@ -11,13 +12,19 @@ interface DropdownProps {
 }
 interface DropdownItemProps {
   children: ReactNode;
-  onClick: () => void;
+  onClick: (e: MouseEvent) => void;
 }
 function Dropdown(props: DropdownProps) {
+  
+  const onOpen = (e: MouseEvent) => {
+    e.stopPropagation();
+    props.onOpen();
+  }
+
   return (
     <>
       <div className="relative">
-        <span onClick={props.onOpen}>{props.target}</span>
+        <span onClick={onOpen}>{props.target}</span>
         <motion.ul
           animate={{ scale: props.opened ? 1 : 0 }}
           onClick={props.onClose}
