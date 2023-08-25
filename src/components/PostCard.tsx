@@ -27,12 +27,11 @@ export function PostCard(props: PostCardProps) {
 
   const justifyHeader = props.isAuthor ? "justify-between" : "";
   const comments = props.isOpened ? "" : "hidden";
-  const postWidth = props.isOpened ? "w-full":"w-96";
 
   return (
     <div className="w-full space-y-4">
       <Card>
-        <div className={`${postWidth} space-y-2`}>
+        <div className={` space-y-2`}>
           <div
             className={`flex items-center ${justifyHeader} space-x-2 w-full`}
           >
