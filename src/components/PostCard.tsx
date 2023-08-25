@@ -2,28 +2,30 @@ import {
   IconDots,
   IconHeart,
   IconMessage,
+  IconPencil,
   IconShare,
+  IconTrash,
 } from "@tabler/icons-react";
 import { Card } from "./ui/Card";
 import { Avatar } from "./ui/Avatar";
 import { ActionIcon } from "./ui/ActionIcon";
-import { useElapsedDelayFormat } from "@/hooks/useElapsedDelayFormat";
+import { Dropdown } from "./ui/Dropdown";
 import { ReadMoreText } from "./ui/ReadMoreText";
+import { useElapsedDelayFormat } from "@/hooks/useElapsedDelayFormat";
 import { BasePublishedContentProps } from "@/types/BasePublishedContentProps";
-import React, { ReactNode } from "react";
+import { Children, ReactNode, useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface PostCardProps extends BasePublishedContentProps {
   isAuthor?: boolean;
   isOpened?: boolean;
   children: ReactNode;
-  onSettingClick: () => void;
-  onLikeClick: () => void;
-  onCommentClick: () => void;
-  onShareClick: () => void;
 }
 
 export function PostCard(props: PostCardProps) {
+  const t = useTranslations('Utils');
   const formater = useElapsedDelayFormat();
+  const [isAuthorMenuOpened, setIsAuthorMenuOpened] = useState(false);
 
   const justifyHeader = props.isAuthor ? "justify-between" : "";
   const comments = props.isOpened ? "" : "hidden";
@@ -50,29 +52,45 @@ export function PostCard(props: PostCardProps) {
               </div>
             </div>
             {props.isAuthor ? (
-              <ActionIcon onClick={props.onSettingClick}>
-                <IconDots />
-              </ActionIcon>
-            ) : (
-              <></>
-            )}
+            <Dropdown
+              opened={isAuthorMenuOpened}
+              onOpen={() => setIsAuthorMenuOpened(true)}
+              onClose={() => setIsAuthorMenuOpened(false)}
+              target={
+                <ActionIcon>
+                  <IconDots />
+                </ActionIcon>
+              }
+            >
+              <Dropdown.Item onClick={props.onEdit}>
+                <IconPencil className="text-blue-600" />
+                <span>{t('edit')}</span>
+              </Dropdown.Item>
+              <Dropdown.Item onClick={props.onDelete}>
+                <IconTrash className="text-red-600" />
+                <span>{t('delete')}</span>
+              </Dropdown.Item>
+            </Dropdown>
+          ) : (
+            <></>
+          )}
           </div>
           <ReadMoreText text={props.text} charLimit={props.charLimit} />
           <div className="grid grid-cols-3">
             <div className="flex items-center space-x-2">
-              <ActionIcon onClick={props.onLikeClick}>
+              <ActionIcon onClick={props.onLike}>
                 <IconHeart />
               </ActionIcon>
               <p>{props.likeCount}</p>
             </div>
             <div className="flex justify-center items-center space-x-2">
-              <ActionIcon onClick={props.onCommentClick}>
+              <ActionIcon onClick={props.onComment}>
                 <IconMessage />
               </ActionIcon>
-              <p>{React.Children.count(props.children)}</p>
+              <p>{Children.count(props.children)}</p>
             </div>
             <div className="flex justify-end">
-              <ActionIcon onClick={props.onShareClick}>
+              <ActionIcon onClick={props.onShare}>
                 <IconShare />
               </ActionIcon>
             </div>
