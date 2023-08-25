@@ -33,6 +33,7 @@
 + - Card "What's on your mind" clicable
 + - Composant PublishModal: formulaire avec TextArea + Bouton Publier
 + - Lors du clic, ouverture d'une PublishModal
++ - Affichage des posts de la base de donnée sur la page home
 + Composant Post:
 + - Affiche l'auteur, la date, le contenu du post, Buttons liker et commenter
 + - Composant ActionIcon
