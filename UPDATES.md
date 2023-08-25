@@ -1,5 +1,8 @@
 # My Social Network's Updates
 
+## 0.8 (25/08/2023)
+- Page /home : Affichage des posts de la base de donnée sur la page home
+
 ## 0.7 (24/08/2023)
 - Composant Comment : Affiche l'auteur, la date, le contenu du commentaire, Buttons liker et répondre
 - Composant Dropdown
