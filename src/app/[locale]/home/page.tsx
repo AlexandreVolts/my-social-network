@@ -4,10 +4,17 @@ import { CommentCard } from "@/components/CommentCard";
 import { Header } from "@/components/Header";
 import { PostCard } from "@/components/PostCard";
 import { PublishModal } from "@/components/PublishModal";
+import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
+import { Modal } from "@/components/ui/Modal";
+import { Toaster } from "@/components/ui/Toaster";
 import { useUser } from "@/hooks/useUser";
-import { getPosts } from "@/utils/getPosts";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { PostProps } from "@/types/PostProps";
+import { deletePost, getPosts } from "@/utils/supabase";
+import {
+  SupabaseClient,
+  createClientComponentClient,
+} from "@supabase/auth-helpers-nextjs";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next-intl/client";
 import { use, useEffect, useState } from "react";
@@ -17,9 +24,15 @@ export default function Home() {
   const { user, isComplete } = useUser(supabase);
   const router = useRouter();
   const t = useTranslations("Home");
+
+  const [openedDelete, setOpenedDelete] = useState(false);
   const [opened, setOpened] = useState(false);
   const [postContent, setPostContent] = useState("");
   const homePosts = use(getPosts(supabase));
+  //useToasters
+  const [isErrorDelete, setIsErrorDelete] = useState<boolean>();
+  //get Error message from supabase
+  const [errorMsg, setErrorMsg] = useState("");
 
   const posts = homePosts.data;
 
@@ -31,6 +44,19 @@ export default function Home() {
     setPostContent("");
   };
 
+  const onDelete = () => {
+    deletePost(supabase, user!.id).then((data) => {
+      if (data.error) {
+        setIsErrorDelete(true);
+        setErrorMsg(data.error.message);
+      }
+      else {
+      setIsErrorDelete(false);
+      }
+    });
+    setOpenedDelete(false);
+  };
+
   useEffect(() => {
     if (isComplete && !user) {
       router.push("/");
@@ -39,6 +65,16 @@ export default function Home() {
 
   return (
     <>
+      <Modal
+        opened={openedDelete}
+        onClose={() => setOpenedDelete(false)}
+        title="Do you want to delete this post ?"
+      >
+        <div className="flex justify-around">
+          <Button label="Cancel" secondary onClick={() => setOpenedDelete(false)} />
+          <Button label="Proceed" onClick={onDelete} />
+        </div>
+      </Modal>
       <PublishModal
         opened={opened}
         value={postContent}
@@ -66,35 +102,30 @@ export default function Home() {
                 text={postInfo.content}
                 likeCount={0}
                 isAuthor={user?.id === postInfo.users.id}
-                onClick={() => {}}
-                onEdit={() => {}}
+                onClick={()=>{}}
                 onComment={() => {}}
-                onShare={() => {}}
+                onDelete={() => setOpenedDelete(true)}
+                onEdit={() => {}}
                 onLike={() => {}}
-                onDelete={() => {}}
+                onShare={() => {}}
               >
-                {Array.from({ length: 10 }).map((_, index) => {
-                  return (
-                    <CommentCard
-                      key={index}
-                      name={"test"}
-                      surname={`${index}`}
-                      likeCount={0}
-                      text={"Test comment"}
-                      createdAt={new Date()}
-                      onComment={() => {}}
-                      onDelete={() => {}}
-                      onEdit={() => {}}
-                      onLike={() => {}}
-                      onShare={() => {}}
-                    />
-                  );
-                })}
+
               </PostCard>
             );
           }) ?? <></>}
         </div>
       </main>
+      <Toaster
+        opened={isErrorDelete !== undefined}
+        onClose={() => setIsErrorDelete(undefined)}
+        title={!isErrorDelete ? "Success !" : "Oops !"}
+        isValid={!isErrorDelete}
+        message={
+          !isErrorDelete
+            ? "Post was successfuly deleted !"
+            : `Something went wrong while trying to delete the post : ${errorMsg}`
+        }
+      />
     </>
   );
 }
