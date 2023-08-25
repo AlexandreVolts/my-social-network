@@ -1,5 +1,7 @@
-import { SupabaseClient } from "@supabase/supabase-js";
+import { PostProps } from "@/types/PostProps";
+import { PostgrestSingleResponse, SupabaseClient } from "@supabase/supabase-js";
+import { cache } from "react";
 
-export async function getPosts(client: SupabaseClient) {
-  return await client.from("posts").select("*, users(name, surname)")
-}
+export const getPosts = cache(async (client: SupabaseClient): Promise<PostgrestSingleResponse<PostProps[]>> => {
+  return await client.from("posts").select("*, users(name, surname, id)").order("created_at", {ascending: false})
+})

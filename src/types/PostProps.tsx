@@ -7,4 +7,5 @@ export interface PostProps {
 interface Identity {
   name: string;
   surname: string;
+  id: string;
 }
