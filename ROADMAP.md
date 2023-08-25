@@ -13,7 +13,7 @@
 + - Numéro de téléphone ou email, mot de passe
 
 + Ajouter des icônes sur les boutons
-- Composant Toaster
++ Composant Toaster
 + Animations whileTaping sur le bouton et l'input
 + Composant Overlay
 + - Relier le Select à l'Overlay
