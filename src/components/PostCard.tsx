@@ -13,7 +13,7 @@ import { Dropdown } from "./ui/Dropdown";
 import { ReadMoreText } from "./ui/ReadMoreText";
 import { useElapsedDelayFormat } from "@/hooks/useElapsedDelayFormat";
 import { BasePublishedContentProps } from "@/types/BasePublishedContentProps";
-import { Children, MouseEvent, ReactNode, useId, useState } from "react";
+import { Children, MouseEvent, ReactNode, useState } from "react";
 import { useTranslations } from "next-intl";
 
 interface PostCardProps extends BasePublishedContentProps {
@@ -26,7 +26,6 @@ interface PostCardProps extends BasePublishedContentProps {
 export function PostCard(props: PostCardProps) {
   const t = useTranslations('Utils');
   const formater = useElapsedDelayFormat();
-  const id = useId();
   const [isAuthorMenuOpened, setIsAuthorMenuOpened] = useState(false);
 
   const justifyHeader = props.isAuthor ? "justify-between" : "";
@@ -38,9 +37,9 @@ export function PostCard(props: PostCardProps) {
   }
 
   return (
-    <div onClick={props.onClick} className={`${id} w-full space-y-4`}>
+    <div onClick={props.onClick} className={` w-full space-y-4`}>
       <Card>
-        <div className={`${id} space-y-2`}>
+        <div className={` space-y-2`}>
           <div
             className={`flex items-center ${justifyHeader} space-x-2 w-full`}
           >
@@ -64,17 +63,18 @@ export function PostCard(props: PostCardProps) {
               opened={isAuthorMenuOpened}
               onOpen={() => setIsAuthorMenuOpened(true)}
               onClose={() => setIsAuthorMenuOpened(false)}
+              stopPropagation
               target={
                 <ActionIcon>
                   <IconDots />
                 </ActionIcon>
               }
             >
-              <Dropdown.Item onClick={(e)=>cancelEvent(e, props.onEdit)}>
+              <Dropdown.Item onClick={props.onEdit}>
                 <IconPencil className="text-blue-600" />
                 <span>{t('edit')}</span>
               </Dropdown.Item>
-              <Dropdown.Item onClick={(e)=>cancelEvent(e, props.onDelete)}>
+              <Dropdown.Item onClick={props.onDelete}>
                 <IconTrash className="text-red-600" />
                 <span>{t('delete')}</span>
               </Dropdown.Item>
