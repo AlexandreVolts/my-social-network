@@ -10,7 +10,7 @@ import { Modal } from "@/components/ui/Modal";
 import { Toaster } from "@/components/ui/Toaster";
 import { useUser } from "@/hooks/useUser";
 import { PostProps } from "@/types/PostProps";
-import { deletePost, getPosts } from "@/utils/supabase";
+import { deletePost, getPostLikes, getPosts } from "@/utils/supabase";
 import {
   SupabaseClient,
   createClientComponentClient,
@@ -32,6 +32,8 @@ export default function Home() {
   const [isErrorDelete, setIsErrorDelete] = useState<boolean>();
   //get Error message from supabase
   const [errorMsg, setErrorMsg] = useState("");
+  const [postLikes, setPostLikes] = useState<number[]>([]);
+  const [isErrorLike, setIsErrorLike] = useState(false);
 
   const posts = homePosts.data;
 
@@ -54,13 +56,16 @@ export default function Home() {
       }
     });
   };
+  const onLike = (post: string) => {
+
+  }
 
   useEffect(() => {
     if (isComplete && !user) {
       router.push("/");
     }
   });
-
+  
   return (
     <>
       <PublishModal
@@ -80,7 +85,7 @@ export default function Home() {
               <p className="text-gray-500">{t("Home.publish-subtitle")}</p>
             </Card>
           </div>
-          {posts?.map((postInfo, index) => {
+          {posts?.map((postInfo, index) => {            
             return (
               <PostCard
                 key={index}
