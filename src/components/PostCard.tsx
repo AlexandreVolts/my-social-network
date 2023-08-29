@@ -18,7 +18,6 @@ import { useTranslations } from "next-intl";
 
 interface PostCardProps extends BasePublishedContentProps {
   isAuthor?: boolean;
-  isOpened?: boolean;
   children: ReactNode;
   onClick: ()=>void;
 }
@@ -27,17 +26,18 @@ export function PostCard(props: PostCardProps) {
   const t = useTranslations('Utils');
   const formater = useElapsedDelayFormat();
   const [isAuthorMenuOpened, setIsAuthorMenuOpened] = useState(false);
+  const [isCommentOpened, setIsCommentOpened] = useState(false);
 
   const justifyHeader = props.isAuthor ? "justify-between" : "";
-  const comments = props.isOpened ? "" : "hidden";
+  const comments = isCommentOpened ? "" : "hidden";
 
   const cancelEvent = (e: MouseEvent, callback: ()=>void) => {
     e.stopPropagation();
-    return callback;
+    callback();
   }
 
   return (
-    <div onClick={props.onClick} className={` w-full space-y-4`}>
+    <div onClick={props.onClick} className={`) w-full space-y-4`}>
       <Card>
         <div className={` space-y-2`}>
           <div
@@ -92,7 +92,7 @@ export function PostCard(props: PostCardProps) {
               <p>{props.likeCount}</p>
             </div>
             <div className="flex justify-center items-center space-x-2">
-              <ActionIcon onClick={(e)=>cancelEvent(e, props.onComment)}>
+              <ActionIcon onClick={(e)=>cancelEvent(e, ()=>setIsCommentOpened(!isCommentOpened))}>
                 <IconMessage />
               </ActionIcon>
               <p>{Children.count(props.children)}</p>

@@ -57,7 +57,6 @@ export default function Home() {
             </Card>
           </div>
           {posts?.map((postInfo, index) => {
-            const [isOpened, setIsOpened] = useState(false);
             return (
               <PostCard
                 key={index}
@@ -66,9 +65,8 @@ export default function Home() {
                 createdAt={new Date(postInfo.created_at)}
                 text={postInfo.content}
                 likeCount={0}
-                isOpened={isOpened}
                 isAuthor={user?.id === postInfo.users.id}
-                onClick={() => setIsOpened(!isOpened)}
+                onClick={() => {}}
                 onEdit={() => {}}
                 onComment={() => {}}
                 onShare={() => {}}
