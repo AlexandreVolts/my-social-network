@@ -5,6 +5,7 @@ export interface BasePublishedContentProps {
   avatarColor?: string;
   createdAt: Date;
   likeCount: number;
+  isLiked: boolean;
   text: string;
   charLimit?: number;
   onEdit: () => void;
