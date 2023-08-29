@@ -28,7 +28,7 @@ export function CommentCard(props: CommentCardProps) {
   const [isAuthorMenuOpened, setIsAuthorMenuOpened] = useState(false);
 
   return (
-    <motion.div className="flex space-x-2">
+    <motion.div className="flex space-x-2" onClick={(e)=>e.stopPropagation()}>
       <div className="flex flex-col justify-start">
         <Avatar
           src={props.avatarSrc}

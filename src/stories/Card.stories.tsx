@@ -26,7 +26,7 @@ export const WithText: Story = {
     }
 }
 
-export const withInput: Story = {
+export const WithInput: Story = {
     args: {
         children: (
             <TextInput 

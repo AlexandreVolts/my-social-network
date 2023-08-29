@@ -1,32 +1,49 @@
 import { ReactNode } from "react";
 import { Overlay } from "./Overlay";
 import { motion } from "framer-motion";
+import { MouseEvent } from "react";
 
 interface DropdownProps {
   opened: boolean;
   target: ReactNode;
   children: ReactNode;
+  stopPropagation?: boolean;
   onOpen: () => void;
   onClose: () => void;
 }
 interface DropdownItemProps {
   children: ReactNode;
-  onClick: () => void;
+  onClick: (e: MouseEvent) => void;
 }
 function Dropdown(props: DropdownProps) {
+  const onOpen = (e: MouseEvent) => {
+    if (props.stopPropagation) {
+      e.stopPropagation();
+    }
+    props.onOpen();
+  };
+
+  const onClose = (e: MouseEvent) => {
+    if (props.stopPropagation) {
+      e.stopPropagation();
+    }
+    props.onClose();
+  };
+
   return (
     <>
       <div className="relative">
-        <span onClick={props.onOpen}>{props.target}</span>
+        <span onClick={onOpen}>{props.target}</span>
         <motion.ul
           animate={{ scale: props.opened ? 1 : 0 }}
-          onClick={props.onClose}
+          onClick={onClose}
           className="absolute z-20 cursor-pointer"
         >
           {props.children}
         </motion.ul>
       </div>
-      <Overlay opened={props.opened} onClick={props.onClose} />
+      {/*Warn: there still is click propagation on overlay*/}
+      <Overlay opened={props.opened} onClick={props.onClose}/>
     </>
   );
 }
