@@ -6,6 +6,6 @@ export const getPosts = cache(async (client: SupabaseClient): Promise<PostgrestS
   return await client.from("posts").select("*, users(name, surname, id)").order("created_at", {ascending: false})
 })
 
-export const deletePost = cache(async (client: SupabaseClient, user: string) => {
+export const deletePost = async (client: SupabaseClient, user: string) => {
   return (await client.from("posts").delete().match({author: user}))
-})
+}

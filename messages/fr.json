@@ -54,6 +54,13 @@
   },
   "Utils": {
     "edit": "Editer",
-    "delete": "Supprimer"
+    "delete": "Supprimer",
+    "on-delete": "Voulez-vous supprimer ce post ?",
+    "cancel": "Annuler",
+    "proceed": "Continuer",
+    "on-success": "Succès !",
+    "on-fail": "Oups !",
+    "on-success-delete-msg": "Post supprimé avec succès !",
+    "on-fail-delete-msg": "Une erreur a survenu lors de la suppression du post : "
   }
 }
