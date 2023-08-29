@@ -25,7 +25,6 @@ export default function Home() {
   const router = useRouter();
   const t = useTranslations();
 
-  const [openedDelete, setOpenedDelete] = useState(false);
   const [opened, setOpened] = useState(false);
   const [postContent, setPostContent] = useState("");
   const homePosts = use(getPosts(supabase));
@@ -44,8 +43,8 @@ export default function Home() {
     setPostContent("");
   };
 
-  const onDelete = () => {
-    deletePost(supabase, user!.id).then((data) => {
+  const onDelete = (postId: string) => {
+    deletePost(supabase, postId).then((data) => {
       if (data.error) {
         setIsErrorDelete(true);
         setErrorMsg(data.error.message);
@@ -54,7 +53,6 @@ export default function Home() {
       setIsErrorDelete(false);
       }
     });
-    setOpenedDelete(false);
   };
 
   useEffect(() => {
@@ -65,16 +63,6 @@ export default function Home() {
 
   return (
     <>
-      <Modal
-        opened={openedDelete}
-        onClose={() => setOpenedDelete(false)}
-        title={t("Utils.on-delete")}
-      >
-        <div className="flex justify-around">
-          <Button label={t("Utils.cancel")} secondary onClick={() => setOpenedDelete(false)} />
-          <Button label={t("Utils.proceed")} onClick={onDelete} />
-        </div>
-      </Modal>
       <PublishModal
         opened={opened}
         value={postContent}
@@ -104,7 +92,7 @@ export default function Home() {
                 isAuthor={user?.id === postInfo.users.id}
                 onClick={()=>{}}
                 onComment={() => {}}
-                onDelete={() => setOpenedDelete(true)}
+                onDelete={() => onDelete(postInfo.id)}
                 onEdit={() => {}}
                 onLike={() => {}}
                 onShare={() => {}}
