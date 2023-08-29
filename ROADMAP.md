@@ -34,6 +34,7 @@
 + - Composant PublishModal: formulaire avec TextArea + Bouton Publier
 + - Lors du clic, ouverture d'une PublishModal
 + - Affichage des posts de la base de donnée sur la page home
+- - Mise à jour dynamique de la page lorsqu'une action est réalisée
 + Composant Post:
 + - Affiche l'auteur, la date, le contenu du post, Buttons liker et commenter
 + - Composant ActionIcon
