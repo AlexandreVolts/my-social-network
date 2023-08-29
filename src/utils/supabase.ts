@@ -59,3 +59,7 @@ export const getALike = async (
     .select()
     .match({ user_id: userId, post_id: postId });
 };
+
+export const getUserInfos = cache(async (client: SupabaseClient, userId: string) => {
+  return await client.from("users").select().match({id: userId})
+})

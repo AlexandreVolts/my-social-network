@@ -46,7 +46,7 @@
 + - Affiche l'auteur, la date, le contenu du commentaire, Buttons liker et répondre
 - Création d'une page /post qui affiche un post spécifique (pour pouvoir le partager)
 
-- Création d'une page /profile
++ Création d'une page /profile
 - - Avatar, description, adresse (pays, ville), date de création du compte, nombre de publications
 - - Afficher les posts créés par l'utilisateur
 - - Possibilité de modifier ces informations si l'utilisateur est sur son profil
