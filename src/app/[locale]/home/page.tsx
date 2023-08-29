@@ -1,5 +1,6 @@
 "use client";
 
+import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { PostCard } from "@/components/PostCard";
 import { PublishModal } from "@/components/PublishModal";
@@ -18,7 +19,7 @@ import {
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next-intl/client";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const supabase = createClientComponentClient();
@@ -26,7 +27,7 @@ export default function Home() {
   const router = useRouter();
   const t = useTranslations();
 
-  const [opened, setOpened] = useState(false);
+  const [isPublishModalOpened, setIsPublishedModalOpened] = useState(false);
   const [postContent, setPostContent] = useState("");
 
   const { data: posts, handlers: postHandlers } = useQuery(() =>
@@ -36,13 +37,12 @@ export default function Home() {
     getLikes(supabase)
   );
 
-  //get Error message from supabase
   const [errorMsg, setErrorMsg] = useState<string>();
 
   const onPublish = async () => {
     const data = await supabase.from("posts").insert({ content: postContent });
 
-    setOpened(false);
+    setIsPublishedModalOpened(false);
     setPostContent("");
     if (data.error) {
       setErrorMsg(data.error.message);
@@ -51,22 +51,23 @@ export default function Home() {
     postHandlers.update();
   };
 
-  const onDelete = (postId: string) => {
-    deletePost(supabase, postId).then((data) => {
-      if (data.error) {
-        setErrorMsg(data.error.message);
-      }
-    });
+  const onDelete = async (postId: string) => {
+    const data = await deletePost(supabase, postId);
+
+    if (data.error) {
+      setErrorMsg(data.error.message);
+      return;
+    }
+    postHandlers.update();
   };
 
   const onLike = async (postId: string) => {
-    getALike(supabase, user!.id, postId).then((data) => {
-      if (data.data?.length) {
-        removeLike(supabase, user!.id, postId);
-      } else {
-        addLike(supabase, user!.id, postId);
-      }
-    });
+    const data = await getALike(supabase, user!.id, postId);
+    if (data.data?.length) {
+      removeLike(supabase, user!.id, postId).then(likeHandlers.update);
+    } else {
+      addLike(supabase, user!.id, postId).then(likeHandlers.update);
+    }
   };
 
   useEffect(() => {
@@ -78,17 +79,20 @@ export default function Home() {
   return (
     <>
       <PublishModal
-        opened={opened}
+        opened={isPublishModalOpened}
         value={postContent}
         isLoading={false}
-        onClose={() => setOpened(false)}
+        onClose={() => setIsPublishedModalOpened(false)}
         onChange={setPostContent}
         onPublish={onPublish}
       />
       <Header isLoggedIn />
-      <main className="flex flex-col items-center justify-between p-24">
-        <div className="flex flex-col space-y-2 md:w-1/2 w-full">
-          <div className="cursor-pointer" onClick={() => setOpened(true)}>
+      <main className="flex flex-col items-center justify-between p-12">
+        <div className="flex flex-col space-y-2 sm:w-1/2 w-full">
+          <div
+            className="cursor-pointer"
+            onClick={() => setIsPublishedModalOpened(true)}
+          >
             <Card>
               <h3 className="text-3xl font-bold">
                 {t("Home.publish-modal-title")}
@@ -109,12 +113,10 @@ export default function Home() {
                     .length ?? 0
                 }
                 isLiked={
-                  likes?.data?.find(
+                  !!likes?.data?.find(
                     (like) =>
                       like.post_id === postInfo.id && like.user_id === user?.id
                   )
-                    ? true
-                    : false
                 }
                 isAuthor={user?.id === postInfo.users.id}
                 onClick={() => {}}

@@ -15,8 +15,8 @@ export const getPosts = cache(
 );
 
 export const deletePost = cache(
-  async (client: SupabaseClient, user: string) => {
-    return await client.from("posts").delete().match({ author: user });
+  async (client: SupabaseClient, postId: string) => {
+    return await client.from("posts").delete().match({ id: postId });
   }
 );
 
@@ -49,6 +49,13 @@ export const getLikes = cache(
   }
 );
 
-export const getALike = async (client: SupabaseClient, userId: string, postId: string) => {
-  return await client.from("post_likes").select().match({user_id: userId, post_id: postId})
-}
+export const getALike = async (
+  client: SupabaseClient,
+  userId: string,
+  postId: string
+) => {
+  return await client
+    .from("post_likes")
+    .select()
+    .match({ user_id: userId, post_id: postId });
+};
