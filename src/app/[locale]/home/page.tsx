@@ -4,10 +4,17 @@ import { CommentCard } from "@/components/CommentCard";
 import { Header } from "@/components/Header";
 import { PostCard } from "@/components/PostCard";
 import { PublishModal } from "@/components/PublishModal";
+import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
+import { Modal } from "@/components/ui/Modal";
+import { Toaster } from "@/components/ui/Toaster";
 import { useUser } from "@/hooks/useUser";
-import { getPosts } from "@/utils/getPosts";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { PostProps } from "@/types/PostProps";
+import { deletePost, getPosts } from "@/utils/supabase";
+import {
+  SupabaseClient,
+  createClientComponentClient,
+} from "@supabase/auth-helpers-nextjs";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next-intl/client";
 import { use, useEffect, useState } from "react";
@@ -16,10 +23,15 @@ export default function Home() {
   const supabase = createClientComponentClient();
   const { user, isComplete } = useUser(supabase);
   const router = useRouter();
-  const t = useTranslations("Home");
+  const t = useTranslations();
+
   const [opened, setOpened] = useState(false);
   const [postContent, setPostContent] = useState("");
   const homePosts = use(getPosts(supabase));
+  //useToasters
+  const [isErrorDelete, setIsErrorDelete] = useState<boolean>();
+  //get Error message from supabase
+  const [errorMsg, setErrorMsg] = useState("");
 
   const posts = homePosts.data;
 
@@ -29,6 +41,18 @@ export default function Home() {
     // TODO: Manage response
     setOpened(false);
     setPostContent("");
+  };
+
+  const onDelete = (postId: string) => {
+    deletePost(supabase, postId).then((data) => {
+      if (data.error) {
+        setIsErrorDelete(true);
+        setErrorMsg(data.error.message);
+      }
+      else {
+      setIsErrorDelete(false);
+      }
+    });
   };
 
   useEffect(() => {
@@ -52,8 +76,8 @@ export default function Home() {
         <div className="flex flex-col w-1/2 space-y-2">
           <div className="cursor-pointer" onClick={() => setOpened(true)}>
             <Card>
-              <h3 className="text-3xl font-bold">{t("publish-modal-title")}</h3>
-              <p className="text-gray-500">{t("publish-subtitle")}</p>
+              <h3 className="text-3xl font-bold">{t("Home.publish-modal-title")}</h3>
+              <p className="text-gray-500">{t("Home.publish-subtitle")}</p>
             </Card>
           </div>
           {posts?.map((postInfo, index) => {
@@ -66,35 +90,30 @@ export default function Home() {
                 text={postInfo.content}
                 likeCount={0}
                 isAuthor={user?.id === postInfo.users.id}
-                onClick={() => {}}
-                onEdit={() => {}}
+                onClick={()=>{}}
                 onComment={() => {}}
-                onShare={() => {}}
+                onDelete={() => onDelete(postInfo.id)}
+                onEdit={() => {}}
                 onLike={() => {}}
-                onDelete={() => {}}
+                onShare={() => {}}
               >
-                {Array.from({ length: 10 }).map((_, index) => {
-                  return (
-                    <CommentCard
-                      key={index}
-                      name={"test"}
-                      surname={`${index}`}
-                      likeCount={0}
-                      text={"Test comment"}
-                      createdAt={new Date()}
-                      onComment={() => {}}
-                      onDelete={() => {}}
-                      onEdit={() => {}}
-                      onLike={() => {}}
-                      onShare={() => {}}
-                    />
-                  );
-                })}
+
               </PostCard>
             );
           }) ?? <></>}
         </div>
       </main>
+      <Toaster
+        opened={isErrorDelete !== undefined}
+        onClose={() => setIsErrorDelete(undefined)}
+        title={!isErrorDelete ? t("Utils.on-success") : t("Utils.on-fail")}
+        isValid={!isErrorDelete}
+        message={
+          !isErrorDelete
+            ? t("Utils.on-success-delete-msg")
+            : `${t("Utils.on-fail-delete-msg")}${errorMsg}`
+        }
+      />
     </>
   );
 }

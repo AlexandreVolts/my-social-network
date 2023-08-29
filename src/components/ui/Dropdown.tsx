@@ -35,6 +35,7 @@ function Dropdown(props: DropdownProps) {
       <div className="relative">
         <span onClick={onOpen}>{props.target}</span>
         <motion.ul
+          initial={{scale: 0}}
           animate={{ scale: props.opened ? 1 : 0 }}
           onClick={onClose}
           className="absolute z-20 cursor-pointer"
@@ -42,7 +43,7 @@ function Dropdown(props: DropdownProps) {
           {props.children}
         </motion.ul>
       </div>
-      {/*Warn: there still is click propagation on overlay*/}
+      {/*TODO: there still is click propagation on overlay*/}
       <Overlay opened={props.opened} onClick={props.onClose}/>
     </>
   );

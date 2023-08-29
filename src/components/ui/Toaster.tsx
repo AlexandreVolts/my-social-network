@@ -20,6 +20,7 @@ export function Toaster(props: ToasterProps) {
   return (
     <motion.div
       ref={ref}
+      initial={{opacity: 0, scale: 0}}
       animate={{
         y: props.opened ? 0 : 32+(ref.current?.clientHeight??0),
         opacity: props.opened ? 1 : 0,

@@ -2,6 +2,7 @@
 
 ## 0.8 (25/08/2023)
 - Page /home : Affichage des posts de la base de donnée sur la page home
+-Page /home : Gestion de la supression d'un post
 - Composant Toaster
 - Composant Post : Lors du clic sur un post, affichage des commentaires
 
