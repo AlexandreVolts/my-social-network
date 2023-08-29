@@ -1,6 +1,5 @@
 import {
   IconDots,
-  IconHeart,
   IconMessage,
   IconPencil,
   IconShare,
@@ -17,6 +16,7 @@ import { Children, MouseEvent, ReactNode, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Modal } from "./ui/Modal";
 import { Button } from "./ui/Button";
+import { LikeIcon } from "./ui/LikeIcon";
 
 interface PostCardProps extends BasePublishedContentProps {
   isAuthor?: boolean;
@@ -108,9 +108,9 @@ export function PostCard(props: PostCardProps) {
             </div>
             <ReadMoreText text={props.text} charLimit={props.charLimit} />
             <div className="grid grid-cols-3">
-              <div className="flex items-center space-x-2">
+              <div className={` flex items-center space-x-2`}>
                 <ActionIcon onClick={(e) => cancelEvent(e, props.onLike)}>
-                  <IconHeart />
+                  <LikeIcon isLiked={props.isLiked}/>
                 </ActionIcon>
                 <p>{props.likeCount}</p>
               </div>

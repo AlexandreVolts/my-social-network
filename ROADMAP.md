@@ -40,9 +40,9 @@
 + - Composant Dropdown
 + - Lors du clic sur un post, affichage des commentaires
 + - Si il s'agit d'un clic de l'auteur, ajouter des boutons de suppression ou d'édition
++ - Gestion du clic sur un like
 + Composant Comment:
 + - Affiche l'auteur, la date, le contenu du commentaire, Buttons liker et répondre
-- - Afficher les commentaires lors d'un clic sur le post
 - Création d'une page /post qui affiche un post spécifique (pour pouvoir le partager)
 
 - Création d'une page /profile

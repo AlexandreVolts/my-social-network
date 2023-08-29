@@ -1,5 +1,8 @@
 # My Social Network's Updates
 
+## 0.9 (29/08/2023)
+- Composant Post : Gestion du clic sur un like
+
 ## 0.8 (25/08/2023)
 - Page /home : Affichage des posts de la base de donnée sur la page home
 -Page /home : Gestion de la supression d'un post
