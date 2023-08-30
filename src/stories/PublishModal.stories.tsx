@@ -16,6 +16,8 @@ export const Default: Story = {
   args: {
     opened: true,
     isLoading: false,
+    title: "Title of the default modal",
+    value: "",
   },
 };
 
@@ -23,5 +25,7 @@ export const Loading: Story = {
   args: {
     opened: true,
     isLoading: true,
+    title: "Title of the loading modal",
+    value: "",
   },
 };

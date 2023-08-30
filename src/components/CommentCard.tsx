@@ -24,12 +24,12 @@ interface CommentCardProps extends BasePublishedContentProps {
 
 export function CommentCard(props: CommentCardProps) {
   const formater = useElapsedDelayFormat();
-  const t = useTranslations('Utils');
+  const t = useTranslations("Utils");
   const [isAuthorMenuOpened, setIsAuthorMenuOpened] = useState(false);
 
   return (
-    <motion.div className="flex space-x-2" onClick={(e)=>e.stopPropagation()}>
-      <div className="flex flex-col justify-start">
+    <motion.div className="flex space-x-2" onClick={(e) => e.stopPropagation()}>
+      <div className="flex flex-col">
         <Avatar
           src={props.avatarSrc}
           name={props.name}
@@ -75,13 +75,13 @@ export function CommentCard(props: CommentCardProps) {
             </ActionIcon>
           }
         >
-          <Dropdown.Item onClick={props.onEdit}>
+          <Dropdown.Item onClick={() => props.onEdit("")}>
             <IconPencil className="text-blue-600" />
-            <span>{t('edit')}</span>
+            <span>{t("edit")}</span>
           </Dropdown.Item>
           <Dropdown.Item onClick={props.onDelete}>
             <IconTrash className="text-red-600" />
-            <span>{t('delete')}</span>
+            <span>{t("delete")}</span>
           </Dropdown.Item>
         </Dropdown>
       </div>
