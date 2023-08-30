@@ -24,12 +24,6 @@ export const getUserPosts = async (
     .order("created_at", { ascending: false });
 };
 
-export const deletePost = cache(
-  async (client: SupabaseClient, postId: string) => {
-    return await client.from("posts").delete().match({ id: postId });
-  }
-);
-
 export const addLike = async (
   client: SupabaseClient,
   userId: string,

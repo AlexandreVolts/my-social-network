@@ -17,20 +17,22 @@ import { useTranslations } from "next-intl";
 import { Modal } from "./ui/Modal";
 import { Button } from "./ui/Button";
 import { LikeIcon } from "./ui/LikeIcon";
+import { PublishModal } from "./PublishModal";
 
 interface PostCardProps extends BasePublishedContentProps {
   isAuthor?: boolean;
+  isLoading: boolean;
   children: ReactNode;
   onClick: () => void;
 }
-
 export function PostCard(props: PostCardProps) {
   const t = useTranslations("Utils");
   const formater = useElapsedDelayFormat();
   const [isAuthorMenuOpened, setIsAuthorMenuOpened] = useState(false);
   const [isCommentOpened, setIsCommentOpened] = useState(false);
   const [isDeleteOpened, setIsDeleteOpened] = useState(false);
-
+  const [isEditOpened, setIsEditOpened] = useState(false);
+  const [editContent, setEditContent] = useState("");
 
   const justifyHeader = props.isAuthor ? "justify-between" : "";
   const comments = isCommentOpened ? "" : "hidden";
@@ -39,12 +41,20 @@ export function PostCard(props: PostCardProps) {
     e.stopPropagation();
     callback();
   };
-
   const onDelete = () => {
     setIsDeleteOpened(false);
-    props.onDelete()
-  }
+    props.onDelete();
+  };
+  const onEdit = () => {
+    setIsEditOpened(false);
+    props.onEdit(editContent);
+  };
+  const openEditModal = () => {
+    setIsEditOpened(true);
+    setEditContent(props.text);
+  };
 
+  // TODO: set the delete modal in a separated file.
   return (
     <>
       <Modal
@@ -57,10 +67,23 @@ export function PostCard(props: PostCardProps) {
             label={t("cancel")}
             secondary
             onClick={() => setIsDeleteOpened(false)}
+            disabled={props.isLoading}
           />
-          <Button label={t("proceed")} onClick={onDelete} />
+          <Button
+            label={t("proceed")}
+            onClick={onDelete}
+            disabled={props.isLoading}
+          />
         </div>
       </Modal>
+      <PublishModal
+        opened={isEditOpened}
+        isLoading={props.isLoading}
+        value={editContent}
+        onClose={() => setIsEditOpened(false)}
+        onChange={setEditContent}
+        onPublish={onEdit}
+      />
       <div onClick={props.onClick} className="w-full space-y-4">
         <Card>
           <div className="space-y-2">
@@ -93,11 +116,11 @@ export function PostCard(props: PostCardProps) {
                     </ActionIcon>
                   }
                 >
-                  <Dropdown.Item onClick={props.onEdit}>
+                  <Dropdown.Item onClick={openEditModal}>
                     <IconPencil className="text-blue-600" />
                     <span>{t("edit")}</span>
                   </Dropdown.Item>
-                  <Dropdown.Item onClick={()=>setIsDeleteOpened(true)}>
+                  <Dropdown.Item onClick={() => setIsDeleteOpened(true)}>
                     <IconTrash className="text-red-600" />
                     <span>{t("delete")}</span>
                   </Dropdown.Item>
@@ -110,7 +133,7 @@ export function PostCard(props: PostCardProps) {
             <div className="grid grid-cols-3">
               <div className="flex items-center space-x-2">
                 <ActionIcon onClick={(e) => cancelEvent(e, props.onLike)}>
-                  <LikeIcon isLiked={props.isLiked}/>
+                  <LikeIcon isLiked={props.isLiked} />
                 </ActionIcon>
                 <p>{props.likeCount}</p>
               </div>
