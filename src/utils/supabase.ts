@@ -14,6 +14,16 @@ export const getPosts = cache(
   }
 );
 
+export const getUserPosts = async (
+  client: SupabaseClient, userId: string
+): Promise<PostgrestSingleResponse<PostProps[]>> => {
+  return await client
+    .from("posts")
+    .select()
+    .match({author: userId})
+    .order("created_at", { ascending: false });
+};
+
 export const deletePost = cache(
   async (client: SupabaseClient, postId: string) => {
     return await client.from("posts").delete().match({ id: postId });
@@ -59,3 +69,9 @@ export const getALike = async (
     .select()
     .match({ user_id: userId, post_id: postId });
 };
+
+export const getUserInfos = cache(
+  async (client: SupabaseClient, userId: string) => {
+    return await client.from("users").select().match({ id: userId });
+  }
+);

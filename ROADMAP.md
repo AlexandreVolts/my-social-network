@@ -34,6 +34,7 @@
 + - Composant PublishModal: formulaire avec TextArea + Bouton Publier
 + - Lors du clic, ouverture d'une PublishModal
 + - Affichage des posts de la base de donnée sur la page home
+- - Mise à jour dynamique de la page lorsqu'une action est réalisée
 + Composant Post:
 + - Affiche l'auteur, la date, le contenu du post, Buttons liker et commenter
 + - Composant ActionIcon
@@ -45,9 +46,9 @@
 + - Affiche l'auteur, la date, le contenu du commentaire, Buttons liker et répondre
 - Création d'une page /post qui affiche un post spécifique (pour pouvoir le partager)
 
-- Création d'une page /profile
-- - Avatar, description, adresse (pays, ville), date de création du compte, nombre de publications
-- - Afficher les posts créés par l'utilisateur
++ Création d'une page /profile
++ - Avatar, description, adresse (pays, ville), date de création du compte, nombre de publications
++ - Afficher les posts créés par l'utilisateur
 - - Possibilité de modifier ces informations si l'utilisateur est sur son profil
 
 - - Bouton "Follow" / "Unfollow"

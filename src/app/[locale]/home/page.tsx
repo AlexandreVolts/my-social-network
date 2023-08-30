@@ -8,15 +8,10 @@ import { Card } from "@/components/ui/Card";
 import { Toaster } from "@/components/ui/Toaster";
 import { useQuery } from "@/hooks/useQuery";
 import { useUser } from "@/hooks/useUser";
+import { deletePost, getPosts, getLikes, addLike, getALike, removeLike } from "@/utils/supabase";
 import {
-  deletePost,
-  getPosts,
-  getLikes,
-  addLike,
-  getALike,
-  removeLike,
-} from "@/utils/supabase";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+  createClientComponentClient,
+} from "@supabase/auth-helpers-nextjs";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next-intl/client";
 import { useEffect, useState } from "react";
