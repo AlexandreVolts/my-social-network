@@ -47,8 +47,8 @@
 - Création d'une page /post qui affiche un post spécifique (pour pouvoir le partager)
 
 + Création d'une page /profile
-- - Avatar, description, adresse (pays, ville), date de création du compte, nombre de publications
-- - Afficher les posts créés par l'utilisateur
++ - Avatar, description, adresse (pays, ville), date de création du compte, nombre de publications
++ - Afficher les posts créés par l'utilisateur
 - - Possibilité de modifier ces informations si l'utilisateur est sur son profil
 
 - - Bouton "Follow" / "Unfollow"

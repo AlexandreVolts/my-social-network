@@ -1,5 +1,10 @@
 # My Social Network's Updates
 
+## 0.10 (30/08/2023)
+- Page /profile : 
+  - Avatar, description, adresse (pays, ville), date de création du compte, nombre de publications
+  - Afficher les posts créés par l'utilisateur
+
 ## 0.9 (29/08/2023)
 - Composant Post : Gestion du clic sur un like
 - Mise à jour dynamique des données lors d'une interaction sur la page /home

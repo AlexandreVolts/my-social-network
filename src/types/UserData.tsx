@@ -6,4 +6,5 @@ export interface UserData {
   birthday: Date;
   adress: string;
   avatar_src: string;
+  description: string;
 }
