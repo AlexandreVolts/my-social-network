@@ -135,7 +135,7 @@ export function PostCard(props: PostCardProps) {
                 <ActionIcon onClick={(e) => cancelEvent(e, props.onLike)}>
                   <LikeIcon isLiked={props.isLiked} />
                 </ActionIcon>
-                <p>{props.likeCount}</p>
+                <p className={props.isLiked ? "text-red-500" : "text-black"}>{props.likeCount}</p>
               </div>
               <div className="flex justify-center items-center space-x-2">
                 <ActionIcon
