@@ -11,12 +11,16 @@ export function TextArea(props: TextAreaProps) {
   const disabled = props.disabled
   ? "border-gray-300 bg-gray-300 text-gray-400"
   : "bg-white";
+  const MAX_NB_LINES_TO_SHOW = 5;
 
   useEffect(() => {
     if (ref.current) {
       ref.current.style.height = "44px";
       if (ref.current.scrollHeight >= 40)
         ref.current.style.height = (ref.current.scrollHeight + 4) + "px";
+      if (ref.current.scrollHeight >= 40 * MAX_NB_LINES_TO_SHOW) {
+        ref.current.style.height = (40 * MAX_NB_LINES_TO_SHOW) + "px";
+      }
     }
   }, [ref, props.value]);
   return (

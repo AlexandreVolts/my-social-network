@@ -22,7 +22,7 @@ export default async function RootLayout({
 
   return (
     <html lang={params.locale}>
-      <body>
+      <body className="bg-gray-100">
         <NextIntlClientProvider locale={params.locale} messages={messages}>
           {children}
         </NextIntlClientProvider>

@@ -18,7 +18,7 @@ export function Overlay(props: OverlayProps) {
   return (
     <div
       id={id}
-      onClick={onClick}
+      onMouseDown={onClick}
       className={`fixed left-0 top-0 w-full h-full flex items-center justify-center z-10 ${display} ${opacity}`}
     >
       {props.children}

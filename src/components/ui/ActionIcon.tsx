@@ -13,7 +13,7 @@ export function ActionIcon(props: ActionIconProps) {
       whileTap={{ scale: props.disabled ? 1 : 0.9 }}
       disabled={props.disabled}
       onClick={props.onClick}
-      className="p-1 enabled:hover:bg-gray-100 rounded-full disabled:text-gray-200"
+      className="p-1 enabled:hover:bg-gray-200 enabled:hover:bg-opacity-50 rounded-full disabled:text-gray-200"
     >
       {props.children}
     </motion.button>

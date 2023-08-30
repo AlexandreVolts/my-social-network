@@ -1,11 +1,12 @@
 export interface PostProps {
   id: string;
   created_at: number;
+  updated_at: number;
   content: string;
-  users: Identity;
+  users: User;
 }
 
-interface Identity {
+interface User {
   name: string;
   surname: string;
   id: string;

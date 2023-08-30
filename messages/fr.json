@@ -1,6 +1,7 @@
 {
   "Home": {
     "publish-modal-title": "A quoi pensez-vous ?",
+    "edit-modal-title": "Edition de la publication",
     "publish-subtitle": "Partagez quelque chose de merveilleux!",
     "publish-placeholder": "Votre texte ici...",
     "publish": "Publier"
@@ -50,18 +51,23 @@
   },
   "Post": {
     "see-more": "Voir plus",
-    "see-less": "Voir moins"
+    "see-less": "Voir moins",
+    "on-success-create-msg": "Publié avec succès !",
+    "on-success-delete-msg": "Publication supprimé avec succès !",
+    "on-success-update-msg": "Publication modifiée avec succès !",
+    "on-fail-create-msg": "Une erreur a survenu lors de la création de la publication : ",
+    "on-fail-delete-msg": "Une erreur a survenu lors de la suppression de la publication : ",
+    "on-fail-update-msg": "Une erreur a survenu lors de l'edition de la publication : ",
+    "on-delete": "Voulez-vous supprimer cette publication ?"
   },
   "Utils": {
     "edit": "Editer",
+    "edited": "Edité",
     "delete": "Supprimer",
-    "on-delete": "Voulez-vous supprimer ce post ?",
     "cancel": "Annuler",
     "proceed": "Continuer",
     "on-success": "Succès !",
-    "on-fail": "Oups !",
-    "on-success-delete-msg": "Post supprimé avec succès !",
-    "on-fail-delete-msg": "Une erreur a survenu lors de la suppression du post : "
+    "on-fail": "Oups !"
   },
   "Profile":  {
     "description-label": "Vous n'avez pas de description",

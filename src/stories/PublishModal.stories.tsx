@@ -16,7 +16,6 @@ export const Default: Story = {
   args: {
     opened: true,
     isLoading: false,
-    value: "",
   },
 };
 
@@ -24,6 +23,5 @@ export const Loading: Story = {
   args: {
     opened: true,
     isLoading: true,
-    value: "",
   },
 };

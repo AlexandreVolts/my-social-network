@@ -1,6 +1,7 @@
 {
   "Home": {
     "publish-modal-title": "Pri kio vi pensas ?",
+    "edit-modal-title": "Update what's on your mind!",
     "publish-subtitle": "Publikigi ion mirindan!",
     "publish-placeholder": "Via teksto ĉi tie...",
     "publish": "Publikigi"
@@ -49,19 +50,24 @@
     "long-ago": "la {date}"
   },
   "Post": {
-    "see-more": "See more",
-    "see-less": "See less"
+    "see-more": "Vidi pli",
+    "see-less": "Vidi malpli",
+    "on-delete": "Do you want to delete this post ?",
+    "on-success-create-msg": "Post was successfuly created !",
+    "on-success-delete-msg": "Post was successfuly deleted !",
+    "on-success-update-msg": "Post was successfuly updated !",
+    "on-fail-create-msg": "Something went wrong while trying to create the post : ",
+    "on-fail-delete-msg": "Something went wrong while trying to delete the post : ",
+    "on-fail-update-msg": "Something went wrong while trying to update the post : "
   },
   "Utils": {
     "edit": "Eldoni",
+    "edited": "Edited",
     "delete": "Forigi",
-    "on-delete": "Do you want to delete this post ?",
     "cancel": "Cancel",
     "proceed": "Proceed",
     "on-success": "Success !",
-    "on-fail": "Oops !",
-    "on-success-delete-msg": "Post was successfuly deleted !",
-    "on-fail-delete-msg": "Something went wrong while trying to delete this post : "
+    "on-fail": "Oops !"
   },
   "Profile":  {
     "description-label": "You don't have a description yet",

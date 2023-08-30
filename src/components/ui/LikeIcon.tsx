@@ -1,4 +1,4 @@
-import { IconHeart } from "@tabler/icons-react";
+import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
 
 interface LikeIconProps {
   isLiked: boolean;
@@ -6,7 +6,7 @@ interface LikeIconProps {
 
 export function LikeIcon(props: LikeIconProps) {
   if (props.isLiked) {
-    return <IconHeart fill="red" color="red"/>
+    return <IconHeartFilled className="text-red-500" />
   }
-  return <IconHeart color="black"/>
+  return <IconHeart />
 }
