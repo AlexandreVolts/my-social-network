@@ -50,6 +50,8 @@
 - - Afficher les posts créés par l'utilisateur
 - - Possibilité de modifier ces informations si l'utilisateur est sur son profil
 
++ Composant Tooltip
+
 - - Bouton "Follow" / "Unfollow"
 - Sur la page /profile, afficher la liste des followers, le nombre de followers et le nombre de profils suivis
 - Sur la page /home, afficher la liste des publications des personnes suivies
