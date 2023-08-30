@@ -4,6 +4,7 @@ export interface BasePublishedContentProps {
   avatarSrc?: string;
   avatarColor?: string;
   createdAt: Date;
+  updatedAt: Date;
   likeCount: number;
   isLiked: boolean;
   text: string;

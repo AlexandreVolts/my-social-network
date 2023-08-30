@@ -24,6 +24,7 @@ export function CreatePostCard(props: CreatePostCard) {
         opened={isPublishModalOpened}
         value={content}
         isLoading={props.isLoading}
+        title={t("publish-modal-title")}
         onClose={() => setIsPublishedModalOpened(false)}
         onChange={setContent}
         onPublish={onPublish}

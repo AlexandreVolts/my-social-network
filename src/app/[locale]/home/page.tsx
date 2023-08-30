@@ -6,11 +6,7 @@ import { PostCard } from "@/components/PostCard";
 import { Toaster } from "@/components/ui/Toaster";
 import { useRestQuery } from "@/hooks/useRestQuery";
 import { useUser } from "@/hooks/useUser";
-import {
-  getLikes,
-  getALike,
-  getPosts,
-} from "@/utils/supabase";
+import { getLikes, getALike, getPosts } from "@/utils/supabase";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next-intl/client";
@@ -65,6 +61,7 @@ export default function Home() {
                 name={post.users.name}
                 surname={post.users.surname}
                 createdAt={new Date(post.created_at)}
+                updatedAt={new Date(post.updated_at)}
                 text={post.content}
                 likeCount={
                   likes?.data?.filter((like) => like.post_id === post.id)

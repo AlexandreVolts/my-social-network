@@ -1,6 +1,7 @@
 {
   "Home": {
     "publish-modal-title": "A quoi pensez-vous ?",
+    "edit-modal-title": "Edition de la publication",
     "publish-subtitle": "Partagez quelque chose de merveilleux!",
     "publish-placeholder": "Votre texte ici...",
     "publish": "Publier"
@@ -61,6 +62,7 @@
   },
   "Utils": {
     "edit": "Editer",
+    "edited": "Edité",
     "delete": "Supprimer",
     "cancel": "Annuler",
     "proceed": "Continuer",

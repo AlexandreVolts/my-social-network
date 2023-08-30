@@ -1,6 +1,7 @@
 {
   "Home": {
     "publish-modal-title": "Pri kio vi pensas ?",
+    "edit-modal-title": "Update what's on your mind!",
     "publish-subtitle": "Publikigi ion mirindan!",
     "publish-placeholder": "Via teksto ĉi tie...",
     "publish": "Publikigi"
@@ -61,6 +62,7 @@
   },
   "Utils": {
     "edit": "Eldoni",
+    "edited": "Edited",
     "delete": "Forigi",
     "cancel": "Cancel",
     "proceed": "Proceed",

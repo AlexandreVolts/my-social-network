@@ -80,6 +80,7 @@ export function PostCard(props: PostCardProps) {
         opened={isEditOpened}
         isLoading={props.isLoading}
         value={editContent}
+        title={t("Home.edit-modal-title")}
         onClose={() => setIsEditOpened(false)}
         onChange={setEditContent}
         onPublish={onEdit}
@@ -101,7 +102,16 @@ export function PostCard(props: PostCardProps) {
                   <h5 className="font-bold">
                     {props.name} {props.surname}
                   </h5>
-                  <p className="text-gray-500">{formater(props.createdAt)}</p>
+                  <p className="text-gray-500">
+                    <span>{formater(props.createdAt)} </span>
+                    {props.createdAt.getTime() !== props.updatedAt.getTime() ? (
+                      <span className="italic">
+                        ({t('Utils.edited')} {formater(props.updatedAt)})
+                      </span>
+                    ) : (
+                      <></>
+                    )}
+                  </p>
                 </div>
               </div>
               {props.isAuthor ? (
@@ -135,7 +145,9 @@ export function PostCard(props: PostCardProps) {
                 <ActionIcon onClick={(e) => cancelEvent(e, props.onLike)}>
                   <LikeIcon isLiked={props.isLiked} />
                 </ActionIcon>
-                <p className={props.isLiked ? "text-red-500" : "text-black"}>{props.likeCount}</p>
+                <p className={props.isLiked ? "text-red-500" : "text-black"}>
+                  {props.likeCount}
+                </p>
               </div>
               <div className="flex justify-center items-center space-x-2">
                 <ActionIcon

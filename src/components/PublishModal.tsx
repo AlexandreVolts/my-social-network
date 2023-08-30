@@ -10,6 +10,7 @@ interface PublishModalProps {
   opened: boolean;
   isLoading: boolean;
   value: string;
+  title: string;
   onClose: () => void;
   onChange: (value: string) => void;
   onPublish: () => void;
@@ -23,7 +24,7 @@ export function PublishModal(props: PublishModalProps) {
   };
   return (
     <Modal
-      title={t("publish-modal-title")}
+      title={props.title}
       opened={props.opened}
       onClose={props.onClose}
       closeOnClickOutside
