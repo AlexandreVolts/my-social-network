@@ -61,9 +61,9 @@ export function PostCard(props: PostCardProps) {
           <Button label={t("proceed")} onClick={onDelete} />
         </div>
       </Modal>
-      <div onClick={props.onClick} className={`) w-full space-y-4`}>
+      <div onClick={props.onClick} className="w-full space-y-4">
         <Card>
-          <div className={` space-y-2`}>
+          <div className="space-y-2">
             <div
               className={`flex items-center ${justifyHeader} space-x-2 w-full`}
             >
@@ -78,7 +78,7 @@ export function PostCard(props: PostCardProps) {
                   <h5 className="font-bold">
                     {props.name} {props.surname}
                   </h5>
-                  <p>{formater(props.createdAt)}</p>
+                  <p className="text-gray-500">{formater(props.createdAt)}</p>
                 </div>
               </div>
               {props.isAuthor ? (
@@ -108,7 +108,7 @@ export function PostCard(props: PostCardProps) {
             </div>
             <ReadMoreText text={props.text} charLimit={props.charLimit} />
             <div className="grid grid-cols-3">
-              <div className={` flex items-center space-x-2`}>
+              <div className="flex items-center space-x-2">
                 <ActionIcon onClick={(e) => cancelEvent(e, props.onLike)}>
                   <LikeIcon isLiked={props.isLiked}/>
                 </ActionIcon>

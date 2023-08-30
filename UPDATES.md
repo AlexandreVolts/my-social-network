@@ -2,6 +2,7 @@
 
 ## 0.9 (29/08/2023)
 - Composant Post : Gestion du clic sur un like
+- Mise à jour dynamique des données lors d'une interaction sur la page /home
 
 ## 0.8 (25/08/2023)
 - Page /home : Affichage des posts de la base de donnée sur la page home
