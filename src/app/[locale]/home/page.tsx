@@ -58,10 +58,10 @@ export default function Home() {
             onPublish={(content: string) => postHandlers.create({ content })}
             isLoading={posts.isLoading}
           />
-          {posts?.data?.map((post, index) => {
+          {posts?.data?.map((post) => {
             return (
               <PostCard
-                key={index}
+                key={post.id}
                 name={post.users.name}
                 surname={post.users.surname}
                 createdAt={new Date(post.created_at)}
@@ -100,8 +100,8 @@ export default function Home() {
         isValid={!posts.error}
         message={
           !posts.error
-            ? t("Utils.on-success-delete-msg")
-            : `${t("Utils.on-fail-delete-msg")}${posts.error.message}`
+            ? t(`Post.on-success-${posts.action!}-msg`)
+            : `${t(`Post.on-fail-${posts.action!}-msg`)}${posts.error.message}`
         }
       />
     </>

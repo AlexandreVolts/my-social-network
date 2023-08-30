@@ -50,18 +50,22 @@
   },
   "Post": {
     "see-more": "Voir plus",
-    "see-less": "Voir moins"
+    "see-less": "Voir moins",
+    "on-success-create-msg": "Publié avec succès !",
+    "on-success-delete-msg": "Publication supprimé avec succès !",
+    "on-success-update-msg": "Publication modifiée avec succès !",
+    "on-fail-create-msg": "Une erreur a survenu lors de la création de la publication : ",
+    "on-fail-delete-msg": "Une erreur a survenu lors de la suppression de la publication : ",
+    "on-fail-update-msg": "Une erreur a survenu lors de l'edition de la publication : ",
+    "on-delete": "Voulez-vous supprimer cette publication ?"
   },
   "Utils": {
     "edit": "Editer",
     "delete": "Supprimer",
-    "on-delete": "Voulez-vous supprimer ce post ?",
     "cancel": "Annuler",
     "proceed": "Continuer",
     "on-success": "Succès !",
-    "on-fail": "Oups !",
-    "on-success-delete-msg": "Post supprimé avec succès !",
-    "on-fail-delete-msg": "Une erreur a survenu lors de la suppression du post : "
+    "on-fail": "Oups !"
   },
   "Profile":  {
     "description-label": "Vous n'avez pas de description",

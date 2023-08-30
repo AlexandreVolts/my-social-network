@@ -26,7 +26,7 @@ interface PostCardProps extends BasePublishedContentProps {
   onClick: () => void;
 }
 export function PostCard(props: PostCardProps) {
-  const t = useTranslations("Utils");
+  const t = useTranslations();
   const formater = useElapsedDelayFormat();
   const [isAuthorMenuOpened, setIsAuthorMenuOpened] = useState(false);
   const [isCommentOpened, setIsCommentOpened] = useState(false);
@@ -60,17 +60,17 @@ export function PostCard(props: PostCardProps) {
       <Modal
         opened={isDeleteOpened}
         onClose={() => setIsDeleteOpened(false)}
-        title={t("on-delete")}
+        title={t("Post.on-delete")}
       >
         <div className="flex justify-around">
           <Button
-            label={t("cancel")}
+            label={t("Utils.cancel")}
             secondary
             onClick={() => setIsDeleteOpened(false)}
             disabled={props.isLoading}
           />
           <Button
-            label={t("proceed")}
+            label={t("Utils.proceed")}
             onClick={onDelete}
             disabled={props.isLoading}
           />
@@ -118,11 +118,11 @@ export function PostCard(props: PostCardProps) {
                 >
                   <Dropdown.Item onClick={openEditModal}>
                     <IconPencil className="text-blue-600" />
-                    <span>{t("edit")}</span>
+                    <span>{t("Utils.edit")}</span>
                   </Dropdown.Item>
                   <Dropdown.Item onClick={() => setIsDeleteOpened(true)}>
                     <IconTrash className="text-red-600" />
-                    <span>{t("delete")}</span>
+                    <span>{t("Utils.delete")}</span>
                   </Dropdown.Item>
                 </Dropdown>
               ) : (
