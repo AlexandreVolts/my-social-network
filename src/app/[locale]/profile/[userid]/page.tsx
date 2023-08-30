@@ -12,6 +12,7 @@ import { UserData } from "@/types/UserData";
 import { getUserInfos, getUserPosts } from "@/utils/supabase";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { IconPencil } from "@tabler/icons-react";
+import { useTranslations } from "next-intl";
 import { useParams, useRouter } from "next/navigation";
 import { use, useEffect, useState } from "react";
 
@@ -20,6 +21,7 @@ export default function Profile() {
   const supabase = createClientComponentClient();
   const { user, isComplete } = useUser(supabase);
   const router = useRouter();
+  const t = useTranslations("Profile");
   const userFetch = use(getUserInfos(supabase, params.userid as string));
   const [userData, setUserData] = useState<UserData>();
   const [userPosts, setUserPosts] = useState<PostProps[] | null>(null);
@@ -27,11 +29,11 @@ export default function Profile() {
 
   //fetch handling and redirection
   useEffect(() => {
-    if (!userData) {
-      if (userFetch.data && isComplete) {
+    if (!userData && isComplete) {
+      if (userFetch.data) {
         setUserData(userFetch.data[0]);
         setIsAuthor(userFetch.data[0].id === user!.id);
-      } else if (userFetch.error && isComplete) {
+      } else  {
         if (user?.id) {
           router.push(`/profile/${user.id}`);
           return;
@@ -48,7 +50,7 @@ export default function Profile() {
         setUserPosts(data.data)
       );
     }
-  });
+  }, [userData, userPosts]);
 
   return (
     <>
@@ -67,20 +69,20 @@ export default function Profile() {
                 {userData?.name} {userData?.surname}
               </h2>
               {/*@ts-ignore*/}
-              <p>Birthdate : {userData?.birthday}</p>
-              <p>Lives at {userData?.adress}</p>
+              <p>{t("birthdate"), userData?.birthday}</p>
+              <p>{t("adress") + userData?.adress}</p>
             </div>
             <div className="grid grid-cols-3 space-x-2">
-              <Button label="Follow" size="sm" />
-              <Button label="Message" secondary size="sm" />
-              <Button label="E-mail" secondary size="sm" />
+              <Button label={t("follow")} size="sm" />
+              <Button label={t("message")} secondary size="sm" />
+              <Button label={t("email")} secondary size="sm" />
             </div>
             <div>
               {isAuthor ? (
                 userData?.description ? (
                   <div>
                     <p>{userData.description}</p>
-                    <ActionIcon >
+                    <ActionIcon>
                       <IconPencil />
                     </ActionIcon>
                   </div>
@@ -89,8 +91,8 @@ export default function Profile() {
                     <TextArea
                       value=""
                       onChange={() => {}}
-                      label="You don't have a description yet"
-                      placeholder="Write your description"
+                      label={t("description-label")}
+                      placeholder={t("description-placeholder")}
                     />
                   </div>
                 )
@@ -99,7 +101,7 @@ export default function Profile() {
               )}
             </div>
             <p className="italic">
-              Joined the{" "}
+              {t("joined-on")}
               {new Date(userData?.created_at ?? 0).toLocaleDateString()}
             </p>
             <p className="bold">Posts : {userPosts?.length}</p>

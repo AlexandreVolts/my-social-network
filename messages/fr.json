@@ -62,5 +62,16 @@
     "on-fail": "Oups !",
     "on-success-delete-msg": "Post supprimé avec succès !",
     "on-fail-delete-msg": "Une erreur a survenu lors de la suppression du post : "
+  },
+  "Profile":  {
+    "description-label": "Vous n'avez pas de description",
+    "description-placeholder": "Ecrivez de quoi vous decrire",
+    "follow": "Suivre",
+    "unfollow": "Ne plus suivre",
+    "message": "Envoyer un message",
+    "email": "Envoyer un mail",
+    "joined-on": "Nous a rejoint le ",
+    "birthdate": "Né(e) le ",
+    "adress": "Habite à "
   }
 }

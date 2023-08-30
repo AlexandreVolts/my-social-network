@@ -62,5 +62,16 @@
     "on-fail": "Oops !",
     "on-success-delete-msg": "Post was successfuly deleted !",
     "on-fail-delete-msg": "Something went wrong while trying to delete this post : "
+  },
+  "Profile":  {
+    "description-label": "You don't have a description yet",
+    "description-placeholder": "Write your description",
+    "follow": "Follow",
+    "unfollow": "Unfollow",
+    "message": "Message",
+    "email": "Email",
+    "joined-on": "Joined the ",
+    "birthdate": "Born the ",
+    "adress": "Lives at "
   }
 }
