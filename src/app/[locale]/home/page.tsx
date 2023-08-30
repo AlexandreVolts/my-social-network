@@ -4,15 +4,11 @@ import { CreatePostCard } from "@/components/CreatePostCard";
 import { Header } from "@/components/Header";
 import { PostCard } from "@/components/PostCard";
 import { Toaster } from "@/components/ui/Toaster";
-import { useQuery } from "@/hooks/useQuery";
 import { useRestQuery } from "@/hooks/useRestQuery";
 import { useUser } from "@/hooks/useUser";
-import { PostProps } from "@/types/PostProps";
 import {
   getLikes,
-  addLike,
   getALike,
-  removeLike,
   getPosts,
 } from "@/utils/supabase";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -26,22 +22,25 @@ export default function Home() {
   const router = useRouter();
   const t = useTranslations();
 
-  const { data: posts, handlers: postHandlers } = useRestQuery<PostProps[]>(
+  const { data: posts, handlers: postHandlers } = useRestQuery(
     supabase,
     "posts",
     () => getPosts(supabase)
   );
-  const { data: likes, handlers: likeHandlers } = useQuery(() =>
-    getLikes(supabase)
+  const { data: likes, handlers: likeHandlers } = useRestQuery(
+    supabase,
+    "post_likes",
+    () => getLikes(supabase)
   );
 
   const onLike = async (postId: string) => {
     const data = await getALike(supabase, user!.id, postId);
-    if (data.data?.length) {
-      removeLike(supabase, user!.id, postId).then(likeHandlers.update);
-    } else {
-      addLike(supabase, user!.id, postId).then(likeHandlers.update);
-    }
+
+    if (data.error) return;
+    likeHandlers[data.data?.length ? "delete" : "create"]({
+      post_id: postId,
+      user_id: user!.id,
+    });
   };
 
   useEffect(() => {
@@ -50,7 +49,6 @@ export default function Home() {
     }
   });
 
-  console.log(posts)
   return (
     <>
       <Header isLoggedIn />
@@ -82,8 +80,10 @@ export default function Home() {
                 isLoading={posts.isLoading}
                 onClick={() => {}}
                 onComment={() => {}}
-                onDelete={() => postHandlers.delete(post.id)}
-                onEdit={(content) => postHandlers.update(post.id, { content })}
+                onDelete={() => postHandlers.delete({ id: post.id })}
+                onEdit={(content) =>
+                  postHandlers.update({ id: post.id }, { content })
+                }
                 onLike={() => onLike(post.id)}
                 onShare={() => {}}
               >

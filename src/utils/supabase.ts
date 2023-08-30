@@ -24,27 +24,6 @@ export const getUserPosts = async (
     .order("created_at", { ascending: false });
 };
 
-export const addLike = async (
-  client: SupabaseClient,
-  userId: string,
-  postId: string
-) => {
-  return await client
-    .from("post_likes")
-    .insert({ user_id: userId, post_id: postId });
-};
-
-export const removeLike = async (
-  client: SupabaseClient,
-  userId: string,
-  postId: string
-) => {
-  return await client
-    .from("post_likes")
-    .delete()
-    .match({ user_id: userId, post_id: postId });
-};
-
 export const getLikes = cache(
   async (
     client: SupabaseClient
