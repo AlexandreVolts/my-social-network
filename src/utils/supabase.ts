@@ -1,3 +1,4 @@
+import { FollowProps } from "@/types/FollowProps";
 import { LikeProps } from "@/types/LikeProps";
 import { PostProps } from "@/types/PostProps";
 import { PostgrestSingleResponse, SupabaseClient } from "@supabase/supabase-js";
@@ -15,12 +16,13 @@ export const getPosts = cache(
 );
 
 export const getUserPosts = async (
-  client: SupabaseClient, userId: string
+  client: SupabaseClient,
+  userId: string
 ): Promise<PostgrestSingleResponse<PostProps[]>> => {
   return await client
     .from("posts")
     .select()
-    .match({author: userId})
+    .match({ author: userId })
     .order("created_at", { ascending: false });
 };
 
@@ -46,5 +48,17 @@ export const getALike = async (
 export const getUserInfos = cache(
   async (client: SupabaseClient, userId: string) => {
     return await client.from("users").select().match({ id: userId });
+  }
+);
+
+export const getAllFollows = cache(
+  async (
+    client: SupabaseClient
+  ): Promise<PostgrestSingleResponse<FollowProps[]>> => {
+    return await client
+      .from("follows")
+      .select(
+        "*, follower:users!follows_follower_fkey(name, surname, id), target:users!follows_target_fkey(name, surname, id)"
+      );
   }
 );

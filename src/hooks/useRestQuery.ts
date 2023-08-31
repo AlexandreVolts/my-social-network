@@ -20,17 +20,17 @@ export function useRestQuery<T>(
     handlers.update();
   };
 
-  const create = (data: Partial<T>) => {
+  const create = <U>(data: Partial<U>) => {
     setIsLoading(true);
     setAction("create");
     client.from(table).insert(data).then(clear);
   };
-  const update = (matcher: Partial<T>, data: Partial<T>) => {
+  const update = <U>(matcher: Partial<T>, data: Partial<U>) => {
     setIsLoading(true);
     setAction("update");
     client.from(table).update(data).match(matcher).then(clear);
   };
-  const destroy = (matcher: Partial<T>) => {
+  const destroy = <U>(matcher: Partial<U>) => {
     setIsLoading(true);
     setAction("delete");
     client.from(table).delete().match(matcher).then(clear);

@@ -78,6 +78,9 @@
     "email": "Email",
     "joined-on": "Joined the ",
     "birthdate": "Born the ",
-    "adress": "Lives at "
+    "adress": "Lives at ",
+    "follows-modal": " follows them :",
+    "followers-modal": "They follow ",
+    "view-profile": "View profile"
   }
 }

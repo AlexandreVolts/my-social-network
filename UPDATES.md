@@ -1,5 +1,10 @@
 # My Social Network's Updates
 
+## 0.11 (31/08/2023)
+- Page /profile : 
+  - Bouton follow / unfollow
+  - Sur la page /profile, afficher la liste des followers, le nombre de followers et le nombre de profils suivis
+
 ## 0.10 (30/08/2023)
 - Page /profile : 
   - Avatar, description, adresse (pays, ville), date de création du compte, nombre de publications

@@ -54,8 +54,8 @@
 
 + Composant Tooltip
 
-- - Bouton "Follow" / "Unfollow"
-- Sur la page /profile, afficher la liste des followers, le nombre de followers et le nombre de profils suivis
++ - Bouton "Follow" / "Unfollow"
++ Sur la page /profile, afficher la liste des followers, le nombre de followers et le nombre de profils suivis
 - Sur la page /home, afficher la liste des publications des personnes suivies
 
 - Création d'une page /notifications

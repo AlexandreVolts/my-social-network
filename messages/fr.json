@@ -78,6 +78,9 @@
     "email": "Envoyer un mail",
     "joined-on": "Nous a rejoint le ",
     "birthdate": "Né(e) le ",
-    "adress": "Habite à "
+    "adress": "Habite à ",
+    "follows-modal": " les suit :",
+    "followers-modal": "Ils suivent ",
+    "view-profile": "Voir profil"
   }
 }
