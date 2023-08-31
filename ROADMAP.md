@@ -61,7 +61,7 @@
 - Création d'une page /notifications
 - - Affiche les notifications non lues, supprime de la base les notifications déjà lues
 
-- Composant Pin
++ Composant Pin
 - Composant UserLayout
 - - Afficher un menu avec les liens "Home", "Notifications", "Profile"
 - - Sur les notifications ajouter un Pin avec le nombre de notifications non lues

@@ -4,6 +4,7 @@
 - Page /profile : 
   - Bouton follow / unfollow
   - Sur la page /profile, afficher la liste des followers, le nombre de followers et le nombre de profils suivis
+- Composant Pin
 
 ## 0.10 (30/08/2023)
 - Page /profile : 
