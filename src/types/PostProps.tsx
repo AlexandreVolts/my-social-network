@@ -1,3 +1,5 @@
+import { User } from "./User";
+
 export interface PostProps {
   id: string;
   created_at: number;
@@ -6,8 +8,3 @@ export interface PostProps {
   users: User;
 }
 
-interface User {
-  name: string;
-  surname: string;
-  id: string;
-}
