@@ -95,7 +95,7 @@ export default function Profile() {
       <Modal
         opened={isFollowsOpened}
         onClose={() => setIsFollowsOpened(false)}
-        title={userData?.name + " " + userData?.surname + ` follows them`}
+        title={userData?.name + " " + userData?.surname + t("follows-modal")}
         closeOnClickOutside
       >
         <ul className="space-y-2">
@@ -103,8 +103,15 @@ export default function Profile() {
             const follow = user.target;
             return (
               <li key={index} className="flex justify-between">
-                <p className="font-bold">{follow.name + " " + follow.surname}</p>
-                <Link href={`/profile/${follow.id}`} className="italic hover:underline">See profile</Link>
+                <p className="font-bold">
+                  {follow.name + " " + follow.surname}
+                </p>
+                <Link
+                  href={`/profile/${follow.id}`}
+                  className="italic hover:underline"
+                >
+                  {t("view-profile")}
+                </Link>
               </li>
             );
           })}
@@ -113,7 +120,7 @@ export default function Profile() {
       <Modal
         opened={isFollowersOpened}
         onClose={() => setIsFollowersOpened(false)}
-        title={`They follow ` + userData?.name + " " + userData?.surname}
+        title={t("followers-modal") + userData?.name + " " + userData?.surname}
         closeOnClickOutside
       >
         <ul className="space-y-2">
@@ -121,8 +128,15 @@ export default function Profile() {
             const follower = user.follower;
             return (
               <li key={index} className="flex justify-between">
-                <p className="font-bold">{follower.name + " " + follower.surname}</p>
-                <Link href={`/profile/${follower.id}`} className="italic hover:underline">See profile</Link>
+                <p className="font-bold">
+                  {follower.name + " " + follower.surname}
+                </p>
+                <Link
+                  href={`/profile/${follower.id}`}
+                  className="italic hover:underline"
+                >
+                  {t("view-profile")}
+                </Link>
               </li>
             );
           })}
