@@ -11,7 +11,7 @@ export function useRestQuery<T>(
 ) {
   const [showMessage, setShowMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [action, setAction] = useState<Action>();
+  const [action, setAction] = useState<Action>("create");
   const { data, handlers } = useQuery(() => initializer(client));
 
   const clear = () => {
