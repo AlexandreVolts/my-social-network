@@ -2,6 +2,7 @@
 
 import { Header } from "@/components/Header";
 import { PostCard } from "@/components/PostCard";
+import { UserListModal } from "@/components/UserListModal";
 import { ActionIcon } from "@/components/ui/ActionIcon";
 import { Avatar } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button";
@@ -30,7 +31,7 @@ export default function Profile() {
   const [userData, setUserData] = useState<UserData>();
   const [userPosts, setUserPosts] = useState<PostProps[] | null>(null);
   const [isAuthor, setIsAuthor] = useState<boolean>();
-  const [isFollowed, setIsFollowed] = useState<boolean>(false);
+  const [isFollowed, setIsFollowed] = useState<boolean>();
   const [isFollowsOpened, setIsFollowsOpened] = useState(false);
   const [isFollowersOpened, setIsFollowersOpened] = useState(false);
   const { data: follows, handlers: followsHandlers } = useRestQuery(
@@ -56,12 +57,10 @@ export default function Profile() {
   //update isFollowed
   useEffect(() => {
     setIsFollowed(
-      follows.data?.find(
+      !!follows.data?.some(
         (follow) =>
           follow.follower.id === user?.id && follow.target.id === userData?.id
       )
-        ? true
-        : false
     );
   }, [follows]);
 
@@ -92,57 +91,18 @@ export default function Profile() {
 
   return (
     <>
-      <Modal
+      <UserListModal 
         opened={isFollowsOpened}
-        onClose={() => setIsFollowsOpened(false)}
+        onClose={()=>setIsFollowsOpened(false)}
         title={userData?.name + " " + userData?.surname + t("follows-modal")}
-        closeOnClickOutside
-      >
-        <ul className="space-y-2">
-          {followList?.map((user, index) => {
-            const follow = user.target;
-            return (
-              <li key={index} className="flex justify-between">
-                <p className="font-bold">
-                  {follow.name + " " + follow.surname}
-                </p>
-                <Link
-                  href={`/profile/${follow.id}`}
-                  className="italic hover:underline"
-                >
-                  {t("view-profile")}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </Modal>
-      <Modal
+        list={followList?.map((follow)=>follow.target)}
+      />
+      <UserListModal 
         opened={isFollowersOpened}
-        onClose={() => setIsFollowersOpened(false)}
+        onClose={()=>setIsFollowersOpened(false)}
         title={t("followers-modal") + userData?.name + " " + userData?.surname}
-        closeOnClickOutside
-      >
-        <ul className="space-y-2">
-          {followerList?.map((user, index) => {
-            const follower = user.follower;
-            return (
-              <li key={index} className="flex justify-between">
-                <p className="font-bold">
-                  {follower.name + " " + follower.surname}
-                </p>
-                <Link
-                  href={`/profile/${follower.id}`}
-                  className="italic hover:underline"
-                >
-                  {t("view-profile")}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </Modal>
-
+        list={followerList?.map((follow)=>follow.follower)}
+      />
       <Header isLoggedIn />
       <main className="flex flex-col items-center justify-between p-24">
         <div className="flex sm:flex-row flex-col space-x-4 w-full">
@@ -176,9 +136,6 @@ export default function Profile() {
                   secondary
                   onClick={() => console.log(followList, followerList)}
                 />
-              </Tooltip>
-              <Tooltip label={t("email")}>
-                <Button label={t("email")} secondary />
               </Tooltip>
             </div>
             <div>

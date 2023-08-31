@@ -2,13 +2,13 @@ import { motion } from "framer-motion";
 import { ReactNode } from "react";
 
 interface ButtonProps {
-    label: string;
-    icon?: ReactNode;
-    disabled?: boolean;
-    secondary?: boolean;
-    size?: "sm"|"md"|"lg";
-    type?: "reset"|"button"|"submit";
-    onClick?: ()=>void;
+  label: string;
+  icon?: ReactNode;
+  disabled?: boolean;
+  secondary?: boolean;
+  size?: "sm" | "md" | "lg";
+  type?: "reset" | "button" | "submit";
+  onClick?: () => void;
 }
 export function Button(props: ButtonProps) {
   const primary = props.secondary ? "border-2" : "text-white";
@@ -23,12 +23,12 @@ export function Button(props: ButtonProps) {
     md: "px-10 h-10",
     lg: "px-16 h-12",
   };
-  const iconOnly = (props.icon&&!props.label.length)?"hidden":"";
+  const iconOnly = props.icon && !props.label.length ? "hidden" : "";
 
   return (
     <motion.button
       whileTap={{ scale: props.disabled ? 1 : 0.97 }}
-      type={props.type??"button"}
+      type={props.type ?? "button"}
       disabled={props.disabled}
       onClick={props.onClick}
       className={`

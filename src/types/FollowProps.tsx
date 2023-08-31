@@ -1,8 +1,8 @@
-import { User } from "./User";
+import { UserData } from "./UserData";
 
 export interface FollowProps {
-  follower: User;
-  target: User;
+  follower: UserData;
+  target: UserData;
   created_at: number;
   validated: boolean;
 }
