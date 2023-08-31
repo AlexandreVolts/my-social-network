@@ -1,4 +1,6 @@
 import { ActionIcon } from "@/components/ui/ActionIcon";
+import { Avatar } from "@/components/ui/Avatar";
+import { Button } from "@/components/ui/Button";
 import { Pin } from "@/components/ui/Pin";
 import type { Meta, StoryObj } from "@storybook/react";
 import { IconBell, IconBook, IconDots, IconSettings } from "@tabler/icons-react";
@@ -56,5 +58,21 @@ export const WithNumber: Story = {
       </ActionIcon>
     ),
     notificationNb: 8,
+  }
+}
+
+export const OnAvatar: Story = {
+  args: {
+    children: (
+      <Avatar name="Rodolphe" surname="C" size="sm" />
+    ),
+  }
+}
+
+export const onButton: Story = {
+  args:{
+    children: (
+      <Button label="Test button" />
+    )
   }
 }
