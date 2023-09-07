@@ -1,29 +1,5 @@
 # My Social Network's roadmap
 
-+ Composant TextInput
-+ Composant PasswordInput
-+ Composant DatePicker
-+ Composant Select
-+ Composant Button
-+ Composant Card
-+ Fix: focus disabled when clicking icons in TextInput
-+ Template page d'accueil: Formulaire d'inscription
-+ - Prénom, nom, numéro de téléphone ou email, mot de passe, date de naissance
-+ Template page d'accueil: Formulaire de connexion
-+ - Numéro de téléphone ou email, mot de passe
-
-+ Ajouter des icônes sur les boutons
-+ Composant Toaster
-+ Animations whileTaping sur le bouton et l'input
-+ Composant Overlay
-+ - Relier le Select à l'Overlay
-+ Création d'une page /login (ne contient que le formulaire de connexion)
-+ Création d'une page /register (ne contient que le formulaire d'inscription)
-+ Composant Header: titre, bouton d'inscription et de connexion
-+ Création d'une page /about
-+ - Implémenter le composant Header
-+ Composant Footer: Selection de langue, liens vers page de connexion, inscription et about
-
 - Fix: Overlay s'adapte au conteneur parent
 - Fix: Select se place sur l'input
 + Composant Modal
@@ -69,3 +45,6 @@
 - Création d'une page /messages
 
 - Fix comportement du composant DatePicker : passage du 31 Aug -> 3 Mar quand on selectionne Feb 
+
+- Sur les posts, ajouter les Tooltip sur les boutons j'aime, les commentaires et le bouton de partage
++ Améliorer le layout du profil
