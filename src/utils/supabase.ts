@@ -15,7 +15,7 @@ export const getPosts = cache(
   }
 );
 
-export const getUserPosts = async (
+export const getUserPosts = cache(async (
   client: SupabaseClient,
   userId: string
 ): Promise<PostgrestSingleResponse<PostProps[]>> => {
@@ -24,7 +24,7 @@ export const getUserPosts = async (
     .select()
     .match({ author: userId })
     .order("created_at", { ascending: false });
-};
+});
 
 export const getLikes = cache(
   async (
