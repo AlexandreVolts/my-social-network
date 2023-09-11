@@ -239,6 +239,7 @@ export default function Profile() {
                     }
                     createdAt={new Date(post.created_at)}
                     updatedAt={new Date(post.updated_at)}
+                    userId={params.userid as string}
                     text={post.content}
                     isLoading={false}
                     onClick={() => {}}

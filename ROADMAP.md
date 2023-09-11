@@ -27,6 +27,7 @@
 + - Avatar, description, adresse (pays, ville), date de création du compte, nombre de publications
 + - Afficher les posts créés par l'utilisateur
 - - Possibilité de modifier ces informations si l'utilisateur est sur son profil
++ - Possibilité de rediriger sur la page profile/ lors du clic sur un nom d'utilisateur d'un post
 
 + Composant Tooltip
 
