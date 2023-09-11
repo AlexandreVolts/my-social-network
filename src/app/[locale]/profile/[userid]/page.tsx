@@ -13,7 +13,13 @@ import { useRestQuery } from "@/hooks/useRestQuery";
 import { useUser } from "@/hooks/useUser";
 import { PostProps } from "@/types/PostProps";
 import { UserData } from "@/types/UserData";
-import { getAllFollows, getUserInfos, getUserPosts } from "@/utils/supabase";
+import {
+  getALike,
+  getAllFollows,
+  getLikes,
+  getUserInfos,
+  getUserPosts,
+} from "@/utils/supabase";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import {
   IconHeart,
@@ -33,8 +39,7 @@ export default function Profile() {
   const t = useTranslations("Profile");
   const userFetch = use(getUserInfos(supabase, params.userid as string));
   const [userData, setUserData] = useState<UserData>();
-  const [userPosts, setUserPosts] = useState<PostProps[] | null>(null);
-  const [isAuthor, setIsAuthor] = useState<boolean>();
+  const [isAuthor, setIsAuthor] = useState(true);
   const [isFollowed, setIsFollowed] = useState<boolean>();
   const [isFollowsOpened, setIsFollowsOpened] = useState(false);
   const [isFollowersOpened, setIsFollowersOpened] = useState(false);
@@ -42,6 +47,16 @@ export default function Profile() {
     supabase,
     "follows",
     () => getAllFollows(supabase)
+  );
+  const { data: posts, handlers: postsHandlers } = useRestQuery(
+    supabase,
+    "posts",
+    () => getUserPosts(supabase, params.userid as string)
+  );
+  const { data: likes, handlers: likeHandlers } = useRestQuery(
+    supabase,
+    "post_likes",
+    () => getLikes(supabase)
   );
 
   const followList = follows.data?.filter(
@@ -55,6 +70,16 @@ export default function Profile() {
     followsHandlers[isFollowed ? "delete" : "create"]({
       follower: user?.id,
       target: userData?.id,
+    });
+  };
+
+  const onLike = async (postId: string) => {
+    const data = await getALike(supabase, user!.id, postId);
+
+    if (data.error) return;
+    likeHandlers[data.data?.length ? "delete" : "create"]({
+      post_id: postId,
+      user_id: user!.id,
     });
   };
 
@@ -83,15 +108,6 @@ export default function Profile() {
       }
     }
   }, [userFetch, userData, isComplete, router, user]);
-
-  //fetch post data
-  useEffect(() => {
-    if (userData && !userPosts) {
-      getUserPosts(supabase, userData.id).then((data) =>
-        setUserPosts(data.data)
-      );
-    }
-  }, [userData, userPosts, supabase]);
 
   return (
     <>
@@ -126,7 +142,7 @@ export default function Profile() {
               <div className="flex grow grid grid-cols-3 w-full p-2">
                 <div>
                   <LabelledNumber
-                    value={userPosts?.length}
+                    value={posts.data?.length}
                     label={t("posts")}
                   />
                 </div>
@@ -204,25 +220,36 @@ export default function Profile() {
             </p>
           </div>
           <div className="w-full space-y-2">
-            {userPosts?.map((post, index) => {
+            {posts.data?.map((post, index) => {
               if (userData) {
                 return (
                   <PostCard
                     key={index}
                     name={userData.name}
                     surname={userData.surname}
-                    likeCount={0}
-                    isLiked={false}
+                    likeCount={
+                      likes?.data?.filter((like) => like.post_id === post.id)
+                        .length ?? 0
+                    }
+                    isLiked={
+                      !!likes?.data?.find(
+                        (like) =>
+                          like.post_id === post.id && like.user_id === user?.id
+                      )
+                    }
                     createdAt={new Date(post.created_at)}
+                    updatedAt={new Date(post.updated_at)}
                     text={post.content}
                     isLoading={false}
-                    updatedAt={new Date(post.updated_at)}
                     onClick={() => {}}
                     onComment={() => {}}
-                    onDelete={() => {}}
-                    onEdit={() => {}}
-                    onLike={() => {}}
+                    onDelete={() => postsHandlers.delete({ id: post.id })}
+                    onEdit={(content) =>
+                      postsHandlers.update({ id: post.id }, { content })
+                    }
+                    onLike={() => onLike(post.id)}
                     onShare={() => {}}
+                    isAuthor
                   >
                     <></>
                   </PostCard>
