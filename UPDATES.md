@@ -1,5 +1,8 @@
 # My Social Network's Updates
 
+## 0.12 (07/09/2023)
+- Améliorer le layout du profil
+
 ## 0.11 (31/08/2023)
 - Page /profile : 
   - Bouton follow / unfollow

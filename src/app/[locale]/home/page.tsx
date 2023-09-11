@@ -49,7 +49,7 @@ export default function Home() {
     <>
       <Header isLoggedIn />
       <main className="flex flex-col items-center justify-between p-12">
-        <div className="flex flex-col space-y-2 sm:w-1/2 w-full">
+        <div className="flex flex-col space-y-2 lg:w-1/2 w-full">
           <CreatePostCard
             onPublish={(content: string) => postHandlers.create({ content })}
             isLoading={posts.isLoading}

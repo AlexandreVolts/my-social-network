@@ -1,12 +1,12 @@
 "use client";
 
 import { Header } from "@/components/Header";
+import { LabelledNumber } from "@/components/LabelledNumber";
 import { PostCard } from "@/components/PostCard";
 import { UserListModal } from "@/components/UserListModal";
 import { ActionIcon } from "@/components/ui/ActionIcon";
 import { Avatar } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button";
-import { Modal } from "@/components/ui/Modal";
 import { TextArea } from "@/components/ui/TextArea";
 import { Tooltip } from "@/components/ui/Tooltip";
 import { useRestQuery } from "@/hooks/useRestQuery";
@@ -15,9 +15,13 @@ import { PostProps } from "@/types/PostProps";
 import { UserData } from "@/types/UserData";
 import { getAllFollows, getUserInfos, getUserPosts } from "@/utils/supabase";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { IconHeart, IconHeartFilled, IconPencil } from "@tabler/icons-react";
+import {
+  IconHeart,
+  IconHeartFilled,
+  IconMail,
+  IconPencil,
+} from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { use, useEffect, useState } from "react";
 
@@ -62,7 +66,7 @@ export default function Profile() {
           follow.follower.id === user?.id && follow.target.id === userData?.id
       )
     );
-  }, [follows]);
+  }, [follows, userData, user]);
 
   //fetch handling and redirection
   useEffect(() => {
@@ -78,7 +82,7 @@ export default function Profile() {
         router.push("/");
       }
     }
-  }, [userFetch, userData, isComplete]);
+  }, [userFetch, userData, isComplete, router, user]);
 
   //fetch post data
   useEffect(() => {
@@ -87,57 +91,90 @@ export default function Profile() {
         setUserPosts(data.data)
       );
     }
-  }, [userData, userPosts]);
+  }, [userData, userPosts, supabase]);
 
   return (
     <>
-      <UserListModal 
+      <UserListModal
         opened={isFollowsOpened}
-        onClose={()=>setIsFollowsOpened(false)}
+        onClose={() => setIsFollowsOpened(false)}
         title={userData?.name + " " + userData?.surname + t("follows-modal")}
-        list={followList?.map((follow)=>follow.target)}
+        list={followList?.map((follow) => follow.target)}
       />
-      <UserListModal 
+      <UserListModal
         opened={isFollowersOpened}
-        onClose={()=>setIsFollowersOpened(false)}
+        onClose={() => setIsFollowersOpened(false)}
         title={t("followers-modal") + userData?.name + " " + userData?.surname}
-        list={followerList?.map((follow)=>follow.follower)}
+        list={followerList?.map((follow) => follow.follower)}
       />
       <Header isLoggedIn />
       <main className="flex flex-col items-center justify-between p-24">
-        <div className="flex sm:flex-row flex-col space-x-4 w-full">
-          <div className="flex flex-col w-full sm:w-1/2">
-            <Avatar
-              name={userData?.name ?? ""}
-              surname={userData?.surname ?? ""}
-              src={userData?.avatar_src}
-              size="lg"
-            />
-            <div>
-              <h2 className="font-bold text-3xl">
-                {userData?.name} {userData?.surname}
-              </h2>
-              {/*@ts-ignore*/}
-              <p>{(t("birthdate"), userData?.birthday)}</p>
-              <p>{t("adress") + userData?.adress}</p>
-            </div>
-            <div className="flex w-full space-x-2">
-              <Tooltip label={isFollowed ? t("unfollow") : t("follow")}>
-                <Button
-                  onClick={onFollowClick}
-                  label=""
-                  secondary={isFollowed}
-                  icon={isFollowed ? <IconHeartFilled /> : <IconHeart />}
+        <div className="flex lg:flex-row flex-col space-x-4 w-full">
+          <div className="flex flex-col w-full lg:w-1/2 min-w-max">
+            <div className="flex flex-col lg:flex-row items-center">
+              <div>
+                <Avatar
+                  name={userData?.name ?? ""}
+                  surname={userData?.surname ?? ""}
+                  src={userData?.avatar_src}
+                  size="lg"
                 />
-              </Tooltip>
-              <Tooltip label={t("message")}>
-                <Button
-                  label={t("message")}
-                  secondary
-                  onClick={() => console.log(followList, followerList)}
-                />
-              </Tooltip>
+                <h2 className="text-center font-bold text-3xl">
+                  {userData?.name} {userData?.surname}
+                </h2>
+              </div>
+              <div className="flex grow grid grid-cols-3 w-full p-2">
+                <div>
+                  <LabelledNumber
+                    value={userPosts?.length}
+                    label={t("posts")}
+                  />
+                </div>
+                <div
+                  className="cursor-pointer"
+                  onClick={() => setIsFollowsOpened(true)}
+                >
+                  <LabelledNumber
+                    value={followList?.length}
+                    label={t("follows")}
+                  />
+                </div>
+                <div
+                  className="cursor-pointer"
+                  onClick={() => setIsFollowersOpened(true)}
+                >
+                  <LabelledNumber
+                    value={followerList?.length}
+                    label={t("followers")}
+                  />
+                </div>
+              </div>
             </div>
+            {/*@ts-ignore*/}
+            <p>{(t("birthdate"), userData?.birthday)}</p>
+            <p>{t("adress") + userData?.adress}</p>
+            {!isAuthor ? (
+              <div className="flex w-full space-x-2">
+                <Tooltip label={isFollowed ? t("unfollow") : t("follow")}>
+                  <Button
+                    onClick={onFollowClick}
+                    label=""
+                    secondary={isFollowed}
+                    icon={isFollowed ? <IconHeartFilled /> : <IconHeart />}
+                  />
+                </Tooltip>
+                <Tooltip label={t("message")}>
+                  <Button
+                    label={t("message")}
+                    icon={<IconMail />}
+                    secondary
+                    onClick={() => console.log(followList, followerList)}
+                  />
+                </Tooltip>
+              </div>
+            ) : (
+              <></>
+            )}
             <div>
               {isAuthor ? (
                 userData?.description ? (
@@ -164,19 +201,6 @@ export default function Profile() {
             <p className="italic">
               {t("joined-on")}
               {new Date(userData?.created_at ?? 0).toLocaleDateString()}
-            </p>
-            <p className="font-bold">Posts : {userPosts?.length}</p>
-            <p
-              onClick={() => setIsFollowsOpened(true)}
-              className="font-bold cursor-pointer"
-            >
-              Follows : {followList?.length}
-            </p>
-            <p
-              onClick={() => setIsFollowersOpened(true)}
-              className="font-bold cursor-pointer"
-            >
-              Followers : {followerList?.length}
             </p>
           </div>
           <div className="w-full space-y-2">
