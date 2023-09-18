@@ -1,3 +1,4 @@
+import { Card } from "@/components/ui/Card";
 import { Drawer } from "@/components/ui/Drawer";
 import type { Meta, StoryObj } from "@storybook/react";
 
@@ -18,23 +19,24 @@ export const Default: Story = {
   args: {
     opened: true,
     title: "Default Title",
-    children: (
-      <></>
-    ),
+    children: <></>,
     onClose: () => {},
   },
 };
 
-export const Menu: Story = {
+export const WithCards: Story = {
   args: {
     opened: true,
-    title: "This is a Menu",
+    title: "Various templates",
     children: (
-      <ul>
-        <li>Home</li>
-        <li>Profile</li>
-        <li>Messages</li>
-        <li>NOtifications</li>
+      <ul className="space-y-2">
+        {Array.from({ length: 15 }).map((_, index) => {
+          return (
+            <li key={index}>
+              <Card>{index}</Card>
+            </li>
+          );
+        })}
       </ul>
     ),
     onClose: () => {},

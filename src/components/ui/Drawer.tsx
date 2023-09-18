@@ -23,8 +23,8 @@ export function Drawer(props: DrawerProps) {
       />
       <motion.div
         ref={ref}
-        animate={{ x: props.opened ? 0 : -(ref.current?.clientWidth ?? 0) }}
-        className="absolute left-0 top-0 w-96 bg-white min-h-screen p-2 z-20"
+        animate={{ x: props.opened ? 0 : -(ref.current?.offsetWidth ?? 0) }}
+        className="p-2 absolute left-0 top-0 w-96 bg-white h-screen overflow-auto z-20"
       >
         <div className="flex items-center justify-between space-x-2">
           <h3 className="text-xl font-bold">{props.title}</h3>
