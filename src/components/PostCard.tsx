@@ -18,6 +18,7 @@ import { Modal } from "./ui/Modal";
 import { Button } from "./ui/Button";
 import { LikeIcon } from "./ui/LikeIcon";
 import { PublishModal } from "./PublishModal";
+import Link from "next/link";
 
 interface PostCardProps extends BasePublishedContentProps {
   isAuthor?: boolean;
@@ -100,7 +101,7 @@ export function PostCard(props: PostCardProps) {
                 />
                 <div className="flex-col">
                   <h5 className="font-bold">
-                    {props.name} {props.surname}
+                    <Link href={`/profile/${props.userId}`}>{props.name} {props.surname}</Link>
                   </h5>
                   <p className="text-gray-500">
                     <span>{formater(props.createdAt)} </span>

@@ -63,6 +63,7 @@ export default function Home() {
                 createdAt={new Date(post.created_at)}
                 updatedAt={new Date(post.updated_at)}
                 text={post.content}
+                userId={post.users.id}
                 likeCount={
                   likes?.data?.filter((like) => like.post_id === post.id)
                     .length ?? 0

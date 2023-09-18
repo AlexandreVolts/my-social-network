@@ -3,6 +3,7 @@ export interface BasePublishedContentProps {
   surname: string;
   avatarSrc?: string;
   avatarColor?: string;
+  userId: string;
   createdAt: Date;
   updatedAt: Date;
   likeCount: number;
