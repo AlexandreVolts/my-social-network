@@ -32,6 +32,11 @@
       "birthday-min-age": "Vous devez avoir au moins 13 ans pour vous inscrire."
     }
   },
+  "Menu": {
+    "home": "Accueil",
+    "profile": "Profil",
+    "messages": "Messages"
+  },
   "Languages": {
     "language": "Selection de la langue",
     "en": "Anglais",

@@ -3,17 +3,13 @@ import { Card } from "@/components/ui/Card";
 import { Modal } from "@/components/ui/Modal";
 import type { Meta, StoryObj } from "@storybook/react";
 
-// More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
   title: "UI/Modal",
   component: Modal,
   parameters: {
-    // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/react/configure/story-layout
     layout: "centered",
   },
-  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/react/writing-docs/autodocs
   tags: ["autodocs"],
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
 } satisfies Meta<typeof Modal>;
 
@@ -44,11 +40,11 @@ export const WithCardIn: Story = {
     children: (
       <Card>
         <Card>
-
+          <></>
         </Card>
       </Card>
     ),
-    onClose: ()=>{},
+    onClose: () => {},
   },
 };
 
@@ -56,9 +52,7 @@ export const WithBigComponentIn: Story = {
   args: {
     opened: true,
     title: "Modal with a login form inside",
-    children: (
-      <LoginForm onSubmit={()=>{}} onSwitch={()=>{}} />
-    ),
-    onClose: ()=>{},
-  }
-}
+    children: <LoginForm onSubmit={() => {}} onSwitch={() => {}} />,
+    onClose: () => {},
+  },
+};

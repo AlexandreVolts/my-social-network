@@ -98,7 +98,7 @@ export default function Profile() {
     if (!userData && isComplete) {
       if (userFetch.data) {
         setUserData(userFetch.data[0]);
-        setIsAuthor(userFetch.data[0].id === user!.id);
+        setIsAuthor(userFetch.data[0].id === user?.id);
       } else {
         if (user?.id) {
           router.push(`/profile/${user.id}`);

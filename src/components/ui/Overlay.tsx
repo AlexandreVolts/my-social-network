@@ -4,7 +4,6 @@ interface OverlayProps {
   opened?: boolean;
   opacity?: boolean;
   onClick: () => void;
-  children?: ReactNode;
 }
 export function Overlay(props: OverlayProps) {
   const id = useId();
@@ -20,8 +19,6 @@ export function Overlay(props: OverlayProps) {
       id={id}
       onMouseDown={onClick}
       className={`fixed left-0 top-0 w-full h-full flex items-center justify-center z-10 ${display} ${opacity}`}
-    >
-      {props.children}
-    </div>
+    />
   );
 }
