@@ -32,6 +32,11 @@
       "birthday-min-age": "Must be at least 13 years old."
     }
   },
+  "Menu": {
+    "home": "Home",
+    "profile": "Profile",
+    "messages": "Messages"
+  },
   "Languages": {
     "language": "Lingva Selekto",
     "en": "Angla",
