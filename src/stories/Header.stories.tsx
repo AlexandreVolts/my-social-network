@@ -14,4 +14,4 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = { args: {} };
 
-export const LoggedIn: Story = { args: { isLoggedIn: true } };
+export const LoggedIn: Story = { args: { userId: "Hello" } };

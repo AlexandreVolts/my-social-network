@@ -2,6 +2,7 @@
 
 ## 0.14 (18/09/2023)
 - Composant Drawer
+- Menu latéral
 
 ## 0.13 (11/09/2023)
 - Possibilité de rediriger sur la page profile/ lors du clic sur un nom d'utilisateur d'un post

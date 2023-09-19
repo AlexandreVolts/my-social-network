@@ -47,7 +47,7 @@ export default function Home() {
 
   return (
     <>
-      <Header isLoggedIn />
+      <Header userId={user?.id} />
       <main className="flex flex-col items-center justify-between p-12">
         <div className="flex flex-col space-y-2 lg:w-1/2 w-full">
           <CreatePostCard
