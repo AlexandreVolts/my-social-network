@@ -11,7 +11,7 @@ export default function About() {
 
   return (
     <>
-      <Header isLoggedIn={!!user} />
+      <Header userId={user.user?.id} />
       <main className="flex flex-col items-center justify-between p-24"></main>
       <Footer />
     </>

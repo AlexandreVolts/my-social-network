@@ -123,7 +123,7 @@ export default function Profile() {
         title={t("followers-modal") + userData?.name + " " + userData?.surname}
         list={followerList?.map((follow) => follow.follower)}
       />
-      <Header isLoggedIn />
+      <Header userId={user?.id} />
       <main className="flex flex-col items-center justify-between p-24">
         <div className="flex lg:flex-row flex-col space-x-4 w-full">
           <div className="flex flex-col w-full lg:w-1/2 min-w-max">

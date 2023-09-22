@@ -18,12 +18,12 @@ export function Modal(props: ModalProps) {
       <Overlay
         opened={props.opened}
         onClick={props.closeOnClickOutside ? props.onClose : () => {}}
-        opacity={true}
+        opacity
       />
       <motion.div
-        initial={{ x: '-50%', y: '-50%' }}
+        initial={{ y: '-50%', scale: 0 }}
         animate={{ scale: props.opened ? 1 : 0 }}
-        className="absolute flex w-96 z-20"
+        className="fixed flex w-96 left-0 right-0 top-1/2 m-auto z-20"
       >
         <Card>
           <div className="space-y-4">

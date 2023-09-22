@@ -6,7 +6,7 @@ import { ReactNode, useRef } from "react";
 
 interface DrawerProps {
   opened: boolean;
-  title: string;
+  title?: string;
   children: ReactNode;
   closeOnClickOutside?: boolean;
   onClose: () => void;
@@ -21,8 +21,9 @@ export function Drawer(props: DrawerProps) {
         onClick={props.closeOnClickOutside ? props.onClose : () => {}}
         opacity
       />
-      <motion.div
+      <motion.nav
         ref={ref}
+        initial={{ x: -(ref.current?.offsetWidth ?? 0) }}
         animate={{ x: props.opened ? 0 : -(ref.current?.offsetWidth ?? 0) }}
         className="p-2 absolute left-0 top-0 w-96 bg-white h-screen overflow-auto z-20"
       >
@@ -32,8 +33,8 @@ export function Drawer(props: DrawerProps) {
             <IconX />
           </ActionIcon>
         </div>
-        <div>{props.children}</div>
-      </motion.div>
+        {props.children}
+      </motion.nav>
     </>
   );
 }
