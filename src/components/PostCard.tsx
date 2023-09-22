@@ -19,6 +19,7 @@ import { Button } from "./ui/Button";
 import { LikeIcon } from "./ui/LikeIcon";
 import { PublishModal } from "./PublishModal";
 import Link from "next/link";
+import { TextArea } from "./ui/TextArea";
 
 interface PostCardProps extends BasePublishedContentProps {
   isAuthor?: boolean;
@@ -33,10 +34,10 @@ export function PostCard(props: PostCardProps) {
   const [isCommentOpened, setIsCommentOpened] = useState(false);
   const [isDeleteOpened, setIsDeleteOpened] = useState(false);
   const [isEditOpened, setIsEditOpened] = useState(false);
-  const [editContent, setEditContent] = useState("");
+  const [editText, setEditText] = useState("");
+  const [commentText, setCommentText] = useState("");
 
-  const justifyHeader = props.isAuthor ? "justify-between" : "";
-  const comments = isCommentOpened ? "" : "hidden";
+  const header = props.isAuthor ? "justify-between" : "";
 
   const cancelEvent = (e: MouseEvent, callback: () => void) => {
     e.stopPropagation();
@@ -48,11 +49,11 @@ export function PostCard(props: PostCardProps) {
   };
   const onEdit = () => {
     setIsEditOpened(false);
-    props.onEdit(editContent);
+    props.onEdit(editText);
   };
   const openEditModal = () => {
     setIsEditOpened(true);
-    setEditContent(props.text);
+    setEditText(props.text);
   };
 
   // TODO: set the delete modal in a separated file.
@@ -80,17 +81,17 @@ export function PostCard(props: PostCardProps) {
       <PublishModal
         opened={isEditOpened}
         isLoading={props.isLoading}
-        value={editContent}
+        value={editText}
         title={t("Home.edit-modal-title")}
         onClose={() => setIsEditOpened(false)}
-        onChange={setEditContent}
+        onChange={setEditText}
         onPublish={onEdit}
       />
       <div onClick={props.onClick} className="w-full space-y-4">
         <Card>
           <div className="space-y-2">
             <div
-              className={`flex items-center ${justifyHeader} space-x-2 w-full`}
+              className={`flex items-center ${header} space-x-2 w-full`}
             >
               <div className="flex items-center space-x-2">
                 <Avatar
@@ -101,13 +102,15 @@ export function PostCard(props: PostCardProps) {
                 />
                 <div className="flex-col">
                   <h5 className="font-bold">
-                    <Link href={`/profile/${props.userId}`}>{props.name} {props.surname}</Link>
+                    <Link href={`/profile/${props.userId}`}>
+                      {props.name} {props.surname}
+                    </Link>
                   </h5>
                   <p className="text-gray-500">
                     <span>{formater(props.createdAt)} </span>
                     {props.createdAt.getTime() !== props.updatedAt.getTime() ? (
                       <span className="italic">
-                        ({t('Utils.edited')} {formater(props.updatedAt)})
+                        ({t("Utils.edited")} {formater(props.updatedAt)})
                       </span>
                     ) : (
                       <></>
@@ -168,10 +171,24 @@ export function PostCard(props: PostCardProps) {
             </div>
           </div>
         </Card>
-        <div className={`flex ${comments}`}>
-          <div className="w-20"></div>
-          <div className="w-full">{props.children}</div>
-        </div>
+        {isCommentOpened ? (
+          <div className="pl-8 space-y-2">
+            <div className="w-full">{props.children}</div>
+            <form className="flex flex-col space-y-2" onSubmit={() => props.onComment(commentText)}>
+              <TextArea
+                label=""
+                placeholder="Tell your thoughts!"
+                value={commentText}
+                onChange={setCommentText}
+              />
+              <div className="flex justify-end">
+                <Button label="Publish comment" type="submit" />
+              </div>
+            </form>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );

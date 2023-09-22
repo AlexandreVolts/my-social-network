@@ -1,5 +1,6 @@
 "use client";
 
+import { CommentCard } from "@/components/CommentCard";
 import { Header } from "@/components/Header";
 import { LabelledNumber } from "@/components/LabelledNumber";
 import { PostCard } from "@/components/PostCard";
@@ -11,14 +12,13 @@ import { TextArea } from "@/components/ui/TextArea";
 import { Tooltip } from "@/components/ui/Tooltip";
 import { useRestQuery } from "@/hooks/useRestQuery";
 import { useUser } from "@/hooks/useUser";
-import { PostProps } from "@/types/PostProps";
 import { UserData } from "@/types/UserData";
 import {
-  getALike,
+  getLike,
   getAllFollows,
   getLikes,
   getUserInfos,
-  getUserPosts,
+  getPosts,
 } from "@/utils/supabase";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import {
@@ -51,7 +51,7 @@ export default function Profile() {
   const { data: posts, handlers: postsHandlers } = useRestQuery(
     supabase,
     "posts",
-    () => getUserPosts(supabase, params.userid as string)
+    () => getPosts(supabase)
   );
   const { data: likes, handlers: likeHandlers } = useRestQuery(
     supabase,
@@ -74,7 +74,7 @@ export default function Profile() {
   };
 
   const onLike = async (postId: string) => {
-    const data = await getALike(supabase, user!.id, postId);
+    const data = await getLike(supabase, user!.id, postId);
 
     if (data.error) return;
     likeHandlers[data.data?.length ? "delete" : "create"]({
@@ -220,42 +220,64 @@ export default function Profile() {
             </p>
           </div>
           <div className="w-full space-y-2">
-            {posts.data?.map((post, index) => {
-              if (userData) {
-                return (
-                  <PostCard
-                    key={index}
-                    name={userData.name}
-                    surname={userData.surname}
-                    likeCount={
-                      likes?.data?.filter((like) => like.post_id === post.id)
-                        .length ?? 0
-                    }
-                    isLiked={
-                      !!likes?.data?.find(
-                        (like) =>
-                          like.post_id === post.id && like.user_id === user?.id
-                      )
-                    }
-                    createdAt={new Date(post.created_at)}
-                    updatedAt={new Date(post.updated_at)}
-                    userId={params.userid as string}
-                    text={post.content}
-                    isLoading={false}
-                    onClick={() => {}}
-                    onComment={() => {}}
-                    onDelete={() => postsHandlers.delete({ id: post.id })}
-                    onEdit={(content) =>
-                      postsHandlers.update({ id: post.id }, { content })
-                    }
-                    onLike={() => onLike(post.id)}
-                    onShare={() => {}}
-                    isAuthor
-                  >
-                    <></>
-                  </PostCard>
-                );
+            {posts.data?.filter((post) => !post.answer_to && post.users.id === params.userid).map((post) => {
+              if (!userData) {
+                return <></>;
               }
+              return (
+                <PostCard
+                  key={post.id}
+                  name={userData.name}
+                  surname={userData.surname}
+                  likeCount={
+                    likes?.data?.filter((like) => like.post_id === post.id)
+                      .length ?? 0
+                  }
+                  isLiked={
+                    !!likes?.data?.find(
+                      (like) =>
+                        like.post_id === post.id && like.user_id === user?.id
+                    )
+                  }
+                  createdAt={new Date(post.created_at)}
+                  updatedAt={new Date(post.updated_at)}
+                  userId={params.userid as string}
+                  text={post.content}
+                  isLoading={false}
+                  onClick={() => {}}
+                  onComment={() => {}}
+                  onDelete={() => postsHandlers.delete({ id: post.id })}
+                  onEdit={(content) =>
+                    postsHandlers.update({ id: post.id }, { content })
+                  }
+                  onLike={() => onLike(post.id)}
+                  onShare={() => {}}
+                  isAuthor
+                >
+                  {posts?.data
+                    ?.filter((comment) => comment.answer_to === post.id)
+                    .map((comment) => {
+                      return (
+                        <CommentCard
+                          key={comment.id}
+                          name={comment.users.name}
+                          surname={comment.users.surname}
+                          createdAt={new Date(comment.created_at)}
+                          updatedAt={new Date(comment.updated_at)}
+                          userId={comment.users.id}
+                          text={comment.content}
+                          likeCount={0}
+                          isLiked={false}
+                          onComment={() => {}}
+                          onDelete={() => {}}
+                          onEdit={() => {}}
+                          onLike={() => {}}
+                          onShare={() => {}}
+                        />
+                      );
+                    })}
+                </PostCard>
+              );
             })}
           </div>
         </div>

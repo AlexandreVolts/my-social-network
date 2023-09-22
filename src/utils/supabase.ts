@@ -34,7 +34,7 @@ export const getLikes = cache(
   }
 );
 
-export const getALike = async (
+export const getLike = async (
   client: SupabaseClient,
   userId: string,
   postId: string

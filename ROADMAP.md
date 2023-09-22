@@ -2,25 +2,6 @@
 
 - Fix: Overlay s'adapte au conteneur parent
 - Fix: Select se place sur l'input
-+ Composant Modal
-+ Composant TextArea
-+ Composant Avatar
-+ Création d'une page /home
-+ - Card "What's on your mind" clicable
-+ - Composant PublishModal: formulaire avec TextArea + Bouton Publier
-+ - Lors du clic, ouverture d'une PublishModal
-+ - Affichage des posts de la base de donnée sur la page home
-- - Mise à jour dynamique de la page lorsqu'une action est réalisée
-+ Composant Post:
-+ - Affiche l'auteur, la date, le contenu du post, Buttons liker et commenter
-+ - Composant ActionIcon
-+ - Composant Dropdown
-+ - Lors du clic sur un post, affichage des commentaires
-+ - Si il s'agit d'un clic de l'auteur, ajouter des boutons de suppression ou d'édition
-+ - Gestion du clic sur un like
-+ - Gestion de l'édition du post à l'auteur
-+ Composant Comment:
-+ - Affiche l'auteur, la date, le contenu du commentaire, Buttons liker et répondre
 - Création d'une page /post qui affiche un post spécifique (pour pouvoir le partager)
 
 + Création d'une page /profile
@@ -29,7 +10,6 @@
 - - Possibilité de modifier ces informations si l'utilisateur est sur son profil
 + - Possibilité de rediriger sur la page profile/ lors du clic sur un nom d'utilisateur d'un post
 
-+ Composant Tooltip
 
 + - Bouton "Follow" / "Unfollow"
 + Sur la page /profile, afficher la liste des followers, le nombre de followers et le nombre de profils suivis
@@ -50,3 +30,10 @@
 
 - Sur les posts, ajouter les Tooltip sur les boutons j'aime, les commentaires et le bouton de partage
 + Améliorer le layout du profil
+
++ Possibilité de publier un commentaire sous un post
+- Séparer les responsabilités du composant PostCard
+- Gérer l'envoi de champs vides
+- Possibilité de supprimer les commentaires (par l'auteur du commentaire)
+- Possibilité de supprimer les commentaires (par l'auteur du post)
+- Possibilité d'édter les commentaires
