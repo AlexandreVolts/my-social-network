@@ -6,5 +6,6 @@ export interface PostProps {
   updated_at: number;
   content: string;
   users: UserData;
+  answer_to?: string;
 }
 

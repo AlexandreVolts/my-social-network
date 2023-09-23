@@ -1,5 +1,8 @@
 # My Social Network's Updates
 
+## 0.15 (22/09/2023)
+- Possibilité de publier un commentaire sous un post
+
 ## 0.14 (18/09/2023)
 - Composant Drawer
 - Menu latéral

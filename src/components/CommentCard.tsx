@@ -44,7 +44,7 @@ export function CommentCard(props: CommentCardProps) {
           <span>{props.likeCount}</span>
         </div>
       </div>
-      <div className="w-96">
+      <div className="grow">
         <Card>
           <b>
             {props.name} {props.surname}
@@ -53,7 +53,7 @@ export function CommentCard(props: CommentCardProps) {
         </Card>
         <div className="flex items-center justify-between">
           <div className="flex space-x-2 items-center">
-            <ActionIcon onClick={props.onComment}>
+            <ActionIcon onClick={() => {}}>
               <IconMessage />
             </ActionIcon>
             <span>{0}</span>

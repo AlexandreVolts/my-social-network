@@ -13,6 +13,6 @@ export interface BasePublishedContentProps {
   onEdit: (content: string) => void;
   onDelete: () => void;
   onLike: () => void;
-  onComment: () => void;
+  onComment: (comment: string) => void;
   onShare: () => void;
 }
