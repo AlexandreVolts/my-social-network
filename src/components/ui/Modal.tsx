@@ -24,6 +24,9 @@ export function Modal(props: ModalProps) {
         initial={{ y: '-50%', scale: 0 }}
         animate={{ scale: props.opened ? 1 : 0 }}
         className="fixed flex w-96 left-0 right-0 top-1/2 m-auto z-20"
+        role="dialog"
+        aria-modal="true"
+        aria-hidden="true"
       >
         <Card>
           <div className="space-y-4">

@@ -15,16 +15,26 @@ export const getPosts = cache(
   }
 );
 
-export const getUserPosts = cache(async (
+export const getUserPosts = cache(
+  async (
+    client: SupabaseClient,
+    userId: string
+  ): Promise<PostgrestSingleResponse<PostProps[]>> => {
+    return await client
+      .from("posts")
+      .select()
+      .match({ author: userId })
+      .order("created_at", { ascending: false });
+  }
+);
+
+export const sendMessage = async (
   client: SupabaseClient,
-  userId: string
-): Promise<PostgrestSingleResponse<PostProps[]>> => {
-  return await client
-    .from("posts")
-    .select()
-    .match({ author: userId })
-    .order("created_at", { ascending: false });
-});
+  message: string,
+  target: string
+) => {
+  await client.from('messages').insert({ target, message });
+};
 
 export const getLikes = cache(
   async (

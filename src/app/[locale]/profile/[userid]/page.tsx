@@ -4,6 +4,7 @@ import { CommentCard } from "@/components/CommentCard";
 import { Header } from "@/components/Header";
 import { LabelledNumber } from "@/components/LabelledNumber";
 import { PostCard } from "@/components/PostCard";
+import { PublishModal } from "@/components/PublishModal";
 import { UserListModal } from "@/components/UserListModal";
 import { ActionIcon } from "@/components/ui/ActionIcon";
 import { Avatar } from "@/components/ui/Avatar";
@@ -19,11 +20,14 @@ import {
   getLikes,
   getUserInfos,
   getPosts,
+  sendMessage,
 } from "@/utils/supabase";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import {
+  IconCake,
   IconHeart,
   IconHeartFilled,
+  IconHome,
   IconMail,
   IconPencil,
 } from "@tabler/icons-react";
@@ -43,6 +47,8 @@ export default function Profile() {
   const [isFollowed, setIsFollowed] = useState<boolean>();
   const [isFollowsOpened, setIsFollowsOpened] = useState(false);
   const [isFollowersOpened, setIsFollowersOpened] = useState(false);
+  const [isMessageModalOpened, setIsMessageModalOpened] = useState(false);
+
   const { data: follows, handlers: followsHandlers } = useRestQuery(
     supabase,
     "follows",
@@ -83,6 +89,10 @@ export default function Profile() {
     });
   };
 
+  const onSendMessage = (message: string) => {
+    sendMessage(supabase, message, user?.id!)
+  };
+
   //update isFollowed
   useEffect(() => {
     setIsFollowed(
@@ -114,19 +124,26 @@ export default function Profile() {
       <UserListModal
         opened={isFollowsOpened}
         onClose={() => setIsFollowsOpened(false)}
-        title={userData?.name + " " + userData?.surname + t("follows-modal")}
+        title={`${userData?.name} ${userData?.surname} ${t("follows-modal")} `}
         list={followList?.map((follow) => follow.target)}
       />
       <UserListModal
         opened={isFollowersOpened}
         onClose={() => setIsFollowersOpened(false)}
-        title={t("followers-modal") + userData?.name + " " + userData?.surname}
+        title={`${t("followers-modal")} ${userData?.name} ${userData?.surname}`}
         list={followerList?.map((follow) => follow.follower)}
+      />
+      <PublishModal
+        opened={isMessageModalOpened}
+        isLoading={false}
+        title={`${t("send-message")} ${userData?.name} ${userData?.surname}`}
+        onClose={() => setIsMessageModalOpened(false)}
+        onPublish={onSendMessage}
       />
       <Header userId={user?.id} />
       <main className="flex flex-col items-center justify-between p-24">
         <div className="flex lg:flex-row flex-col space-x-4 w-full">
-          <div className="flex flex-col w-full lg:w-1/2 min-w-max">
+          <div className="flex flex-col w-full lg:w-1/2 min-w-max space-y-2">
             <div className="flex flex-col lg:flex-row items-center">
               <div>
                 <Avatar
@@ -166,11 +183,24 @@ export default function Profile() {
                 </div>
               </div>
             </div>
-            {/*@ts-ignore*/}
-            <p>{(t("birthdate"), userData?.birthday)}</p>
-            <p>{t("adress") + userData?.adress}</p>
+            {userData?.birthday ? (
+              <div className="flex space-x-2">
+                <IconCake />
+                <p>{`${t("birthdate")} ${userData.birthday}`}</p>
+              </div>
+            ) : (
+              <></>
+            )}
+            {userData?.adress ? (
+              <div className="flex space-x-2">
+                <IconHome />
+                <p>{t("adress") + userData?.adress}</p>
+              </div>
+            ) : (
+              <></>
+            )}
             {!isAuthor ? (
-              <div className="flex w-full space-x-2">
+              <div className="flex space-x-2">
                 <Tooltip label={isFollowed ? t("unfollow") : t("follow")}>
                   <Button
                     onClick={onFollowClick}
@@ -184,7 +214,7 @@ export default function Profile() {
                     label={t("message")}
                     icon={<IconMail />}
                     secondary
-                    onClick={() => console.log(followList, followerList)}
+                    onClick={() => setIsMessageModalOpened(true)}
                   />
                 </Tooltip>
               </div>
@@ -220,65 +250,69 @@ export default function Profile() {
             </p>
           </div>
           <div className="w-full space-y-2">
-            {posts.data?.filter((post) => !post.answer_to && post.users.id === params.userid).map((post) => {
-              if (!userData) {
-                return <></>;
-              }
-              return (
-                <PostCard
-                  key={post.id}
-                  name={userData.name}
-                  surname={userData.surname}
-                  likeCount={
-                    likes?.data?.filter((like) => like.post_id === post.id)
-                      .length ?? 0
-                  }
-                  isLiked={
-                    !!likes?.data?.find(
-                      (like) =>
-                        like.post_id === post.id && like.user_id === user?.id
-                    )
-                  }
-                  createdAt={new Date(post.created_at)}
-                  updatedAt={new Date(post.updated_at)}
-                  userId={params.userid as string}
-                  text={post.content}
-                  isLoading={false}
-                  onClick={() => {}}
-                  onComment={() => {}}
-                  onDelete={() => postsHandlers.delete({ id: post.id })}
-                  onEdit={(content) =>
-                    postsHandlers.update({ id: post.id }, { content })
-                  }
-                  onLike={() => onLike(post.id)}
-                  onShare={() => {}}
-                  isAuthor
-                >
-                  {posts?.data
-                    ?.filter((comment) => comment.answer_to === post.id)
-                    .map((comment) => {
-                      return (
-                        <CommentCard
-                          key={comment.id}
-                          name={comment.users.name}
-                          surname={comment.users.surname}
-                          createdAt={new Date(comment.created_at)}
-                          updatedAt={new Date(comment.updated_at)}
-                          userId={comment.users.id}
-                          text={comment.content}
-                          likeCount={0}
-                          isLiked={false}
-                          onComment={() => {}}
-                          onDelete={() => {}}
-                          onEdit={() => {}}
-                          onLike={() => {}}
-                          onShare={() => {}}
-                        />
-                      );
-                    })}
-                </PostCard>
-              );
-            })}
+            {posts.data
+              ?.filter(
+                (post) => !post.answer_to && post.users.id === params.userid
+              )
+              .map((post) => {
+                if (!userData) {
+                  return <></>;
+                }
+                return (
+                  <PostCard
+                    key={post.id}
+                    name={userData.name}
+                    surname={userData.surname}
+                    likeCount={
+                      likes?.data?.filter((like) => like.post_id === post.id)
+                        .length ?? 0
+                    }
+                    isLiked={
+                      !!likes?.data?.find(
+                        (like) =>
+                          like.post_id === post.id && like.user_id === user?.id
+                      )
+                    }
+                    createdAt={new Date(post.created_at)}
+                    updatedAt={new Date(post.updated_at)}
+                    userId={params.userid as string}
+                    text={post.content}
+                    isLoading={false}
+                    onClick={() => {}}
+                    onComment={() => {}}
+                    onDelete={() => postsHandlers.delete({ id: post.id })}
+                    onEdit={(content) =>
+                      postsHandlers.update({ id: post.id }, { content })
+                    }
+                    onLike={() => onLike(post.id)}
+                    onShare={() => {}}
+                    isAuthor={user?.id === post.users.id}
+                  >
+                    {posts?.data
+                      ?.filter((comment) => comment.answer_to === post.id)
+                      .map((comment) => {
+                        return (
+                          <CommentCard
+                            key={comment.id}
+                            name={comment.users.name}
+                            surname={comment.users.surname}
+                            createdAt={new Date(comment.created_at)}
+                            updatedAt={new Date(comment.updated_at)}
+                            userId={comment.users.id}
+                            text={comment.content}
+                            likeCount={0}
+                            isLiked={false}
+                            onComment={() => {}}
+                            onDelete={() => {}}
+                            onEdit={() => {}}
+                            onLike={() => {}}
+                            onShare={() => {}}
+                          />
+                        );
+                      })}
+                  </PostCard>
+                );
+              })}
           </div>
         </div>
       </main>

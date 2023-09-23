@@ -24,6 +24,7 @@
 - - Afficher un menu avec les liens "Home", "Notifications", "Profile"
 - - Sur les notifications ajouter un Pin avec le nombre de notifications non lues
 
++ Envoyer un message depuis la page profil
 - Création d'une page /messages
 
 - Fix comportement du composant DatePicker : passage du 31 Aug -> 3 Mar quand on selectionne Feb 
@@ -37,3 +38,6 @@
 - Possibilité de supprimer les commentaires (par l'auteur du commentaire)
 - Possibilité de supprimer les commentaires (par l'auteur du post)
 - Possibilité d'édter les commentaires
+- Implémenter le Toaster pour les posts sur /profile
+- Implémenter le Toaster pour les messages sur /profile
+- Composant Message

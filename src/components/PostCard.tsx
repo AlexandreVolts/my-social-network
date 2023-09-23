@@ -34,7 +34,6 @@ export function PostCard(props: PostCardProps) {
   const [isCommentOpened, setIsCommentOpened] = useState(false);
   const [isDeleteOpened, setIsDeleteOpened] = useState(false);
   const [isEditOpened, setIsEditOpened] = useState(false);
-  const [editText, setEditText] = useState("");
   const [commentText, setCommentText] = useState("");
 
   const header = props.isAuthor ? "justify-between" : "";
@@ -46,14 +45,6 @@ export function PostCard(props: PostCardProps) {
   const onDelete = () => {
     setIsDeleteOpened(false);
     props.onDelete();
-  };
-  const onEdit = () => {
-    setIsEditOpened(false);
-    props.onEdit(editText);
-  };
-  const openEditModal = () => {
-    setIsEditOpened(true);
-    setEditText(props.text);
   };
 
   // TODO: set the delete modal in a separated file.
@@ -81,11 +72,10 @@ export function PostCard(props: PostCardProps) {
       <PublishModal
         opened={isEditOpened}
         isLoading={props.isLoading}
-        value={editText}
         title={t("Home.edit-modal-title")}
+        defaultValue={props.text}
         onClose={() => setIsEditOpened(false)}
-        onChange={setEditText}
-        onPublish={onEdit}
+        onPublish={props.onEdit}
       />
       <div onClick={props.onClick} className="w-full space-y-4">
         <Card>
@@ -130,7 +120,7 @@ export function PostCard(props: PostCardProps) {
                     </ActionIcon>
                   }
                 >
-                  <Dropdown.Item onClick={openEditModal}>
+                  <Dropdown.Item onClick={() => setIsEditOpened(true)}>
                     <IconPencil className="text-blue-600" />
                     <span>{t("Utils.edit")}</span>
                   </Dropdown.Item>

@@ -89,6 +89,7 @@
     "adress": "Lives at ",
     "follows-modal": " follows them :",
     "followers-modal": "They follow ",
-    "view-profile": "View profile"
+    "view-profile": "View profile",
+    "send-message": "Send message to"
   }
 }
