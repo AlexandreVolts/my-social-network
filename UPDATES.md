@@ -2,6 +2,7 @@
 
 ## 0.15 (22/09/2023)
 - Possibilité de publier un commentaire sous un post
+- Envoyer un message depuis la page profil
 
 ## 0.14 (18/09/2023)
 - Composant Drawer

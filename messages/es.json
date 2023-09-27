@@ -82,13 +82,14 @@
     "followers": "Seguidores",
     "follows": "Follows",
     "posts": "Publicaciones",
-    "message": "Message",
+    "message": "Mandar un mensaje",
     "email": "Email",
     "joined-on": "Joined the ",
     "birthdate": "Born the ",
     "adress": "Lives at ",
     "follows-modal": " follows them :",
     "followers-modal": "They follow ",
-    "view-profile": "View profile"
+    "view-profile": "Ver el perfil",
+    "send-message": "Mandar un mensaje a"
   }
 }

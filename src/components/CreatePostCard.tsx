@@ -10,24 +10,15 @@ interface CreatePostCard {
 export function CreatePostCard(props: CreatePostCard) {
   const t = useTranslations("Home");
   const [isPublishModalOpened, setIsPublishedModalOpened] = useState(false);
-  const [content, setContent] = useState("");
-
-  const onPublish = () => {
-    setIsPublishedModalOpened(false);
-    setContent("");
-    props.onPublish(content);
-  };
 
   return (
     <>
       <PublishModal
         opened={isPublishModalOpened}
-        value={content}
         isLoading={props.isLoading}
         title={t("publish-modal-title")}
         onClose={() => setIsPublishedModalOpened(false)}
-        onChange={setContent}
-        onPublish={onPublish}
+        onPublish={props.onPublish}
       />
       <div
         className="cursor-pointer"
