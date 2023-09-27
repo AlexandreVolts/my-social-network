@@ -1,11 +1,12 @@
+import { UUID } from "crypto";
 import { UserData } from "./UserData";
 
 export interface PostProps {
-  id: string;
+  id: UUID;
   created_at: number;
   updated_at: number;
   content: string;
   users: UserData;
-  answer_to?: string;
+  answer_to?: UUID;
 }
 

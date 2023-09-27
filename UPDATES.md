@@ -1,5 +1,8 @@
 # My Social Network's Updates
 
+## 0.16 (27/09/2023)
+- Refactorer le système des posts
+
 ## 0.15 (22/09/2023)
 - Possibilité de publier un commentaire sous un post
 - Envoyer un message depuis la page profil

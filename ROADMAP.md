@@ -33,7 +33,7 @@
 + Améliorer le layout du profil
 
 + Possibilité de publier un commentaire sous un post
-- Séparer les responsabilités du composant PostCard
++ Refactorer le système des posts
 - Gérer l'envoi de champs vides
 - Possibilité de supprimer les commentaires (par l'auteur du commentaire)
 - Possibilité de supprimer les commentaires (par l'auteur du post)

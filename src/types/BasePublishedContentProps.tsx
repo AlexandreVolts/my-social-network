@@ -1,9 +1,11 @@
+import { UUID } from "crypto";
+
 export interface BasePublishedContentProps {
   name: string;
   surname: string;
   avatarSrc?: string;
   avatarColor?: string;
-  userId: string;
+  userId: UUID;
   createdAt: Date;
   updatedAt: Date;
   likeCount: number;
