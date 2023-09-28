@@ -12,6 +12,7 @@ interface PostListProps {
   onComment: (content: string, answerTo: UUID) => void;
   onDelete: (id: UUID) => void;
   onEdit: (id: UUID, content: string) => void;
+  onLike: (id: UUID) => void;
 }
 export function PostList(props: PostListProps) {
   // TODO: The way to join likes to posts is very expensive and must be improved.
@@ -46,7 +47,7 @@ export function PostList(props: PostListProps) {
               onComment={(comment) => props.onComment(comment, post.id)}
               onDelete={() => props.onDelete(post.id)}
               onEdit={(content) => props.onEdit(post.id, content)}
-              onLike={() => {}}
+              onLike={() => props.onLike(post.id)}
               onShare={() => {}}
             >
               {props.posts
@@ -72,11 +73,12 @@ export function PostList(props: PostListProps) {
                             like.user_id === props.userId
                         )
                       }
-                      isAuthor={props.userId === post.users.id}
+                      isAuthor={props.userId === comment.users.id}
+                      isAdmin={props.userId === post.users.id}
                       onComment={(content) => props.onComment(content, comment.id)}
                       onDelete={() => props.onDelete(comment.id)}
                       onEdit={(content) => props.onEdit(comment.id, content)}
-                      onLike={() => {}}
+                      onLike={() => props.onLike(comment.id)}
                       onShare={() => {}}
                     />
                   );

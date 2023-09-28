@@ -79,12 +79,12 @@ export default function Profile() {
     });
   };
 
-  const onLike = async (postId: string) => {
-    const data = await getLike(supabase, user!.id, postId);
+  const onLike = async (id: string) => {
+    const data = await getLike(supabase, user!.id, id);
 
     if (data.error) return;
     likeHandlers[data.data?.length ? "delete" : "create"]({
-      post_id: postId,
+      post_id: id,
       user_id: user!.id,
     });
   };
@@ -267,6 +267,7 @@ export default function Profile() {
               }
               onDelete={(id) => postHandler.delete({ id })}
               onEdit={(id, content) => postHandler.update({ id }, { content })}
+              onLike={onLike}
             />
           ) : (
             <></>

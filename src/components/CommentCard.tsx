@@ -2,9 +2,10 @@ import { Card } from "./ui/Card";
 import { Avatar } from "./ui/Avatar";
 import { ActionIcon } from "./ui/ActionIcon";
 import { ReadMoreText } from "./ui/ReadMoreText";
+import { LikeIcon } from "./ui/LikeIcon";
 import { useElapsedDelayFormat } from "@/hooks/useElapsedDelayFormat";
 import { BasePublishedContentProps } from "@/types/BasePublishedContentProps";
-import { IconHeart, IconMessage, IconShare } from "@tabler/icons-react";
+import { IconMessage, IconShare } from "@tabler/icons-react";
 import { motion } from "framer-motion";
 import { UpdateContentDropdown } from "./UpdateContentDropdown";
 
@@ -27,9 +28,11 @@ export function CommentCard(props: CommentCardProps) {
         />
         <div className="flex flex-col items-center">
           <ActionIcon onClick={props.onLike}>
-            <IconHeart />
+            <LikeIcon isLiked={props.isLiked} />
           </ActionIcon>
-          <span>{props.likeCount}</span>
+          <span className={props.isLiked ? "text-red-500" : "text-black"}>
+            {props.likeCount}
+          </span>
         </div>
       </div>
       <div className="grow">
@@ -52,7 +55,11 @@ export function CommentCard(props: CommentCardProps) {
           <span>{formater(props.createdAt)}</span>
         </div>
       </div>
-      {props.isAuthor || props.isAdmin ? <UpdateContentDropdown {...props} /> : <></>}
+      {props.isAuthor || props.isAdmin ? (
+        <UpdateContentDropdown {...props} />
+      ) : (
+        <></>
+      )}
     </motion.div>
   );
 }
