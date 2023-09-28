@@ -1,9 +1,8 @@
 "use client";
 
-import { CommentCard } from "@/components/CommentCard";
 import { Header } from "@/components/Header";
 import { LabelledNumber } from "@/components/LabelledNumber";
-import { PostCard } from "@/components/PostCard";
+import { PostList } from "@/components/PostList";
 import { PublishModal } from "@/components/PublishModal";
 import { UserListModal } from "@/components/UserListModal";
 import { ActionIcon } from "@/components/ui/ActionIcon";
@@ -31,6 +30,7 @@ import {
   IconMail,
   IconPencil,
 } from "@tabler/icons-react";
+import { UUID } from "crypto";
 import { useTranslations } from "next-intl";
 import { useParams, useRouter } from "next/navigation";
 import { use, useEffect, useState } from "react";
@@ -41,7 +41,7 @@ export default function Profile() {
   const { user, isComplete } = useUser(supabase);
   const router = useRouter();
   const t = useTranslations("Profile");
-  const userFetch = use(getUserInfos(supabase, params.userid as string));
+  const userFetch = use(getUserInfos(supabase, params.userid as UUID));
   const [userData, setUserData] = useState<UserData>();
   const [isAuthor, setIsAuthor] = useState(true);
   const [isFollowed, setIsFollowed] = useState<boolean>();
@@ -54,14 +54,14 @@ export default function Profile() {
     "follows",
     () => getAllFollows(supabase)
   );
-  const { data: posts, handlers: postsHandlers } = useRestQuery(
+  const { data: posts, handlers: postHandler } = useRestQuery(
     supabase,
     "posts",
     () => getPosts(supabase)
   );
   const { data: likes, handlers: likeHandlers } = useRestQuery(
     supabase,
-    "post_likes",
+    "likes",
     () => getLikes(supabase)
   );
 
@@ -90,7 +90,7 @@ export default function Profile() {
   };
 
   const onSendMessage = (message: string) => {
-    sendMessage(supabase, message, user?.id!)
+    sendMessage(supabase, message, user?.id!);
   };
 
   //update isFollowed
@@ -249,71 +249,23 @@ export default function Profile() {
               {new Date(userData?.created_at ?? 0).toLocaleDateString()}
             </p>
           </div>
-          <div className="w-full space-y-2">
-            {posts.data
-              ?.filter(
-                (post) => !post.answer_to && post.users.id === params.userid
-              )
-              .map((post) => {
-                if (!userData) {
-                  return <></>;
-                }
-                return (
-                  <PostCard
-                    key={post.id}
-                    name={userData.name}
-                    surname={userData.surname}
-                    likeCount={
-                      likes?.data?.filter((like) => like.post_id === post.id)
-                        .length ?? 0
-                    }
-                    isLiked={
-                      !!likes?.data?.find(
-                        (like) =>
-                          like.post_id === post.id && like.user_id === user?.id
-                      )
-                    }
-                    createdAt={new Date(post.created_at)}
-                    updatedAt={new Date(post.updated_at)}
-                    userId={params.userid as string}
-                    text={post.content}
-                    isLoading={false}
-                    onClick={() => {}}
-                    onComment={() => {}}
-                    onDelete={() => postsHandlers.delete({ id: post.id })}
-                    onEdit={(content) =>
-                      postsHandlers.update({ id: post.id }, { content })
-                    }
-                    onLike={() => onLike(post.id)}
-                    onShare={() => {}}
-                    isAuthor={user?.id === post.users.id}
-                  >
-                    {posts?.data
-                      ?.filter((comment) => comment.answer_to === post.id)
-                      .map((comment) => {
-                        return (
-                          <CommentCard
-                            key={comment.id}
-                            name={comment.users.name}
-                            surname={comment.users.surname}
-                            createdAt={new Date(comment.created_at)}
-                            updatedAt={new Date(comment.updated_at)}
-                            userId={comment.users.id}
-                            text={comment.content}
-                            likeCount={0}
-                            isLiked={false}
-                            onComment={() => {}}
-                            onDelete={() => {}}
-                            onEdit={() => {}}
-                            onLike={() => {}}
-                            onShare={() => {}}
-                          />
-                        );
-                      })}
-                  </PostCard>
-                );
-              })}
-          </div>
+          {posts.data && likes.data ? (
+            <PostList
+              posts={posts.data.filter(
+                (post) => post.users.id === (params.userid as UUID)
+              )}
+              likes={likes.data}
+              userId={params.userid as UUID}
+              isLoading={false}
+              onComment={(content, answerTo) =>
+                postHandler.create({ content, answer_to: answerTo })
+              }
+              onDelete={(id) => postHandler.delete({ id })}
+              onEdit={(id, content) => postHandler.update({ id }, { content })}
+            />
+          ) : (
+            <></>
+          )}
         </div>
       </main>
     </>

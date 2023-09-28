@@ -40,7 +40,7 @@ export const getLikes = cache(
   async (
     client: SupabaseClient
   ): Promise<PostgrestSingleResponse<LikeProps[]>> => {
-    return await client.from("post_likes").select();
+    return await client.from("likes").select();
   }
 );
 
@@ -50,7 +50,7 @@ export const getLike = async (
   postId: string
 ) => {
   return await client
-    .from("post_likes")
+    .from("likes")
     .select()
     .match({ user_id: userId, post_id: postId });
 };

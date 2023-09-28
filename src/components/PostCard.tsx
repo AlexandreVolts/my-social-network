@@ -12,20 +12,19 @@ import { Dropdown } from "./ui/Dropdown";
 import { ReadMoreText } from "./ui/ReadMoreText";
 import { useElapsedDelayFormat } from "@/hooks/useElapsedDelayFormat";
 import { BasePublishedContentProps } from "@/types/BasePublishedContentProps";
-import { Children, MouseEvent, ReactNode, useState } from "react";
-import { useTranslations } from "next-intl";
 import { Modal } from "./ui/Modal";
 import { Button } from "./ui/Button";
 import { LikeIcon } from "./ui/LikeIcon";
 import { PublishModal } from "./PublishModal";
-import Link from "next/link";
 import { TextArea } from "./ui/TextArea";
+import { Children, FormEvent, ReactNode, useState } from "react";
+import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 interface PostCardProps extends BasePublishedContentProps {
   isAuthor?: boolean;
   isLoading: boolean;
   children: ReactNode;
-  onClick: () => void;
 }
 export function PostCard(props: PostCardProps) {
   const t = useTranslations();
@@ -38,9 +37,9 @@ export function PostCard(props: PostCardProps) {
 
   const header = props.isAuthor ? "justify-between" : "";
 
-  const cancelEvent = (e: MouseEvent, callback: () => void) => {
-    e.stopPropagation();
-    callback();
+  const onComment = (e: FormEvent) => {
+    e.preventDefault();
+    props.onComment(commentText);
   };
   const onDelete = () => {
     setIsDeleteOpened(false);
@@ -77,12 +76,10 @@ export function PostCard(props: PostCardProps) {
         onClose={() => setIsEditOpened(false)}
         onPublish={props.onEdit}
       />
-      <div onClick={props.onClick} className="w-full space-y-4">
+      <div className="w-full space-y-4">
         <Card>
           <div className="space-y-2">
-            <div
-              className={`flex items-center ${header} space-x-2 w-full`}
-            >
+            <div className={`flex items-center ${header} space-x-2 w-full`}>
               <div className="flex items-center space-x-2">
                 <Avatar
                   src={props.avatarSrc}
@@ -136,7 +133,7 @@ export function PostCard(props: PostCardProps) {
             <ReadMoreText text={props.text} charLimit={props.charLimit} />
             <div className="grid grid-cols-3">
               <div className="flex items-center space-x-2">
-                <ActionIcon onClick={(e) => cancelEvent(e, props.onLike)}>
+                <ActionIcon onClick={props.onLike}>
                   <LikeIcon isLiked={props.isLiked} />
                 </ActionIcon>
                 <p className={props.isLiked ? "text-red-500" : "text-black"}>
@@ -145,16 +142,14 @@ export function PostCard(props: PostCardProps) {
               </div>
               <div className="flex justify-center items-center space-x-2">
                 <ActionIcon
-                  onClick={(e) =>
-                    cancelEvent(e, () => setIsCommentOpened(!isCommentOpened))
-                  }
+                  onClick={() => setIsCommentOpened(!isCommentOpened)}
                 >
                   <IconMessage />
                 </ActionIcon>
                 <p>{Children.count(props.children)}</p>
               </div>
               <div className="flex justify-end">
-                <ActionIcon onClick={(e) => cancelEvent(e, props.onShare)}>
+                <ActionIcon onClick={props.onShare}>
                   <IconShare />
                 </ActionIcon>
               </div>
@@ -164,7 +159,7 @@ export function PostCard(props: PostCardProps) {
         {isCommentOpened ? (
           <div className="pl-8 space-y-2">
             <div className="w-full">{props.children}</div>
-            <form className="flex flex-col space-y-2" onSubmit={() => props.onComment(commentText)}>
+            <form className="flex flex-col space-y-2" onSubmit={onComment}>
               <TextArea
                 label=""
                 placeholder="Tell your thoughts!"

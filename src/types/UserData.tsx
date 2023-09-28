@@ -1,5 +1,7 @@
+import { UUID } from "crypto";
+
 export interface UserData {
-  id: string;
+  id: UUID;
   created_at?: number;
   name: string;
   surname: string;
