@@ -1,38 +1,27 @@
-import {
-  IconDots,
-  IconMessage,
-  IconPencil,
-  IconShare,
-  IconTrash,
-} from "@tabler/icons-react";
+import { IconMessage, IconShare } from "@tabler/icons-react";
 import { Card } from "./ui/Card";
 import { Avatar } from "./ui/Avatar";
 import { ActionIcon } from "./ui/ActionIcon";
-import { Dropdown } from "./ui/Dropdown";
 import { ReadMoreText } from "./ui/ReadMoreText";
 import { useElapsedDelayFormat } from "@/hooks/useElapsedDelayFormat";
 import { BasePublishedContentProps } from "@/types/BasePublishedContentProps";
-import { Modal } from "./ui/Modal";
 import { Button } from "./ui/Button";
 import { LikeIcon } from "./ui/LikeIcon";
-import { PublishModal } from "./PublishModal";
 import { TextArea } from "./ui/TextArea";
+import { UpdateContentDropdown } from "./UpdateContentDropdown";
 import { Children, FormEvent, ReactNode, useState } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 interface PostCardProps extends BasePublishedContentProps {
   isAuthor?: boolean;
-  isLoading: boolean;
+  isLoading?: boolean;
   children: ReactNode;
 }
 export function PostCard(props: PostCardProps) {
   const t = useTranslations();
   const formater = useElapsedDelayFormat();
-  const [isAuthorMenuOpened, setIsAuthorMenuOpened] = useState(false);
   const [isCommentOpened, setIsCommentOpened] = useState(false);
-  const [isDeleteOpened, setIsDeleteOpened] = useState(false);
-  const [isEditOpened, setIsEditOpened] = useState(false);
   const [commentText, setCommentText] = useState("");
 
   const header = props.isAuthor ? "justify-between" : "";
@@ -41,45 +30,14 @@ export function PostCard(props: PostCardProps) {
     e.preventDefault();
     props.onComment(commentText);
   };
-  const onDelete = () => {
-    setIsDeleteOpened(false);
-    props.onDelete();
-  };
 
   // TODO: set the delete modal in a separated file.
   return (
     <>
-      <Modal
-        opened={isDeleteOpened}
-        onClose={() => setIsDeleteOpened(false)}
-        title={t("Post.on-delete")}
-      >
-        <div className="flex justify-around">
-          <Button
-            label={t("Utils.cancel")}
-            secondary
-            onClick={() => setIsDeleteOpened(false)}
-            disabled={props.isLoading}
-          />
-          <Button
-            label={t("Utils.proceed")}
-            onClick={onDelete}
-            disabled={props.isLoading}
-          />
-        </div>
-      </Modal>
-      <PublishModal
-        opened={isEditOpened}
-        isLoading={props.isLoading}
-        title={t("Home.edit-modal-title")}
-        defaultValue={props.text}
-        onClose={() => setIsEditOpened(false)}
-        onPublish={props.onEdit}
-      />
       <div className="w-full space-y-4">
         <Card>
           <div className="space-y-2">
-            <div className={`flex items-center ${header} space-x-2 w-full`}>
+            <div className={`flex ${header} space-x-2 w-full`}>
               <div className="flex items-center space-x-2">
                 <Avatar
                   src={props.avatarSrc}
@@ -105,30 +63,7 @@ export function PostCard(props: PostCardProps) {
                   </p>
                 </div>
               </div>
-              {props.isAuthor ? (
-                <Dropdown
-                  opened={isAuthorMenuOpened}
-                  onOpen={() => setIsAuthorMenuOpened(true)}
-                  onClose={() => setIsAuthorMenuOpened(false)}
-                  stopPropagation
-                  target={
-                    <ActionIcon>
-                      <IconDots />
-                    </ActionIcon>
-                  }
-                >
-                  <Dropdown.Item onClick={() => setIsEditOpened(true)}>
-                    <IconPencil className="text-blue-600" />
-                    <span>{t("Utils.edit")}</span>
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={() => setIsDeleteOpened(true)}>
-                    <IconTrash className="text-red-600" />
-                    <span>{t("Utils.delete")}</span>
-                  </Dropdown.Item>
-                </Dropdown>
-              ) : (
-                <></>
-              )}
+              {props.isAuthor ? <UpdateContentDropdown {...props} /> : <></>}
             </div>
             <ReadMoreText text={props.text} charLimit={props.charLimit} />
             <div className="grid grid-cols-3">

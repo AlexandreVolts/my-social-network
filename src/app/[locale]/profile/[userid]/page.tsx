@@ -159,7 +159,12 @@ export default function Profile() {
               <div className="flex grow grid grid-cols-3 w-full p-2">
                 <div>
                   <LabelledNumber
-                    value={posts.data?.length}
+                    value={
+                      posts.data?.filter(
+                        (post) =>
+                          !post.answer_to && post.users.id === params.userid
+                      ).length
+                    }
                     label={t("posts")}
                   />
                 </div>
@@ -252,10 +257,10 @@ export default function Profile() {
           {posts.data && likes.data ? (
             <PostList
               posts={posts.data.filter(
-                (post) => post.users.id === (params.userid as UUID)
+                (post) => post.users.id === (params.userid as UUID) || post.answer_to
               )}
               likes={likes.data}
-              userId={params.userid as UUID}
+              userId={user?.id as UUID}
               isLoading={false}
               onComment={(content, answerTo) =>
                 postHandler.create({ content, answer_to: answerTo })

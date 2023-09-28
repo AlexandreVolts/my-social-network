@@ -21,6 +21,7 @@ export function PostList(props: PostListProps) {
       {props.posts
         .filter((post) => !post.answer_to)
         .map((post) => {
+          console.log(props.userId, post.users.id);
           return (
             <PostCard
               key={post.id}
@@ -71,6 +72,7 @@ export function PostList(props: PostListProps) {
                             like.user_id === props.userId
                         )
                       }
+                      isAuthor={props.userId === post.users.id}
                       onComment={(content) => props.onComment(content, comment.id)}
                       onDelete={() => props.onDelete(comment.id)}
                       onEdit={(content) => props.onEdit(comment.id, content)}
