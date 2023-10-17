@@ -21,7 +21,7 @@ export default function Login() {
   const onSubmit = (data: LoginFormData) => {
     handlers.signIn(
       data,
-      () => router.push("/post"),
+      () => router.push("/home"),
       (e) => setError(e.message),
     );
   };
