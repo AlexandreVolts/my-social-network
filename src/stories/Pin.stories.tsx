@@ -57,7 +57,7 @@ export const WithNumber: Story = {
         <IconBell />
       </ActionIcon>
     ),
-    notificationNb: 8,
+    value: 8,
   }
 }
 
@@ -69,7 +69,7 @@ export const OnAvatar: Story = {
   }
 }
 
-export const onButton: Story = {
+export const OnButton: Story = {
   args:{
     children: (
       <Button label="Test button" />
