@@ -8,9 +8,9 @@ import { FormEvent, useEffect, useState } from "react";
 
 interface PublishModalProps {
   opened: boolean;
-  isLoading: boolean;
   title: string;
   defaultValue?: string;
+  isLoading?: boolean;
   onClose: () => void;
   onPublish: (value: string) => void;
 }

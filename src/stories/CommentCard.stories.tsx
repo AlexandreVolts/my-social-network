@@ -1,5 +1,6 @@
 import { CommentCard } from "@/components/CommentCard";
 import type { Meta, StoryObj } from "@storybook/react";
+import { UUID } from "crypto";
 
 const meta = {
   title: "Components/CommentCard",
@@ -25,6 +26,7 @@ export const Default: Story = {
 
 export const LongComment: Story = {
   args:{
+    userId: '' as UUID,
     name: "Snail",
     surname: "Enjoyer",
     text: "A snail is a shelled gastropod. The name is most often applied to land snails, terrestrial pulmonate gastropod molluscs. However, the common name snail is also used for most of the members of the molluscan class Gastropoda that have a coiled shell that is large enough for the animal to retract completely into. When the word snail is used in this most general sense, it includes not just land snails but also numerous species of sea snails and freshwater snails. Gastropods that naturally lack a shell, or have only an internal shell, are mostly called slugs, and land snails that have only a very small shell (that they cannot retract into) are often called semi-slugs. Snails have considerable human relevance, including as food items, as pests, and as vectors of disease, and their shells are used as decorative objects and are incorporated into jewelry.[1] The snail has also had some cultural significance, tending to be associated with lethargy. The snail has also been used as a figure of speech in reference to slow-moving things. The snail is the same or similar shape as the cochlea.",
@@ -39,6 +41,7 @@ export const LongComment: Story = {
 
 export const MeanComment: Story = {
   args: {
+    userId: '' as UUID,
     name: "Serial",
     surname: "Hater",
     text: "tldr",
@@ -51,11 +54,26 @@ export const MeanComment: Story = {
 
 export const LikedComment: Story = {
   args: {
+    userId: '' as UUID,
     name: "Serial",
     surname: "Lover",
     text: "Everyone loves me, including you.",
     likeCount: 90,
     isLiked: true,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  }
+}
+
+export const AuthorComment: Story = {
+  args: {
+    userId: '' as UUID,
+    name: "Serial",
+    surname: "Author",
+    text: "I can edit or delete this comment.",
+    likeCount: 90,
+    isLiked: false,
+    isAuthor: true,
     createdAt: new Date(),
     updatedAt: new Date(),
   }

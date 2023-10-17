@@ -1,6 +1,7 @@
 import { CommentCard } from "@/components/CommentCard";
 import { PostCard } from "@/components/PostCard";
 import type { Meta, StoryObj } from "@storybook/react";
+import { UUID } from "crypto";
 
 const meta = {
   title: "Components/PostCard",
@@ -15,6 +16,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    userId: '' as UUID,
     name: "Rodolphe",
     surname: "Cochet",
     createdAt: new Date(2001, 7, 19),
@@ -29,6 +31,7 @@ export const Default: Story = {
 
 export const PostedNow: Story = {
   args: {
+    userId: '' as UUID,
     name: "dzz",
     surname: "d",
     createdAt: new Date(),
@@ -43,6 +46,7 @@ export const PostedNow: Story = {
 
 export const FullOfText: Story = {
   args: {
+    userId: '' as UUID,
     name: "Spammer",
     surname: "Spamton",
     createdAt: new Date(0),
@@ -59,6 +63,7 @@ export const FullOfText: Story = {
 
 export const CharLimit: Story = {
   args: {
+    userId: '' as UUID,
     name: "zg",
     surname: " fefe",
     //@ts-ignore
@@ -78,6 +83,7 @@ export const CharLimit: Story = {
 
 export const AuthorMode: Story = {
   args: {
+    userId: '' as UUID,
     name: "Christophen",
     surname: "Allen",
     //@ts-ignore
@@ -95,6 +101,7 @@ export const AuthorMode: Story = {
 
 export const Liked: Story = {
   args: {
+    userId: '' as UUID,
     name: "John",
     surname: "Doe",
     //@ts-ignore
@@ -112,6 +119,7 @@ export const Liked: Story = {
 
 export const Updated: Story = {
   args: {
+    userId: '' as UUID,
     name: "Katty",
     surname: "Perry",
     //@ts-ignore
@@ -127,25 +135,9 @@ export const Updated: Story = {
   },
 };
 
-export const LoadingPopups: Story = {
-  args: {
-    name: "John",
-    surname: "Doe",
-    //@ts-ignore
-    createdAt: new Date(new Date() - 1000 * 60 * 60 * 24 * 2),
-    //@ts-ignore
-    updatedAt: new Date(new Date() - 1000 * 60 * 60 * 24 * 2),
-    likeCount: 5,
-    text: "The process of loading is infinitely slow over there.",
-    isAuthor: true,
-    isLiked: true,
-    isLoading: true,
-    children: <></>,
-  },
-};
-
 export const WithComments: Story = {
   args: {
+    userId: '' as UUID,
     name: "3ll0n",
     surname: "Musc",
     //@ts-ignore
@@ -165,6 +157,7 @@ export const WithComments: Story = {
         updatedAt={new Date()}
         likeCount={500}
         text="You're banned now"
+        userId={'' as UUID}
         isLiked={false}
         onEdit={() => {}}
         onComment={() => {}}
