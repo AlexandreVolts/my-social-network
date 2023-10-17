@@ -1,8 +1,13 @@
 import { FollowProps } from "@/types/FollowProps";
 import { LikeProps } from "@/types/LikeProps";
+import { MessageProps } from "@/types/MessageProps";
 import { PostProps } from "@/types/PostProps";
 import { PostgrestSingleResponse, SupabaseClient } from "@supabase/supabase-js";
 import { cache } from "react";
+
+// TODO: DB management will have to be refactored
+// TODO: Tables must be protected
+// TODO: A separated API must be made when back-end dev available
 
 export const getPosts = cache(
   async (
@@ -15,15 +20,15 @@ export const getPosts = cache(
   }
 );
 
-export const getUserPosts = cache(
+export const getUserMessages = cache(
   async (
     client: SupabaseClient,
-    userId: string
-  ): Promise<PostgrestSingleResponse<PostProps[]>> => {
+    userId?: string
+  ): Promise<PostgrestSingleResponse<MessageProps[]>> => {
     return await client
-      .from("posts")
+      .from("messages")
       .select()
-      .match({ author: userId })
+      .match({ target: userId ?? '' })
       .order("created_at", { ascending: false });
   }
 );
