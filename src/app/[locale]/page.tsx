@@ -9,13 +9,17 @@ import { useLogin } from "@/hooks/useLogin";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useUser } from "@/hooks/useUser";
 import { useRouter } from "next-intl/client";
+import { Toaster } from "@/components/ui/Toaster";
+import { useTranslations } from "next-intl";
 
 export default function Home() {
   const supabase = createClientComponentClient();
+  const router = useRouter();
+  const t = useTranslations('Utils');
   const { values, handlers } = useLogin(supabase);
   const { user, isComplete } = useUser(supabase);
-  const router = useRouter();
   const [onLoginPage, setOnLoginPage] = useState(false);
+  const [error, setError] = useState('');
 
   const onSubmitRegister = (data: RegisterFormData) => {
     handlers.register(
@@ -24,17 +28,14 @@ export default function Home() {
         // TODO: Say to the user to check his emails
         console.log("Register successful");
       },
-      (e) => {
-        // TODO: Catch errors here
-        console.error(e);
-      }
+      (e) => setError(e.message),
     );
   };
   const onSubmitLogin = (data: LoginFormData) => {
     handlers.signIn(
       data,
       () => router.push('/home'),
-      (e) => console.error(e)
+      (e) => setError(e.message),
     );
   };
 
@@ -64,6 +65,12 @@ export default function Home() {
           />
         )}
       </div>
+      <Toaster
+        opened={!!error}
+        title={t('on-fail')}
+        message={error}
+        onClose={() => setError('')}
+      />
     </main>
   );
 }
