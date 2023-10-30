@@ -12,17 +12,10 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    onSubmit: () => {},
-    onSwitch: () => {},
-  },
-};
+export const Default: Story = {};
 
 export const Loading: Story = {
   args: {
-    onSubmit: () => {},
-    onSwitch: () => {},
     isLoading: true,
   },
 };

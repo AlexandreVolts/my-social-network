@@ -1,5 +1,8 @@
 # My Social Network's Updates
 
+## 0.17 (17/10/2023)
+- Composant MessagePreview
+
 ## 0.16 (27/09/2023)
 - Refactorer le système des posts
 - Composant UpdateContentDropdown

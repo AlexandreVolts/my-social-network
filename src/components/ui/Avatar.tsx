@@ -30,7 +30,7 @@ export function Avatar(props: AvatarProps) {
           height={320}
         />
       ) : (
-        <p className={`text-center text-white`}>
+        <p className="text-center text-white">
           {props.name.charAt(0).toUpperCase()}
           {props.surname.charAt(0).toUpperCase()}
         </p>

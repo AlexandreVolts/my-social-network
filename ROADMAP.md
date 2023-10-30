@@ -26,6 +26,8 @@
 
 + Envoyer un message depuis la page profil
 - Création d'une page /messages
++ Composant MessagePreview
+- Composant MessageBubble
 
 - Fix comportement du composant DatePicker : passage du 31 Aug -> 3 Mar quand on selectionne Feb 
 
